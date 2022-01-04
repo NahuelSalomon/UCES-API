@@ -5,18 +5,20 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-public class Query extends Forum{
+@Entity(name = "careers")
+public class Career {
 
-    private List<ResponseQuery> responses;
+    @Id
+    private Integer id;
+    private String name;
 
-    @Override
-    public ForumType forumType() {
-        return ForumType.QUERY;
-    }
+
+
 }

@@ -12,7 +12,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity
+@Entity(name = "forums")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "forumType", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Recommendation.class, name = "RECOMMENDATION"),
@@ -25,9 +25,10 @@ public abstract class Forum {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String body;
-    //private User user;
-    private Integer upvotes;
-    private Integer downvotes;
+    @ManyToOne
+    private User user;
+    private Integer upVotes;
+    private Integer downVotes;
 
     @AccessType(AccessType.Type.PROPERTY)
     public abstract ForumType forumType();
