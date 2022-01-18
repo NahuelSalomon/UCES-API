@@ -7,11 +7,14 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Builder
 @Data
+@Entity
 public class Recommendation extends Forum{
+
+    public Recommendation() {
+
+    }
 
     @Override
     public ForumType forumType() {
