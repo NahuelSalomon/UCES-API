@@ -21,7 +21,7 @@ public class Subject {
     private Integer id;
     private String name;
     @OneToOne
-    private SubjectStatics statics;
+    private SubjectStatistics statics;
     @OneToMany
     private List<Subject> correlatives;
     @OneToMany

@@ -1,9 +1,8 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.CareerStatisticsNotExistsException;
-import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.model.CareerStatistics;
-import com.example.UCESAPI.service.CareerStaticsService;
+import com.example.UCESAPI.service.CareerStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/career/statics")
-public class CareerStaticsController {
+public class CareerStatisticsController {
 
-    private final CareerStaticsService careerStaticsService;
+    private final CareerStatisticsService careerStatisticsService;
     private final static String CAREER_STATICS_PATH = "career/statics";
 
     @Autowired
-    public CareerStaticsController(CareerStaticsService careerStaticsService) {
-        this.careerStaticsService = careerStaticsService;
+    public CareerStatisticsController(CareerStatisticsService careerStatisticsService) {
+        this.careerStatisticsService = careerStatisticsService;
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> add(@RequestBody CareerStatistics careerStatistics) {
-        CareerStatistics careerStatisticsCreated = this.careerStaticsService.add(careerStatistics);
+        CareerStatistics careerStatisticsCreated = this.careerStatisticsService.add(careerStatistics);
         return  ResponseEntity
                 .status(HttpStatus.CREATED)
                 .location(EntityURLBuilder.buildURL(CAREER_STATICS_PATH,careerStatisticsCreated.getId()))
@@ -42,19 +41,19 @@ public class CareerStaticsController {
     public ResponseEntity<List<CareerStatistics>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size,
                                                          @RequestParam(value = "size", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page,size);
-        Page<CareerStatistics> careerStatisticsPage = this.careerStaticsService.getAll(pageable);
+        Page<CareerStatistics> careerStatisticsPage = this.careerStatisticsService.getAll(pageable);
         return EntityResponse.listResponse(careerStatisticsPage);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<CareerStatistics> getById(@PathVariable Integer id) throws CareerStatisticsNotExistsException {
-        CareerStatistics careerStatistics = this.careerStaticsService.getById(id);
+        CareerStatistics careerStatistics = this.careerStatisticsService.getById(id);
         return ResponseEntity.ok(careerStatistics);
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
-        this.careerStaticsService.deleteById(id);
+        this.careerStatisticsService.deleteById(id);
         return ResponseEntity.accepted().build();
     }
 

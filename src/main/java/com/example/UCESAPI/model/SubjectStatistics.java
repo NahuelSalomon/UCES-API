@@ -13,13 +13,13 @@ import java.util.List;
 @Builder
 @Data
 @Entity(name = "subject_statics")
-public class SubjectStatics {
+public class SubjectStatistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Float hoursPerWeek;
-    @OneToMany
+    @ManyToMany
     private List<Professor> professors;
     private Float difficulty;
 
