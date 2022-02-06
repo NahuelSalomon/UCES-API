@@ -29,7 +29,7 @@ public class SubjectController {
     public ResponseEntity<Object> add(@RequestBody Subject subject) {
         Subject subjectCreated = this.subjectService.add(subject);
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .location(EntityURLBuilder.buildURL(SUBJECT_PATH, subjectCreated.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .build();

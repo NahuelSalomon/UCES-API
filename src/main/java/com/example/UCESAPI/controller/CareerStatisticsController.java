@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/career/statics")
+@RequestMapping("/api/career/statistics")
 public class CareerStatisticsController {
 
     private final CareerStatisticsService careerStatisticsService;
-    private final static String CAREER_STATICS_PATH = "career/statics";
+    private final static String CAREER_STATICS_PATH = "career/statistics";
 
     @Autowired
     public CareerStatisticsController(CareerStatisticsService careerStatisticsService) {

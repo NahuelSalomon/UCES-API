@@ -18,10 +18,15 @@ public class Career {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "career_name")
     private String name;
-    @OneToMany(mappedBy = "career")
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "career")
     private List<Subject> subjects;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "statistics_id")
     private CareerStatistics statistics;
 
 

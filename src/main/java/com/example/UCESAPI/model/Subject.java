@@ -19,12 +19,22 @@ public class Subject {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "subject_name")
     private String name;
-    @OneToOne
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "statistics_id")
     private SubjectStatistics statics;
+
     @OneToMany
     private List<Subject> correlatives;
-    @OneToMany
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Board> boards;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "career_id")
+    private Career career;
 
 }

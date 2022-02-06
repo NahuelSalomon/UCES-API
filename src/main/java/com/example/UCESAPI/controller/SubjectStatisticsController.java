@@ -17,11 +17,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/subject/statics")
+@RequestMapping("/api/subject/statistics")
 public class SubjectStatisticsController {
 
     private final SubjectStatisticsService subjectStatisticsService;
-    private final String SUBJECT_STATICS_PATH = "subject";
+    private final String SUBJECT_STATICS_PATH = "subject/statistics";
 
     @Autowired
     public SubjectStatisticsController(SubjectStatisticsService subjectStatisticsService) {
