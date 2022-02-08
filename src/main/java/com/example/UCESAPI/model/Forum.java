@@ -18,17 +18,32 @@ import javax.persistence.*;
         @JsonSubTypes.Type(value = Recommendation.class, name = "RECOMMENDATION"),
         @JsonSubTypes.Type(value = Query.class, name = "QUERY")
 })
+@DiscriminatorColumn(
+        name = "forum_type",
+        discriminatorType = DiscriminatorType.STRING
+)
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Forum {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private String body;
-    @ManyToOne
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
+
+    @Column(name = "upvotes")
     private Integer upVotes;
+
+    @Column(name = "downvotes")
     private Integer downVotes;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     @AccessType(AccessType.Type.PROPERTY)
     public abstract ForumType forumType();

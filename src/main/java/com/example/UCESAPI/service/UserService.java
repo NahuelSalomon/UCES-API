@@ -1,10 +1,7 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.SubjectStaticsNotExistsException;
 import com.example.UCESAPI.exception.UserNotExistsException;
-import com.example.UCESAPI.model.SubjectStatics;
 import com.example.UCESAPI.model.User;
-import com.example.UCESAPI.repository.SubjectStaticsRepository;
 import com.example.UCESAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

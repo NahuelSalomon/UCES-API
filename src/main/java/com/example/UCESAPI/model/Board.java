@@ -18,8 +18,14 @@ public class Board {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "board_name")
     private String name;
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "forum_id")
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "board")
     private List<Forum> list;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
 }

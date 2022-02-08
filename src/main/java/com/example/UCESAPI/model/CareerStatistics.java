@@ -20,6 +20,8 @@ public class CareerStatistics {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
     private Float duration;
+
     private Integer accordance;
 }

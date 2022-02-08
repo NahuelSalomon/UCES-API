@@ -12,15 +12,27 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Data
-@Entity(name = "subject_statics")
-public class SubjectStatics {
+@Entity(name = "subject_statistics")
+public class SubjectStatistics {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "hours_per_week")
     private Float hoursPerWeek;
-    @OneToMany
+
+    @ManyToMany(cascade = {
+            CascadeType.PERSIST,
+            CascadeType.MERGE
+    })
+    @JoinTable(
+            name = "subject_statistics_professor",
+            joinColumns = {@JoinColumn(name = "subject_statistic_id")},
+            inverseJoinColumns = {@JoinColumn(name = "professor_id")}
+    )
     private List<Professor> professors;
+
     private Float difficulty;
 
 }

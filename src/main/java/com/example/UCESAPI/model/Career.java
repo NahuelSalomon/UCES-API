@@ -5,10 +5,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +18,16 @@ public class Career {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @Column(name = "career_name")
     private String name;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "career")
+    private List<Subject> subjects;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "statistics_id")
+    private CareerStatistics statistics;
 
 
 
