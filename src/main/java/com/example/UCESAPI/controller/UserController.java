@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
@@ -55,5 +56,12 @@ public class UserController {
         this.userService.deleteById(id);
         return ResponseEntity.accepted().build();
     }
+
+    @GetMapping(value = "/sayHello")
+    public ResponseEntity<Object> sayHello() {
+        return ResponseEntity.ok(new String("hello"));
+    }
+
+
 
 }
