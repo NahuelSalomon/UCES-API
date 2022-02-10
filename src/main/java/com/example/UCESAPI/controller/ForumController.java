@@ -60,7 +60,7 @@ public class ForumController {
     public ResponseEntity updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotExistsException {
         forumService.update(id, newForum);
         return ResponseEntity.accepted().build();
-    }git
+    }
 
     @GetMapping("/{idForum}/response")
     public ResponseEntity<Page<ResponseQuery>> getResponseByQuery(@PathVariable Integer idQuery, Pageable pageable)
