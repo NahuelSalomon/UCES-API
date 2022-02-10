@@ -7,6 +7,7 @@ import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.ResponseQuery;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.service.ForumService;
+import com.example.UCESAPI.service.ResponseQueryService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,13 @@ import java.util.List;
 public class ForumController {
 
     final private ForumService forumService;
+    final private ResponseQueryService responseService;
     final private String FORUM_PATH = "/api/forum";
 
     @Autowired
-    public ForumController(ForumService forumService){
+    public ForumController(ForumService forumService, ResponseQueryService responseService){
         this.forumService = forumService;
+        this.responseService = responseService;
     }
 
     @PostMapping
@@ -57,17 +60,12 @@ public class ForumController {
     public ResponseEntity updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotExistsException {
         forumService.update(id, newForum);
         return ResponseEntity.accepted().build();
-    }
+    }git
 
-    @PutMapping("/{id}/addresponse")
-    public ResponseEntity addResponseToQuery(@PathVariable Integer id, @RequestBody ResponseQuery response) throws ForumNotExistsException {
-        forumService.addResponse(id, response);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/{idForum}/deleteresponse/{idResponse}")
-    public ResponseEntity deleteResponseToQuery(@PathVariable Integer idForum, @PathVariable Integer idResponse) throws ForumNotExistsException {
-        forumService.deleteResponse(idForum, idResponse);
-        return ResponseEntity.ok().build();
+    @GetMapping("/{idForum}/response")
+    public ResponseEntity<Page<ResponseQuery>> getResponseByQuery(@PathVariable Integer idQuery, Pageable pageable)
+    {
+        Page<ResponseQuery> resp = responseService.getAllByQuery(idQuery,pageable);
+        return ResponseEntityMaker.response(resp.getContent(), resp);
     }
 }
