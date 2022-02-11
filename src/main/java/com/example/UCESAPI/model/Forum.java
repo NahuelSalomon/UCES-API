@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.AllArgsConstructor;
@@ -31,7 +32,7 @@ public abstract class Forum {
 
     private String body;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -41,7 +42,8 @@ public abstract class Forum {
     @Column(name = "downvotes")
     private Integer downVotes;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonBackReference(value = "forum-board")
     @JoinColumn(name = "board_id")
     private Board board;
 

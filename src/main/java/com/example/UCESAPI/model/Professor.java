@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -24,7 +25,9 @@ public class Professor {
 
     private Float ratings;
 
-    @ManyToMany(mappedBy = "professors")
-    private List<SubjectStatistics> statatistics;
+    //@JsonBackReference(value = "professor-statistics")
+    @ManyToMany(mappedBy = "professors", targetEntity = SubjectStatistics.class)
+    private List<SubjectStatistics> statistics;
+
 
 }

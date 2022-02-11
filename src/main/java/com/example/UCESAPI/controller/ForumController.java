@@ -19,17 +19,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/forum")
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping("/api/forums")
 public class ForumController {
 
     final private ForumService forumService;
-    final private ResponseQueryService responseService;
-    final private String FORUM_PATH = "/api/forum";
+    //final private ResponseQueryService responseService;
+    final private String FORUM_PATH = "/api/forums";
 
     @Autowired
-    public ForumController(ForumService forumService, ResponseQueryService responseService){
+    public ForumController(ForumService forumService){
         this.forumService = forumService;
-        this.responseService = responseService;
+        //this.responseService = responseService;
     }
 
     @PostMapping
@@ -62,10 +63,10 @@ public class ForumController {
         return ResponseEntity.accepted().build();
     }
 
-    @GetMapping("/{idForum}/response")
-    public ResponseEntity<Page<ResponseQuery>> getResponseByQuery(@PathVariable Integer idQuery, Pageable pageable)
-    {
-        Page<ResponseQuery> resp = responseService.getAllByQuery(idQuery,pageable);
-        return ResponseEntityMaker.response(resp.getContent(), resp);
-    }
+//    @GetMapping("/{idForum}/response")
+//    public ResponseEntity<Page<ResponseQuery>> getResponsesByQuery(@PathVariable Integer idQuery, Pageable pageable)
+//    {
+//        Page<ResponseQuery> resp = responseService.getAllByQuery(idQuery,pageable);
+//        return ResponseEntityMaker.response(resp.getContent(), resp);
+//    }
 }

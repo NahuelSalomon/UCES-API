@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,10 +23,8 @@ public class SubjectStatistics {
     @Column(name = "hours_per_week")
     private Float hoursPerWeek;
 
-    @ManyToMany(cascade = {
-            CascadeType.PERSIST,
-            CascadeType.MERGE
-    })
+    //@JsonManagedReference(value = "professor-statistics")
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Professor.class)
     @JoinTable(
             name = "subject_statistics_professor",
             joinColumns = {@JoinColumn(name = "subject_statistic_id")},

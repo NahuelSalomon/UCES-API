@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,10 +23,11 @@ public class Career {
     @Column(name = "career_name")
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "career")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
+    @JsonManagedReference(value = "subject-career")
     private List<Subject> subjects;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "statistics_id")
     private CareerStatistics statistics;
 

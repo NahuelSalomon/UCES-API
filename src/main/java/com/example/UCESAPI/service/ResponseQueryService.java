@@ -34,7 +34,7 @@ public class ResponseQueryService {
         return responseRepository.findById(id).orElseThrow(ResponseQueryNotExistsException::new);
     }
 
-    public ResponseEntity delete(Integer id){
+    public void delete(Integer id){
         this.responseRepository.deleteById(id);
     }
 }

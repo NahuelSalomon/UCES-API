@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api/users")
 @CrossOrigin(origins = "http://localhost:4200")
 public class UserController {
 
     private final UserService userService;
-    private final String USER_PATH = "user";
+    private final String USER_PATH = "users";
 
     @Autowired
     public UserController(UserService userService) {

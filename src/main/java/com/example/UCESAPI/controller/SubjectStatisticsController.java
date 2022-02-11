@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/subject/statistics")
 public class SubjectStatisticsController {
 
@@ -29,7 +30,7 @@ public class SubjectStatisticsController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Object> add(SubjectStatistics subjectStatistics) {
+    public ResponseEntity<Object> add(@RequestBody SubjectStatistics subjectStatistics) {
         SubjectStatistics subjectStatisticsCreated = this.subjectStatisticsService.add(subjectStatistics);
         return ResponseEntity
                 .status(HttpStatus.CREATED)

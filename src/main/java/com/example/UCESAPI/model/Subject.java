@@ -1,5 +1,7 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,17 +25,19 @@ public class Subject {
     @Column(name = "subject_name")
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "statistics_id")
-    private SubjectStatistics statics;
+    private SubjectStatistics statistics;
 
-    @OneToMany
-    private List<Subject> correlatives;
+    //@OneToMany
+    //private List<Subject> correlatives;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
+    @JsonManagedReference(value = "board-subject")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "subject")
     private List<Board> boards;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference(value = "subject-career")
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "career_id")
     private Career career;
 
