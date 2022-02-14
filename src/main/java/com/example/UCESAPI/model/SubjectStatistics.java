@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,6 +25,7 @@ public class SubjectStatistics {
     private Float hoursPerWeek;
 
     //@JsonManagedReference(value = "professor-statistics")
+    @JsonIgnoreProperties("statistics")
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Professor.class)
     @JoinTable(
             name = "subject_statistics_professor",

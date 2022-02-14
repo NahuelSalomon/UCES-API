@@ -1,6 +1,7 @@
 package com.example.UCESAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.util.List;
 @Builder
 @Data
 @Entity(name = "subjects")
+@JsonIgnoreProperties("correlatives")
 public class Subject {
 
     @Id
@@ -29,11 +31,16 @@ public class Subject {
     @JoinColumn(name = "statistics_id")
     private SubjectStatistics statistics;
 
-    //@OneToMany
-    //private List<Subject> correlatives;
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Subject.class)
+    @JoinTable(
+            name = "correlatives",
+            joinColumns = {@JoinColumn(name = "subject_id")},
+            inverseJoinColumns = {@JoinColumn(name = "correlative_id")}
+    )
+    private List<Subject> correlatives;
 
     @JsonManagedReference(value = "board-subject")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "subject")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private List<Board> boards;
 
     @JsonBackReference(value = "subject-career")

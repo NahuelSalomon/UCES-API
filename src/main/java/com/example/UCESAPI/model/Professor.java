@@ -1,6 +1,7 @@
 package com.example.UCESAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,7 @@ public class Professor {
     private Float ratings;
 
     //@JsonBackReference(value = "professor-statistics")
+    @JsonIgnoreProperties("professors")
     @ManyToMany(mappedBy = "professors", targetEntity = SubjectStatistics.class)
     private List<SubjectStatistics> statistics;
 

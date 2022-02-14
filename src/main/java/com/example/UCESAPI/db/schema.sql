@@ -51,6 +51,16 @@ CREATE TABLE subjects(
             constraint fk_career FOREIGN KEY (career_id) references careers(id)
             );
             
+CREATE TABLE correlatives(
+			id int NOT NULL AUTO_INCREMENT,
+            subject_id int NOT NULL,
+            correlative_id int NOT NULL,
+            constraint pk_correlative PRIMARY KEY (id),
+            constraint fk_correlatives_subject FOREIGN KEY (subject_id) references subjects(id),
+            constraint fk_correlatives_correlative FOREIGN KEY (correlative_id) references subjects(id),
+            constraint check_not_same CHECK (subject_id != correlative_id)
+			);
+            
 CREATE TABLE boards(
 			id int NOT NULL AUTO_INCREMENT,
             board_name varchar(30) NOT NULL,
