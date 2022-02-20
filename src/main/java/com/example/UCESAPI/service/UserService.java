@@ -39,4 +39,8 @@ public class UserService {
         this.userRepository.save(user);
     }
 
+    public User login(String email, String password) {
+        return this.userRepository.findByEmailAndPassword(email, password);
+
+    }
 }

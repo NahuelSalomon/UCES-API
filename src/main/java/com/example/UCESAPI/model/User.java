@@ -24,6 +24,8 @@ public class User {
 
     private String email;
 
+    private TypeUser typeUser;
+
     @Column(name = "u_password")
     private String password;
 

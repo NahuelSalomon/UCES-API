@@ -76,6 +76,7 @@ CREATE TABLE users(
             lastname varchar(30) NOT NULL,
             email varchar(30) NOT NULL,
             u_password varchar(30) NOT NULL,
+            type_user int not null default 1,
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
 );
