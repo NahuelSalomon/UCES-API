@@ -25,6 +25,7 @@ import java.util.stream.Collectors;
 import static com.example.UCESAPI.utils.Constants.JWT_SECRET;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/login")
 public class LoginController {
 
@@ -39,7 +40,7 @@ public class LoginController {
 
     @PostMapping(value = "/")
     public ResponseEntity<LoginResponseDto> login(@RequestBody LoginRequestDto loginRequestDto) {
-        User user = userService.login(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+        User user = userService.login(loginRequestDto.getEmail(), loginRequestDto.getPassword());
         if (user!=null){
             // User dto = conversionService.convert(user,UserDto.class);
             return ResponseEntity.ok(LoginResponseDto.builder().token(this.generateToken(user)).build());

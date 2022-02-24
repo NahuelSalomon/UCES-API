@@ -12,6 +12,10 @@ import javax.persistence.*;
 @Builder
 @Data
 @Entity(name = "users")
+@DiscriminatorColumn(
+        name = "type_user",
+        discriminatorType = DiscriminatorType.INTEGER
+)
 public class User {
 
     @Id
@@ -24,6 +28,7 @@ public class User {
 
     private String email;
 
+    @Column(name = "type_user")
     private TypeUser typeUser;
 
     @Column(name = "u_password")
