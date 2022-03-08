@@ -104,5 +104,14 @@ CREATE TABLE responses_query(
             constraint fk_forum FOREIGN KEY (forum_id) references forums(id)
 );
 
+/*LINEAS PARA EJECUTAR*/
+ALTER TABLE careers CHANGE COLUMN career_name career_name varchar(100) NOT NULL;
+ALTER TABLE forums CHANGE COLUMN forum_type forum_type INT NOT NULL DEFAULT 1;
+
+select * from career_statistics; 
+select * from careers; 
+select * from subject_statistics; 
+select * from subjects; 
+
 			
             
