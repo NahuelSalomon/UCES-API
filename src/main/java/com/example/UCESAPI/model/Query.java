@@ -6,10 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.List;
 
 @NoArgsConstructor
@@ -17,10 +14,11 @@ import java.util.List;
 @Builder
 @Data
 @Entity
+@DiscriminatorValue("1")
 public class Query extends Forum{
 
     @JsonManagedReference(value = "response-query")
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "query")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "query")
     private List<ResponseQuery> responses;
 
     @Override

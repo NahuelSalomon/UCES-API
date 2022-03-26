@@ -40,8 +40,8 @@ public class Subject {
     private List<Subject> correlatives;
 
     @JsonManagedReference(value = "board-subject")
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
-    private List<Board> boards;
+    @OneToOne(fetch = FetchType.LAZY, mappedBy = "subject")
+    private Board board;
 
     @JsonBackReference(value = "subject-career")
     @ManyToOne(fetch = FetchType.EAGER)

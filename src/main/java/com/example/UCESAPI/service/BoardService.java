@@ -43,7 +43,7 @@ public class BoardService {
     public void update(Integer id, Board newBoard) throws BoardNotExistsException {
         Board b = getById(id);
         b.setName(newBoard.getName());
-        b.setList(newBoard.getList());
+        b.setForumList(newBoard.getForumList());
         boardRepository.save(b);
     }
 }

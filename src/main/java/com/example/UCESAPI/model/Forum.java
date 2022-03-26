@@ -21,7 +21,7 @@ import javax.persistence.*;
 })
 @DiscriminatorColumn(
         name = "forum_type",
-        discriminatorType = DiscriminatorType.STRING
+        discriminatorType = DiscriminatorType.INTEGER
 )
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Forum {

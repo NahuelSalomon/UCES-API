@@ -5,16 +5,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+@NoArgsConstructor
 @Builder
 @Data
 @Entity
+@DiscriminatorValue("0")
 public class Recommendation extends Forum{
-
-    public Recommendation() {
-
-    }
 
     @Override
     public ForumType forumType() {
