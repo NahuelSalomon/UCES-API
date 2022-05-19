@@ -20,7 +20,6 @@ public class Career {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "career_name")
     private String name;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
@@ -28,7 +27,7 @@ public class Career {
     private List<Subject> subjects;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "statistics_id")
+    @JoinColumn(name = "id_statistics")
     private CareerStatistics statistics;
 
 

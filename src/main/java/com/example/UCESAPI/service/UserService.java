@@ -1,6 +1,6 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.UserNotExistsException;
+import com.example.UCESAPI.exception.notfound.UserNotFoundException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +26,15 @@ public class UserService {
         return this.userRepository.findAll(pageable);
     }
 
-    public User getById(Integer id) throws UserNotExistsException {
-        return this.userRepository.findById(id).orElseThrow(UserNotExistsException::new);
+    public User getById(Integer id) throws UserNotFoundException {
+        return this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
     public void deleteById(Integer id) {
         this.userRepository.deleteById(id);
     }
 
-    public void update(Integer id, User user) throws UserNotExistsException {
+    public void update(Integer id, User user) throws UserNotFoundException {
         this.getById(id);
         this.userRepository.save(user);
     }

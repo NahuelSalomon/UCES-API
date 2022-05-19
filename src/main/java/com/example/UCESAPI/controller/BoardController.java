@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.BoardNotExistsException;
+import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.model.Board;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -11,7 +11,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -40,19 +39,19 @@ public class BoardController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Board> getById(@PathVariable Integer id) throws BoardNotExistsException {
+    public ResponseEntity<Board> getById(@PathVariable Integer id) throws BoardNotFoundException {
         Board board = boardService.getById(id);
         return ResponseEntity.ok(board);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteBoard(@PathVariable Integer id) throws BoardNotExistsException {
+    public ResponseEntity deleteBoard(@PathVariable Integer id) throws BoardNotFoundException {
         boardService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateBoard(@PathVariable Integer id, @RequestBody Board newBoard) throws BoardNotExistsException {
+    public ResponseEntity updateBoard(@PathVariable Integer id, @RequestBody Board newBoard) throws BoardNotFoundException {
         boardService.update(id, newBoard);
         return ResponseEntity.accepted().build();
     }

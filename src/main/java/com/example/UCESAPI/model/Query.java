@@ -19,7 +19,7 @@ public class Query extends Forum{
 
     @JsonManagedReference(value = "response-query")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "query")
-    private List<ResponseQuery> responses;
+    private List<QueryResponse> responses;
 
     @Override
     public ForumType forumType() {

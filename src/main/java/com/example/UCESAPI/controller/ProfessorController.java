@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.ProfessorNotExistsException;
+import com.example.UCESAPI.exception.notfound.ProfessorNotFoundException;
 import com.example.UCESAPI.model.Professor;
 import com.example.UCESAPI.service.ProfessorService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -47,7 +47,7 @@ public class ProfessorController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Professor> getById(@PathVariable Integer id) throws ProfessorNotExistsException {
+    public ResponseEntity<Professor> getById(@PathVariable Integer id) throws ProfessorNotFoundException {
         Professor professor = this.professorService.getById(id);
         return ResponseEntity.ok(professor);
     }

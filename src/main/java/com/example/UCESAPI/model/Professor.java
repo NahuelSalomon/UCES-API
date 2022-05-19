@@ -21,7 +21,6 @@ public class Professor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "professor_name")
     private String name;
 
     private Float ratings;

@@ -29,8 +29,8 @@ public class SubjectStatistics {
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Professor.class)
     @JoinTable(
             name = "subject_statistics_professor",
-            joinColumns = {@JoinColumn(name = "subject_statistic_id")},
-            inverseJoinColumns = {@JoinColumn(name = "professor_id")}
+            joinColumns = {@JoinColumn(name = "id_subject_statistic")},
+            inverseJoinColumns = {@JoinColumn(name = "id_professor")}
     )
     private List<Professor> professors;
 

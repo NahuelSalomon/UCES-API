@@ -57,7 +57,7 @@ public class LoginController {
 
     public String generateToken(User user) {
         try {
-            String role = user.getTypeUser().toString();
+            String role = user.getUserType().toString();
             ObjectMapper objectMapper = new ObjectMapper();
             List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList(role);
             String token = Jwts

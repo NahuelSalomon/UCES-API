@@ -1,10 +1,7 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.ProfessorNotExistsException;
-import com.example.UCESAPI.exception.SubjectNotExistsException;
-import com.example.UCESAPI.model.Professor;
+import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.model.Subject;
-import com.example.UCESAPI.repository.ProfessorRepository;
 import com.example.UCESAPI.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,15 +26,15 @@ public class SubjectService {
         return this.subjectRepository.findAll(pageable);
     }
 
-    public Subject getById(Integer id) throws SubjectNotExistsException {
-        return this.subjectRepository.findById(id).orElseThrow(SubjectNotExistsException::new);
+    public Subject getById(Integer id) throws SubjectNotFoundException {
+        return this.subjectRepository.findById(id).orElseThrow(SubjectNotFoundException::new);
     }
 
     public void deleteById(Integer id) {
         this.subjectRepository.deleteById(id);
     }
 
-    public void update(Integer id, Subject subjectUpdated) throws SubjectNotExistsException {
+    public void update(Integer id, Subject subjectUpdated) throws SubjectNotFoundException {
         this.getById(id);
         this.subjectRepository.save(subjectUpdated);
     }

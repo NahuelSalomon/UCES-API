@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.CareerStatisticsNotExistsException;
+import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
 import com.example.UCESAPI.model.CareerStatistics;
 import com.example.UCESAPI.service.CareerStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -47,7 +47,7 @@ public class CareerStatisticsController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<CareerStatistics> getById(@PathVariable Integer id) throws CareerStatisticsNotExistsException {
+    public ResponseEntity<CareerStatistics> getById(@PathVariable Integer id) throws CareerStatisticsNotFoundException {
         CareerStatistics careerStatistics = this.careerStatisticsService.getById(id);
         return ResponseEntity.ok(careerStatistics);
     }

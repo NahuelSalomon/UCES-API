@@ -1,6 +1,6 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.CareerStatisticsNotExistsException;
+import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
 import com.example.UCESAPI.model.CareerStatistics;
 import com.example.UCESAPI.repository.CareerStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +26,15 @@ public class CareerStatisticsService {
         return this.careerStatisticsRepository.findAll(pageable);
     }
 
-    public CareerStatistics getById(Integer id) throws CareerStatisticsNotExistsException {
-        return this.careerStatisticsRepository.findById(id).orElseThrow(CareerStatisticsNotExistsException::new);
+    public CareerStatistics getById(Integer id) throws CareerStatisticsNotFoundException {
+        return this.careerStatisticsRepository.findById(id).orElseThrow(CareerStatisticsNotFoundException::new);
     }
 
     public void deleteById(Integer id) {
         this.careerStatisticsRepository.deleteById(id);
     }
 
-    public void update(Integer id, CareerStatistics careerStatisticsUpdated) throws CareerStatisticsNotExistsException {
+    public void update(Integer id, CareerStatistics careerStatisticsUpdated) throws CareerStatisticsNotFoundException {
         this.getById(id);
         this.careerStatisticsRepository.save(careerStatisticsUpdated);
     }

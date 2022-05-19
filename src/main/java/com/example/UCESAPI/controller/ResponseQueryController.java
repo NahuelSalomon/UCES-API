@@ -1,7 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.model.ResponseQuery;
-import com.example.UCESAPI.service.ProfessorService;
+import com.example.UCESAPI.model.QueryResponse;
 import com.example.UCESAPI.service.ResponseQueryService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,8 @@ public class ResponseQueryController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody ResponseQuery response){
-        ResponseQuery r = this.responseService.add(response);
+    public ResponseEntity add(@RequestBody QueryResponse response){
+        QueryResponse r = this.responseService.add(response);
         return ResponseEntity.created(EntityURLBuilder.buildURL(RESPONSE_PATH, r.getId())).build();
     }
 

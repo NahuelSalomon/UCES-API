@@ -1,14 +1,11 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.ResponseQueryNotExistsException;
-import com.example.UCESAPI.model.ResponseQuery;
-import com.example.UCESAPI.model.Subject;
+import com.example.UCESAPI.exception.notfound.ResponseQueryNotFoundException;
+import com.example.UCESAPI.model.QueryResponse;
 import com.example.UCESAPI.repository.ResponseQueryRepository;
-import com.example.UCESAPI.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
@@ -22,16 +19,16 @@ public class ResponseQueryService {
         this.responseRepository = responseQueryRepository;
     }
 
-    public ResponseQuery add(ResponseQuery response) {
+    public QueryResponse add(QueryResponse response) {
         return this.responseRepository.save(response);
     }
 
-    public Page<ResponseQuery> getAllByQuery(Integer idQuery, Pageable p){
+    public Page<QueryResponse> getAllByQuery(Integer idQuery, Pageable p){
         return this.responseRepository.findResponseQueriesByQueryId(idQuery, p);
     }
 
-    public ResponseQuery getById(Integer id) throws ResponseQueryNotExistsException {
-        return responseRepository.findById(id).orElseThrow(ResponseQueryNotExistsException::new);
+    public QueryResponse getById(Integer id) throws ResponseQueryNotFoundException {
+        return responseRepository.findById(id).orElseThrow(ResponseQueryNotFoundException::new);
     }
 
     public void delete(Integer id){

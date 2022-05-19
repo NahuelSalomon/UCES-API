@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.UserNotExistsException;
+import com.example.UCESAPI.exception.notfound.UserNotFoundException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -47,7 +47,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getById(@PathVariable Integer id) throws UserNotExistsException {
+    public ResponseEntity<User> getById(@PathVariable Integer id) throws UserNotFoundException {
         User user = this.userService.getById(id);
         return ResponseEntity.ok(user);
     }

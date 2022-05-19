@@ -1,5 +1,6 @@
 package com.example.UCESAPI.utils;
 
+import com.example.UCESAPI.model.response.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,4 +20,9 @@ public class EntityResponse {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(page.getContent());
         }
     }
+
+    public static Response messageResponse(String message) {
+        return Response.builder().message(message).build();
+    }
+
 }

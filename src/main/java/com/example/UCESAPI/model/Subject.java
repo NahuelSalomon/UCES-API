@@ -24,18 +24,17 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "subject_name")
     private String name;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "statistics_id")
+    @JoinColumn(name = "id_statistics")
     private SubjectStatistics statistics;
 
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Subject.class)
     @JoinTable(
             name = "correlatives",
-            joinColumns = {@JoinColumn(name = "subject_id")},
-            inverseJoinColumns = {@JoinColumn(name = "correlative_id")}
+            joinColumns = {@JoinColumn(name = "id_subject")},
+            inverseJoinColumns = {@JoinColumn(name = "id_correlative")}
     )
     private List<Subject> correlatives;
 
@@ -45,7 +44,7 @@ public class Subject {
 
     @JsonBackReference(value = "subject-career")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "career_id")
+    @JoinColumn(name = "id_career")
     private Career career;
 
 }

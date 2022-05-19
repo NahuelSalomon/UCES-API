@@ -1,5 +1,5 @@
 package com.example.UCESAPI.service;
-import com.example.UCESAPI.exception.SubjectStaticsNotExistsException;
+import com.example.UCESAPI.exception.notfound.SubjectStaticsNotFoundException;
 import com.example.UCESAPI.model.SubjectStatistics;
 import com.example.UCESAPI.repository.SubjectStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,15 +25,15 @@ public class SubjectStatisticsService {
         return this.subjectStatisticsRepository.findAll(pageable);
     }
 
-    public SubjectStatistics getById(Integer id) throws SubjectStaticsNotExistsException {
-        return this.subjectStatisticsRepository.findById(id).orElseThrow(SubjectStaticsNotExistsException::new);
+    public SubjectStatistics getById(Integer id) throws SubjectStaticsNotFoundException {
+        return this.subjectStatisticsRepository.findById(id).orElseThrow(SubjectStaticsNotFoundException::new);
     }
 
     public void deleteById(Integer id) {
         this.subjectStatisticsRepository.deleteById(id);
     }
 
-    public void update(Integer id, SubjectStatistics subjectStatisticsUpdated) throws SubjectStaticsNotExistsException {
+    public void update(Integer id, SubjectStatistics subjectStatisticsUpdated) throws SubjectStaticsNotFoundException {
         this.getById(id);
         this.subjectStatisticsRepository.save(subjectStatisticsUpdated);
     }

@@ -23,17 +23,17 @@ import javax.persistence.*;
         name = "forum_type",
         discriminatorType = DiscriminatorType.INTEGER
 )
-@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Forum {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     private String body;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @Column(name = "upvotes")
@@ -44,7 +44,7 @@ public abstract class Forum {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JsonBackReference(value = "forum-board")
-    @JoinColumn(name = "board_id")
+    @JoinColumn(name = "id_board")
     private Board board;
 
     @AccessType(AccessType.Type.PROPERTY)

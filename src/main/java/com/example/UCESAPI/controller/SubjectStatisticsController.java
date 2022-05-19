@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.SubjectStaticsNotExistsException;
+import com.example.UCESAPI.exception.notfound.SubjectStaticsNotFoundException;
 import com.example.UCESAPI.model.SubjectStatistics;
 import com.example.UCESAPI.service.SubjectStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -47,7 +47,7 @@ public class SubjectStatisticsController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<SubjectStatistics> getById(@PathVariable Integer id) throws SubjectStaticsNotExistsException {
+    public ResponseEntity<SubjectStatistics> getById(@PathVariable Integer id) throws SubjectStaticsNotFoundException {
         SubjectStatistics subjectStatistics = this.subjectStatisticsService.getById(id);
         return ResponseEntity.ok(subjectStatistics);
     }

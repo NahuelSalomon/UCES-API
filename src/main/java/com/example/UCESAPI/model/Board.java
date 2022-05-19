@@ -21,7 +21,6 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "board_name")
     private String name;
 
     @JsonManagedReference(value = "forum-board")
@@ -30,6 +29,6 @@ public class Board {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JsonBackReference(value = "board-subject")
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "id_subject")
     private Subject subject;
 }

@@ -1,14 +1,14 @@
 package com.example.UCESAPI.repository;
 
-import com.example.UCESAPI.model.ResponseQuery;
+import com.example.UCESAPI.model.QueryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ResponseQueryRepository extends JpaRepository<ResponseQuery, Integer> {
+public interface ResponseQueryRepository extends JpaRepository<QueryResponse, Integer> {
 
-    Page<ResponseQuery> findResponseQueriesByQueryId(Integer idQuery, Pageable p);
+    Page<QueryResponse> findResponseQueriesByQueryId(Integer idQuery, Pageable p);
 
 }

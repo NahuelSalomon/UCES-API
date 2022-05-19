@@ -1,13 +1,8 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.BoardNotExistsException;
-import com.example.UCESAPI.exception.ForumNotExistsException;
-import com.example.UCESAPI.model.Board;
+import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.model.Forum;
-import com.example.UCESAPI.model.ResponseQuery;
-import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.service.ForumService;
-import com.example.UCESAPI.service.ResponseQueryService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,19 +41,19 @@ public class ForumController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Forum> getById(@PathVariable Integer id) throws ForumNotExistsException {
+    public ResponseEntity<Forum> getById(@PathVariable Integer id) throws ForumNotFoundException {
         Forum forum = forumService.getById(id);
         return ResponseEntity.ok(forum);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteForum(@PathVariable Integer id) throws ForumNotExistsException {
+    public ResponseEntity deleteForum(@PathVariable Integer id) throws ForumNotFoundException {
         forumService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotExistsException {
+    public ResponseEntity updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotFoundException {
         forumService.update(id, newForum);
         return ResponseEntity.accepted().build();
     }

@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.SubjectNotExistsException;
+import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.service.SubjectService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -44,7 +44,7 @@ public class SubjectController {
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Subject> getById(@PathVariable Integer id) throws SubjectNotExistsException {
+    public ResponseEntity<Subject> getById(@PathVariable Integer id) throws SubjectNotFoundException {
         return ResponseEntity.ok(this.subjectService.getById(id));
     }
 

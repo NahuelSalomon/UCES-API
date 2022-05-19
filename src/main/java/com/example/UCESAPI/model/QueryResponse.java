@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.querydsl.QuerydslRepositoryInvokerAdapter;
 
 import javax.persistence.*;
 
@@ -12,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Data
 @Entity(name = "responses_query")
-public class ResponseQuery {
+public class QueryResponse {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +20,11 @@ public class ResponseQuery {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id_user")
     private User user;
 
     @JsonBackReference(value = "response-query")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "forum_id")
+    @JoinColumn(name = "id_query")
     private Query query;
 }
