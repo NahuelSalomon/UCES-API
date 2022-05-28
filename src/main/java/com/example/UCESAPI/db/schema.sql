@@ -159,7 +159,7 @@ CREATE TABLE forums(
             id_user int NOT NULL,
             id_board int NOT NULL,
             constraint pk_forum PRIMARY KEY (id),
-            constraint fk_user FOREIGN KEY (user_id) references users(id),
+            constraint fk_user FOREIGN KEY (id_user) references users(id),
             constraint fk_board FOREIGN KEY (id_board) references boards(id)
 );
 
@@ -176,7 +176,7 @@ CREATE TABLE responses_query(
 /*LINEAS PARA EJECUTAR*/
 ALTER TABLE careers CHANGE COLUMN career_name career_name varchar(100) NOT NULL;
 ALTER TABLE forums CHANGE COLUMN forum_type forum_type INT NOT NULL DEFAULT 1;
-
+ALTER TABLE users CHANGE COLUMN u_password u_password varchar(60);
 
 INSERT INTO career_statistics(duration, accordance) VALUES
 (2,8),

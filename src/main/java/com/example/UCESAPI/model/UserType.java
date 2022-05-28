@@ -1,9 +1,9 @@
 package com.example.UCESAPI.model;
 
 public enum UserType {
-    ANONYMOUS("Anonymous"),
-    STUDENT("Student"),
-    ADMINISTRATOR("Administrator");
+    ROLE_ANONYMOUS("Anonymous"),
+    ROLE_STUDENT("Student"),
+    ROLE_ADMINISTRATOR("Administrator");
 
     private String description;
 
