@@ -11,7 +11,7 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 @Builder
 @Data
-@Entity
+@Entity(name = "recommendations")
 @DiscriminatorValue("0")
 public class Recommendation extends Forum{
 

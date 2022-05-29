@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Entity(name = "responses_query")
+@Entity(name = "query_responses")
 public class QueryResponse {
 
     @Id

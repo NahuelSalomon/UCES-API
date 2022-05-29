@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Data
-@Entity
+@Entity(name = "queries")
 @DiscriminatorValue("1")
 public class Query extends Forum{
 

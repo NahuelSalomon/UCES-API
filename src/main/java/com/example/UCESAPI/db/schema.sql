@@ -30,12 +30,12 @@ VALUES
 
 CREATE TABLE professors(
 			id int NOT NULL AUTO_INCREMENT,
-            professor_name varchar(40),
+            `name` varchar(40),
             ratings float,
             constraint pk_professor PRIMARY KEY (id)
 );
 
-INSERT INTO professors(professor_name, ratings) VALUES 
+INSERT INTO professors(`name`, ratings) VALUES 
 ("Susana Guccicone", 9.0),
 ("German Gianotti", 9.0),
 ("Pablo Fino", 10.0),
@@ -69,7 +69,7 @@ CREATE TABLE subject_statistics_professor(
             
 CREATE TABLE subjects(
 			id int NOT NULL AUTO_INCREMENT,
-            subject_name varchar(40) NOT NULL,
+            `name` varchar(40) NOT NULL,
             id_statistics int,
             id_career int NOT NULL,
             constraint pk_subject PRIMARY KEY (id),
@@ -77,7 +77,7 @@ CREATE TABLE subjects(
             constraint fk_career FOREIGN KEY (id_career) references careers(id)
             );
             
-INSERT INTO subjects  (subject_name,id_statistics,id_statistics) VALUES
+INSERT INTO subjects  (subject_name,id_statistics,id_career) VALUES
 /*PRIMER CUATRIMESTRE*/
 (),
 (),
@@ -149,7 +149,7 @@ CREATE TABLE users(
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
 );
-
+/*
 CREATE TABLE forums(
 			id int NOT NULL AUTO_INCREMENT,
             forum_type varchar(20) NOT NULL DEFAULT 1,
@@ -162,15 +162,39 @@ CREATE TABLE forums(
             constraint fk_user FOREIGN KEY (id_user) references users(id),
             constraint fk_board FOREIGN KEY (id_board) references boards(id)
 );
+*/
+CREATE TABLE queries(
+			id int NOT NULL AUTO_INCREMENT,
+            body varchar(200) NOT NULL,
+            upvotes int DEFAULT 0,
+            downvotes int DEFAULT 0,
+            id_user int NOT NULL,
+            id_board int NOT NULL,
+            constraint pk_query PRIMARY KEY (id),
+            constraint fk_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_board FOREIGN KEY (id_board) references boards(id)
+);
 
-CREATE TABLE responses_query(
+CREATE TABLE recommendations(
+			id int NOT NULL AUTO_INCREMENT,
+            body varchar(200) NOT NULL,
+            upvotes int DEFAULT 0,
+            downvotes int DEFAULT 0,
+            id_user int NOT NULL,
+            id_board int NOT NULL,
+            constraint pk_recommendation PRIMARY KEY (id),
+            constraint fk_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_board FOREIGN KEY (id_board) references boards(id)
+);
+
+CREATE TABLE query_responses(
 			id int NOT NULL AUTO_INCREMENT,
             body varchar(200) NOT NULL,
             id_user int NOT NULL,
-            id_forum int NOT NULL,
-            constraint pk_responses_query PRIMARY KEY (id),
-            constraint fk_user_response FOREIGN KEY (id_user) references users(id),
-            constraint fk_forum FOREIGN KEY (id_forum) references forums(id)
+            id_query int NOT NULL,
+            constraint pk_query_response PRIMARY KEY (id),
+            constraint fk_query_response_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
 
 /*LINEAS PARA EJECUTAR*/
@@ -189,7 +213,6 @@ INSERT INTO careers(career_name,statistics_id) VALUES
 SELECT * FROM careers; 
 
 
-DESCRIBE subject_statistics; 
 INSERT INTO subject_statistics(hours_per_week,difficulty) VALUES
 (6.0,9.0),
 (4.0,7.0);
