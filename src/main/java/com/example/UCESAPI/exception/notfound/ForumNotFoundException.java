@@ -1,4 +1,4 @@
 package com.example.UCESAPI.exception.notfound;
 
-public class ForumNotFoundException extends Exception{
+public class ForumNotFoundException extends ObjectNotFoundException{
 }

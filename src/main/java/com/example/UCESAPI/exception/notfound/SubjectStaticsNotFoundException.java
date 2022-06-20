@@ -1,4 +1,4 @@
 package com.example.UCESAPI.exception.notfound;
 
-public class SubjectStaticsNotFoundException extends Exception{
+public class SubjectStaticsNotFoundException extends ObjectNotFoundException{
 }

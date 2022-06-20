@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service;
 
 
 @Service
-public class ResponseQueryService {
+public class QueryResponseService {
 
     private final ResponseQueryRepository responseRepository;
 
     @Autowired
-    public ResponseQueryService(ResponseQueryRepository responseQueryRepository) {
+    public QueryResponseService(ResponseQueryRepository responseQueryRepository) {
         this.responseRepository = responseQueryRepository;
     }
 

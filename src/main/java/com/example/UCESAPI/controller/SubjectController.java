@@ -16,8 +16,8 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/subject")
-public class SubjectController {
+@RequestMapping("/api/subjects")
+public class    SubjectController {
 
     private final SubjectService subjectService;
     private final String SUBJECT_PATH = "subject";

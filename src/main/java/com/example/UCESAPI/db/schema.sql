@@ -16,14 +16,14 @@ VALUES
 
 CREATE TABLE careers(
 			id int NOT NULL AUTO_INCREMENT,
-            career_name VARCHAR(100) NOT NULL,
+            `name` VARCHAR(100) NOT NULL,
             id_statistics int,
             constraint pk_career PRIMARY KEY (id),
             constraint fk_career_statistics FOREIGN KEY (id_statistics) REFERENCES career_statistics(id),
-            constraint unq_name UNIQUE (career_name)
+            constraint unq_name UNIQUE (`name`)
 );
 
-INSERT INTO careers(career_name, id_statistics)
+INSERT INTO careers(`name`, id_statistics)
 VALUES 
 ("Tecnicatura universitaria en Programación", 1),
 ("Tecnicatura universitaria en Sistemas Informáticos", 2);
@@ -36,12 +36,47 @@ CREATE TABLE professors(
 );
 
 INSERT INTO professors(`name`, ratings) VALUES 
-("Susana Guccicone", 9.0),
-("German Gianotti", 9.0),
-("Pablo Fino", 10.0),
-("Veronica Lourdes Tomich", 8.0),
-("Sergio Gangur", 8.0),
-("Adrian Solimano", 8.0);
+("Carolina Archuby", 0.0),
+("Mariela Bergamin", 0.0),
+("Veronica Lourdes Tomich", 0.0),
+("Sergio Garguir", 0.0),
+("Emmanuel Etcheber", 0.0),
+
+("Mariela Bergamin", 0.0),
+("Rodrigo Fanjul", 0.0),
+("Gabriel Chaldu", 0.0),
+("Rodolfo Germán Barrios", 0.0),
+("Gustavo A. F. Sonvico", 0.0),
+("Eduardo Mónaco", 0.0),
+
+("Mario De Paolo", 0.0),
+("Maria Teresa De Tomaso", 0.0),
+("Roberto Cesar Lucero", 0.0),
+("Gonzalo Benoffi", 0.0),
+("Karina Felice", 0.0),
+
+("Federico Gil de Muro", 0.0),
+("Cristian Halm", 0.0),
+("Jorge Adrian Solimano", 0.0),
+("Julieta Wilson", 0.0),
+("Matías Tesoreiro", 0.0),
+
+("Leonardo Chiessa", 0.0),
+("German Gianotti", 0.0),
+("Rocio Acosta", 0.0),
+("Fernando Castañeda", 0.0),
+("Pablo Ezequiel Fino", 0.0),
+("Susana Guccione", 0.0),
+("Gonzalo Orellano", 0.0),
+
+("Adolfo Eduardo Onaine", 0.0),
+("Ignacio Casales", 0.0),
+("Juan Jose Azar", 0.0),
+/*("German Gianotti", 0.0),*/
+/*("Susana Guccione", 0.0),*/
+("Carolina Tosoni", 0.0),
+("Nicolás Bertolucci", 0.0);
+
 
 CREATE TABLE subject_statistics(
 			id int NOT NULL AUTO_INCREMENT,
@@ -51,12 +86,52 @@ CREATE TABLE subject_statistics(
 );
 
 INSERT INTO subject_statistics(hours_per_week, difficulty) VALUES 
-("Estadística", 9.0),
-("Matemática", 9.0),
-("Base de datos I", 10.0),
-("Veronica Lourdes Tomich", 8.0),
-("Sergio Gangur", 8.0),
-("Adrian Solimano", 8.0);
+/* PRIMER CUATRIMESTRE */
+/*Matemática*/ (9.0, 0.0),
+/*Inglés I*/ (3.0, 0.0),
+/*Sistema de Procesamiento de Datos*/ (6.0, 0.0),
+/*Laboratorio de Computación I*/ (6.0, 0.0),
+/*Programación I*/ (6.0, 0.0),
+
+/*SEGUNDO CUATRIMESTRE*/
+/*Inglés II*/ (3.0, 0.0),
+/*Arquitectura y Sistemas Operativos*/ (6.0, 0.0),
+/*Programación II*/ (6.0, 0.0),
+/*Metodología de la Investigación*/ (3.0, 0.0),
+/*Laboratorio de Computación II*/ (6.0, 0.0),
+/*Estadística*/ (6.0, 9.0),
+
+/*TERCER CUATRIMESTRE*/
+/*Elementos de Investigación Operativa*/ (6.0, 0.0),
+/*Organización Contable de la Empresa*/ (6.0, 0.0),
+/*Organización Empresarial*/ (6.0, 0.0),
+/*Laboratorio de Computación III*/ (6.0, 0.0),
+/*Programación III*/ (6.0, 0.0),
+
+/*CUARTO CUATRIMESTRE*/
+/*Legislación*/ (6.0, 0.0),
+/*Metodología de Sistemas I*/ (12.0, 0.0),
+/*Laboratorio de Computación IV*/ (6.0, 0.0),
+/*Diseño y Administración de Bases de Datos*/ (6.0, 0.0),
+/*Práctica Profesional*/ (0.0, 0.0),
+
+/*QUINTO CUATRIMESTRE*/
+/*Redes*/ (4.0, 0.0),
+/*Programación Avanzada I	*/ (4.0, 0.0),
+/*Ingles Técnico Avanzado I	*/ (3.0, 0.0),
+/*Metodología De Sistemas II	*/ (4.0, 0.0),
+/*Base de Datos II	*/ (4.0, 0.0),
+/*Matemática II	*/ (4.0, 0.0),
+/*Laboratorio V	*/ (4.0, 0.0),
+
+/*SEXTO CUATRIMESTRE*/
+/*Investigación Operativa II*/ (4.0, 0.0),
+/*Administración y Dirección de Proyectos Informáticos	*/ (4.0, 0.0),
+/*Programación Avanzada II*/ (4.0, 0.0),
+/*Seminario*/ (4.0, 0.0),
+/*Matemática III*/ (4.0, 0.0),
+/*Ingles Técnico Avanzado II*/ (2.0, 0.0),
+/*Metodología de Sistemas III*/ (4.0, 0.0);
 
 CREATE TABLE subject_statistics_professor(
 			id int NOT NULL AUTO_INCREMENT,
@@ -66,10 +141,10 @@ CREATE TABLE subject_statistics_professor(
             constraint fk_subject_statistics_professor FOREIGN KEY (id_subject_statistic) references subject_statistics(id),
             constraint fk_professor FOREIGN KEY (id_professor) references professors(id)
 );
-            
+     
 CREATE TABLE subjects(
 			id int NOT NULL AUTO_INCREMENT,
-            `name` varchar(40) NOT NULL,
+            `name` varchar(60) NOT NULL,
             id_statistics int,
             id_career int NOT NULL,
             constraint pk_subject PRIMARY KEY (id),
@@ -77,48 +152,53 @@ CREATE TABLE subjects(
             constraint fk_career FOREIGN KEY (id_career) references careers(id)
             );
             
-INSERT INTO subjects  (subject_name,id_statistics,id_career) VALUES
+INSERT INTO subjects (`name`,id_statistics,id_career) VALUES
 /*PRIMER CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-(),
+("Matemática I",1,1),
+("Inglés I",2,1),
+("Sistema de Procesamiento de Datos",3,1),
+("Laboratorio de Computación I",4,1),
+("Programación I",5,1),
 
 /*SEGUNDO CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-(),
+("Inglés II",6,1),
+("Arquitectura y Sistemas Operativos",7,1),
+("Programación II",8,1),
+("Metodología de la Investigación",9,1),
+("Laboratorio de Computación II",10,1),
+("Estadística",11,1),
 
-/*TERCERO CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-(),
+/*TERCER CUATRIMESTRE*/
+("Elementos de Investigación Operativa",12,1),
+("Organización Contable de la Empresa",13,1),
+("Organización Empresarial",14,1),
+("Laboratorio de Computación III",15,1),
+("Programación III",16,1),
 
 /*CUARTO CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-(),
+("Legislación",17,1),
+("Metodología de Sistemas I",18,1),
+("Laboratorio de Computación IV",19,1),
+("Diseño y Administración de Bases de Datos",20,1),
+("Práctica Profesional",21,1),
 
 /*QUINTO CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-(),
+("Redes",22,2),
+("Programación Avanzada I",23,2),
+("Ingles Técnico Avanzado I",24,2),
+("Metodología De Sistemas II",25,2),
+("Base de Datos II",26,2),
+("Matemática II",27,2),
+("Laboratorio V",28,2),
 
 /*SEXTO CUATRIMESTRE*/
-(),
-(),
-(),
-(),
-();
+("Investigación Operativa II",29,2),
+("Administración y Dirección de Proyectos Informáticos",30,2),
+("Programación Avanzada II",31,2),
+("Seminario",32,2),
+("Matemática III",33,2),
+("Ingles Técnico Avanzado II",34,2),
+("Metodología de Sistemas III",35,2);
 
 CREATE TABLE correlatives(
 			id INT NOT NULL AUTO_INCREMENT,
@@ -129,47 +209,134 @@ CREATE TABLE correlatives(
             constraint fk_correlatives_correlative FOREIGN KEY (id_correlative) references subjects(id),
             constraint check_not_same CHECK (id_subject != id_correlative)
 			);
-            
+
+INSERT INTO correlatives (id_subject,id_correlative) VALUES 
+/* PRIMER CUATRIMESTRE */
+/*Matemática NO TIENE CORRELATIVAS*/
+/*Inglés I NO TIENE CORRELATIVAS*/
+/*Sistema de Procesamiento de Datos NO TIENE CORRELATIVAS*/
+/*Laboratorio de Computación I NO TIENE CORRELATIVAS*/
+/*Programación I NO TIENE CORRELATIVAS*/
+
+/*SEGUNDO CUATRIMESTRE*/
+/*Inglés II*/ (6, 2),
+/*Arquitectura y Sistemas Operativos*/ (7, 3),
+/*Programación II*/ (8, 4),(8, 5),
+/*Metodología de la Investigación NO TIENE CORRELATIVAS*/ 
+/*Laboratorio de Computación II*/ (10, 4),(10, 5),
+/*Estadística*/ (11, 1),
+
+/*TERCER CUATRIMESTRE*/
+/*Elementos de Investigación Operativa*/ (12, 11),
+/*Organización Contable de la Empresa*/ (13, 1),
+/*Organización Empresarial*/ (14, 11),
+/*Laboratorio de Computación III*/ (15, 8),(15, 10),
+/*Programación III*/ (16, 8),(16, 10),
+
+/*CUARTO CUATRIMESTRE*/
+/*Legislación NO TIENE CORRELATIVAS*/
+/*Metodología de Sistemas I*/ (18, 9),(18, 16),(18, 13),(18, 14),(18, 15),
+/*Laboratorio de Computación IV*/ (19, 15), (19, 16),
+/*Diseño y Administración de Bases de Datos*/ (20, 15),(20, 16), 
+/*Práctica Profesional NO TIENE CORRELATIVAS*/ 
+
+/*QUINTO CUATRIMESTRE*/
+/*Redes NO TIENE CORRELATIVAS*/
+/*Programación Avanzada I NO TIENE CORRELATIVAS*/ 
+/*Ingles Técnico Avanzado I NO TIENE CORRELATIVAS*/ 
+/*Metodología De Sistemas II NO TIENE CORRELATIVAS*/ 
+/*Base de Datos II	NO TIENE CORRELATIVAS*/ 
+/*Matemática II	NO TIENE CORRELATIVAS*/ 
+/*Laboratorio V	NO TIENE CORRELATIVAS*/ 
+
+/*SEXTO CUATRIMESTRE*/
+/*Investigación Operativa II NO TIENE CORRELATIVAS*/ 
+/*Administración y Dirección de Proyectos Informáticos NO TIENE CORRELATIVAS*/ 
+/*Programación Avanzada II*/ (31, 28),
+/*Seminario NO TIENE CORRELATIVAS*/ 
+/*Matemática III*/ (33, 27),
+/*Ingles Técnico Avanzado II*/ (34, 24),
+/*Metodología de Sistemas III*/ (35, 25);
+
 CREATE TABLE boards(
 			id int NOT NULL AUTO_INCREMENT,
-            board_name varchar(30) NOT NULL,
+            `name` varchar(60) NOT NULL,
             id_subject INT,
             constraint pk_boards PRIMARY KEY (id),
             constraint fk_subject FOREIGN KEY (id_subject) references subjects(id),
-            constraint unq_name_subject UNIQUE (board_name, id_subject)
+            constraint unq_name_subject UNIQUE (`name`, id_subject)
 );
+
+INSERT INTO boards(`name`,id_subject) VALUES 
+/*Matemática*/ ("Matemática 1", 1),
+/*Inglés I*/ ("Inglés I", 2),
+/*Sistema de Procesamiento de Datos*/ ("Sistema de Procesamiento de Datos", 3),
+/*Laboratorio de Computación I*/ ("Laboratorio de Computación I", 4),
+/*Programación I*/ ("Programación I", 5),
+
+/*SEGUNDO CUATRIMESTRE*/
+/*Inglés II*/ ("Inglés II", 6),
+/*Arquitectura y Sistemas Operativos*/ ("Arquitectura y Sistemas Operativos", 7),
+/*Programación II*/ ("Programación II", 8),
+/*Metodología de la Investigación*/ ("Metodología de la Investigación", 10),
+/*Laboratorio de Computación II*/ ("Laboratorio de Computación II", 10),
+/*Estadística*/ ("Estadística", 11),
+
+/*TERCER CUATRIMESTRE*/
+/*Elementos de Investigación Operativa*/ ("Elementos de Investigación Operativa", 12),
+/*Organización Contable de la Empresa*/ ("Organización Contable de la Empresa", 13),
+/*Organización Empresarial*/ ("Organización Empresarial", 14),
+/*Laboratorio de Computación III*/ ("Laboratorio de Computación III", 15),
+/*Programación III*/ ("Programación III", 16),
+
+/*CUARTO CUATRIMESTRE*/
+/*Legislación*/ ("Legislación", 17),
+/*Metodología de Sistemas I*/ ("Metodología de Sistemas I", 18),
+/*Laboratorio de Computación IV*/ ("Laboratorio de Computación IV", 19),
+/*Diseño y Administración de Bases de Datos*/ ("Diseño y Administración de Bases de Datos", 20),
+/*Práctica Profesional*/  ("Práctica Profesional", 21),
+
+/*QUINTO CUATRIMESTRE*/
+/*Redes*/  ("Redes", 22),
+/*Programación Avanzada I*/  ("Programación Avanzada I", 23), 
+/*Ingles Técnico Avanzado I*/  ("Ingles Técnico Avanzado I", 24), 
+/*Metodología De Sistemas II*/  ("Metodología De Sistemas II", 25), 
+/*Base de Datos II*/  ("Base de Datos II", 26), 
+/*Matemática II*/  ("Matemática II", 27), 
+/*Laboratorio V*/  ("Laboratorio V", 28), 
+
+/*SEXTO CUATRIMESTRE*/
+/*Investigación Operativa II*/  ("Investigación Operativa II", 29), 
+/*Administración y Dirección de Proyectos Informáticos*/  ("Administración y Dirección de Proyectos Informáticos", 30),
+/*Programación Avanzada II*/ ("Programación Avanzada II", 31),
+/*Seminario*/ ("Seminario", 32),
+/*Matemática III*/ ("Matemática III", 33),
+/*Ingles Técnico Avanzado II*/ ("Ingles Técnico Avanzado II", 34),
+/*Metodología de Sistemas III*/ ("Metodología de Sistemas III", 35);
 
 CREATE TABLE users(
 			id int NOT NULL AUTO_INCREMENT,
             firstname varchar(30) NOT NULL,
             lastname varchar(30) NOT NULL,
             email varchar(30) NOT NULL,
-            u_password varchar(30) NOT NULL,
+            u_password varchar(60) NOT NULL,
             user_type int not null default 1,
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
 );
-/*
-CREATE TABLE forums(
-			id int NOT NULL AUTO_INCREMENT,
-            forum_type varchar(20) NOT NULL DEFAULT 1,
-            body varchar(200) NOT NULL,
-            upvotes int DEFAULT 0,
-            downvotes int DEFAULT 0,
-            id_user int NOT NULL,
-            id_board int NOT NULL,
-            constraint pk_forum PRIMARY KEY (id),
-            constraint fk_user FOREIGN KEY (id_user) references users(id),
-            constraint fk_board FOREIGN KEY (id_board) references boards(id)
-);
-*/
+
+INSERT INTO users (email,firstname,lastname,u_password, user_type) VALUES
+("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1),
+("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1);
+
+
 CREATE TABLE queries(
 			id int NOT NULL AUTO_INCREMENT,
             body varchar(200) NOT NULL,
             upvotes int DEFAULT 0,
             downvotes int DEFAULT 0,
             id_user int NOT NULL,
-            id_board int NOT NULL,
+            id_board int NOT NULL,  
             constraint pk_query PRIMARY KEY (id),
             constraint fk_user FOREIGN KEY (id_user) references users(id),
             constraint fk_board FOREIGN KEY (id_board) references boards(id)
@@ -183,8 +350,8 @@ CREATE TABLE recommendations(
             id_user int NOT NULL,
             id_board int NOT NULL,
             constraint pk_recommendation PRIMARY KEY (id),
-            constraint fk_user FOREIGN KEY (id_user) references users(id),
-            constraint fk_board FOREIGN KEY (id_board) references boards(id)
+            constraint fk_recommendations_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_recommendations_board FOREIGN KEY (id_board) references boards(id)
 );
 
 CREATE TABLE query_responses(
@@ -197,31 +364,4 @@ CREATE TABLE query_responses(
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
 
-/*LINEAS PARA EJECUTAR*/
-ALTER TABLE careers CHANGE COLUMN career_name career_name varchar(100) NOT NULL;
-ALTER TABLE forums CHANGE COLUMN forum_type forum_type INT NOT NULL DEFAULT 1;
-ALTER TABLE users CHANGE COLUMN u_password u_password varchar(60);
-
-INSERT INTO career_statistics(duration, accordance) VALUES
-(2,8),
-(1,9); 
-SELECT * FROM career_statistics; 
-
-INSERT INTO careers(career_name,statistics_id) VALUES 
-("Tecnicatura Universitaria en Programación",1),
-("Tecnicatura Universitaria en Sistemas Informáticos",2);
-SELECT * FROM careers; 
-
-
-INSERT INTO subject_statistics(hours_per_week,difficulty) VALUES
-(6.0,9.0),
-(4.0,7.0);
-
-INSERT INTO subjects(subject_name, statistics_id, career_id) VALUES
-("Estadística",1,1),
-("Investigación operativa",2,1);
-
-SELECT * FROM subjects;  
-
-
-            
+select * from subjects;

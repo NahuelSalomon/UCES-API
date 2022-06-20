@@ -1,5 +1,9 @@
 package com.example.UCESAPI.exception;
 
+import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
+import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
+import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
+import com.example.UCESAPI.exception.notfound.ObjectNotFoundException;
 import com.example.UCESAPI.model.response.ApiError;
 import com.example.UCESAPI.utils.EntityResponse;
 import org.springframework.http.HttpHeaders;
@@ -32,7 +36,8 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return new ResponseEntity<Object>(apiError, new HttpHeaders(),apiError.getHttpStatus());
     }
 
-    private <E extends Exception> ResponseEntity<Object> ResponseNotFound(E ex) {
+    @ExceptionHandler({ObjectNotFoundException.class})
+    public ResponseEntity<Object> handlerObjectNotFoundException(ObjectNotFoundException ex,WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EntityResponse.messageResponse(ex.getMessage()));
     }
 
