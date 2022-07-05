@@ -35,8 +35,8 @@ public class ForumController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Forum>> getAll(Pageable pageable){
-        Page page = forumService.getAll(pageable);
+    public ResponseEntity<Page<Forum>> getAll(Pageable pageable){
+        Page<Forum> page = forumService.getAll(pageable);
         return ResponseEntityMaker.response(page.getContent(), page);
     }
 
@@ -47,13 +47,13 @@ public class ForumController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteForum(@PathVariable Integer id) throws ForumNotFoundException {
+    public ResponseEntity<Object> deleteForum(@PathVariable Integer id) throws ForumNotFoundException {
         forumService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotFoundException {
+    public ResponseEntity<Object> updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotFoundException {
         forumService.update(id, newForum);
         return ResponseEntity.accepted().build();
     }

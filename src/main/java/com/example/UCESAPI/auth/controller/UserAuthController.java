@@ -2,14 +2,18 @@ package com.example.UCESAPI.auth.controller;
 
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
+import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
 import com.example.UCESAPI.model.dto.UserDTO;
+import com.example.UCESAPI.model.dto.UserResponseDto;
 import com.example.UCESAPI.model.response.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -54,4 +58,20 @@ public class UserAuthController {
 
         return ResponseEntity.ok(new LoginResponseDto(jwt));
     }
+
+    @GetMapping(value = "/userDetails")
+    public ResponseEntity<UserResponseDto> userDetails(Authentication auth) {
+        String email = ((UserDetails) auth.getPrincipal()).getUsername();
+        User user = userService.getByEmail(email);
+        UserResponseDto dto = UserResponseDto.builder()
+                .id(user.getId())
+                .email(user.getEmail())
+                .firstname(user.getFirstname())
+                .lastname(user.getLastname())
+                .userType(user.getUserType())
+                .build();
+
+        return ResponseEntity.ok(dto);
+    }
+
 }

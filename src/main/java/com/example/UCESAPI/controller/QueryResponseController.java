@@ -21,13 +21,13 @@ public class QueryResponseController {
     }
 
     @PostMapping
-    public ResponseEntity add(@RequestBody QueryResponse response){
+    public ResponseEntity<Object> add(@RequestBody QueryResponse response){
         QueryResponse r = this.responseService.add(response);
         return ResponseEntity.created(EntityURLBuilder.buildURL(RESPONSE_PATH, r.getId())).build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable Integer id){
+    public ResponseEntity<Object> delete(@PathVariable Integer id){
         this.responseService.delete(id);
         return ResponseEntity.accepted().build();
     }

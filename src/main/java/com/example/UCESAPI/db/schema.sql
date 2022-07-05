@@ -1,4 +1,4 @@
-#DROP DATABASE uces;
+ #DROP DATABASE uces;
 CREATE DATABASE uces;
 USE uces;
 

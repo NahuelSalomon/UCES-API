@@ -55,6 +55,10 @@ public class UserService implements UserDetailsService {
         return this.userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
 
+    public User getByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
     public void deleteById(Integer id) {
         this.userRepository.deleteById(id);
     }
