@@ -40,6 +40,7 @@ public class UserController {
     }
 
     @GetMapping(value = "/")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     public ResponseEntity<List<User>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = this.userService.getAll(pageable);
@@ -53,6 +54,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         this.userService.deleteById(id);
         return ResponseEntity.accepted().build();
