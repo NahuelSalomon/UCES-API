@@ -1,6 +1,6 @@
 package com.example.UCESAPI.repository;
 
-import com.example.UCESAPI.model.SubjectStatistics;
+import com.example.UCESAPI.exception.model.SubjectStatistics;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.SubjectStaticsNotFoundException;
-import com.example.UCESAPI.model.SubjectStatistics;
+import com.example.UCESAPI.exception.model.SubjectStatistics;
 import com.example.UCESAPI.service.SubjectStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -43,7 +43,7 @@ public class SubjectStatisticsController {
     public ResponseEntity<List<SubjectStatistics>> getAll (@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page,size);
         Page<SubjectStatistics> subjectStaticsPage = this.subjectStatisticsService.getAll(pageable);
-        return EntityResponse.listResponse(subjectStaticsPage);
+        return EntityResponse.pageResponse(subjectStaticsPage);
     }
 
     @GetMapping(value = "/{id}")

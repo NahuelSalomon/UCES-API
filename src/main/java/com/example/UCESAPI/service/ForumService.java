@@ -1,14 +1,14 @@
 package com.example.UCESAPI.service;
 
+import com.example.UCESAPI.exception.model.Forum;
+import com.example.UCESAPI.exception.model.ForumType;
+import com.example.UCESAPI.exception.model.QueryResponse;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
-import com.example.UCESAPI.model.*;
 import com.example.UCESAPI.repository.ForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class ForumService {
@@ -48,7 +48,7 @@ public class ForumService {
         f.setDownVotes(newForum.getDownVotes());
         f.setUpVotes(newForum.getUpVotes());
         if (f.forumType() == ForumType.QUERY){
-            ((Query)(f)).setResponses(((Query)(newForum)).getResponses());
+            //((Query)(f)).setResponses(((Query)(newForum)).getResponses());
         }
         forumRepository.save(f);
     }
@@ -57,9 +57,10 @@ public class ForumService {
         Forum f = getById(id);
         if (f.forumType() == ForumType.QUERY){
 
-            List<QueryResponse> responses = ((Query)(f)).getResponses();
+
+            /*List<QueryResponse> responses = ((Query)(f)).getResponses();
             responses.add(response);
-            ((Query)(f)).setResponses(responses);
+            ((Query)(f)).setResponses(responses);*/
             forumRepository.save(f);
         }
     }
@@ -68,9 +69,9 @@ public class ForumService {
         Forum f = getById(idForum);
         if (f.forumType() == ForumType.QUERY){
 
-            List<QueryResponse> responses = ((Query)(f)).getResponses();
+            /*List<QueryResponse> responses = ((Query)(f)).getResponses();
             responses.removeIf(r -> r.getId().equals(idResponse));
-            ((Query)(f)).setResponses(responses);
+            ((Query)(f)).setResponses(responses);*/
             forumRepository.save(f);
         }
     }

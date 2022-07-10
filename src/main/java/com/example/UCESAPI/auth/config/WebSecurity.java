@@ -58,11 +58,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers( "/api/auth/register").permitAll()
+                /*.antMatchers( "/api/auth/register").permitAll()
                 .antMatchers( "/api/auth/login").permitAll()
+                .antMatchers( "/api/careers/").permitAll()
+                .antMatchers( "/api/careers/").permitAll()*/
                 //*** Acá se agregan otras urls para acceder sin estar autenticado, con el formato de arriba  ****
                 .anyRequest()
-                .authenticated()
+                .permitAll()
                 .and().exceptionHandling()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

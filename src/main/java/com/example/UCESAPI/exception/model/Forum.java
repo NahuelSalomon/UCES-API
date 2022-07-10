@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
@@ -6,28 +6,28 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
 import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
 
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-@Entity(name = "forums")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "forumType", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Recommendation.class, name = "RECOMMENDATION"),
         @JsonSubTypes.Type(value = Query.class, name = "QUERY")
 })
-@DiscriminatorColumn(
+@Entity
+/*@DiscriminatorColumn(
         name = "forum_type",
         discriminatorType = DiscriminatorType.INTEGER
-)
+)*/
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Forum {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
     private Integer id;
 
     private String body;
@@ -43,7 +43,7 @@ public abstract class Forum {
     private Integer downVotes;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JsonBackReference(value = "forum-board")
+    //@JsonBackReference(value = "forum-board")
     @JoinColumn(name = "id_board")
     private Board board;
 

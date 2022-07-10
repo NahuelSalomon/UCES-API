@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model.response;
+package com.example.UCESAPI.exception.model.response;
 
 import lombok.Builder;
 import lombok.Data;

@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
-import com.example.UCESAPI.model.User;
+import com.example.UCESAPI.exception.model.User;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -43,7 +43,7 @@ public class UserController {
     public ResponseEntity<List<User>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = this.userService.getAll(pageable);
-        return EntityResponse.listResponse(userPage);
+        return EntityResponse.pageResponse(userPage);
     }
 
     @GetMapping(value = "/{id}")

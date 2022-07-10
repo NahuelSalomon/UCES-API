@@ -1,6 +1,6 @@
 package com.example.UCESAPI.service;
 import com.example.UCESAPI.exception.notfound.SubjectStaticsNotFoundException;
-import com.example.UCESAPI.model.SubjectStatistics;
+import com.example.UCESAPI.exception.model.SubjectStatistics;
 import com.example.UCESAPI.repository.SubjectStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

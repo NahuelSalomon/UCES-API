@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.ProfessorNotFoundException;
-import com.example.UCESAPI.model.Professor;
+import com.example.UCESAPI.exception.model.Professor;
 import com.example.UCESAPI.service.ProfessorService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -43,7 +43,7 @@ public class ProfessorController {
     public ResponseEntity<List<Professor>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value = "page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page,size);
         Page<Professor> professorPage = this.professorService.getAll(pageable);
-        return EntityResponse.listResponse(professorPage);
+        return EntityResponse.pageResponse(professorPage);
     }
 
     @GetMapping(value = "/{id}")

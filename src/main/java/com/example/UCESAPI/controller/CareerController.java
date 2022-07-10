@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
-import com.example.UCESAPI.model.Career;
+import com.example.UCESAPI.exception.model.Career;
 import com.example.UCESAPI.service.CareerService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -44,7 +44,7 @@ public class CareerController {
                                                @RequestParam(value = "page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Career> careers = this.careerService.getAll(pageable);
-        return EntityResponse.listResponse(careers);
+        return EntityResponse.pageResponse(careers);
     }
 
     @GetMapping(value = "/{id}")

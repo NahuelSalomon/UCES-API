@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class QueryResponse {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @JsonBackReference(value = "response-query")
+    //@JsonBackReference(value = "response-query")
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id_query")
     private Query query;

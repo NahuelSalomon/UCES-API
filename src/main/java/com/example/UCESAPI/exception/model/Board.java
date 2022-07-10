@@ -1,14 +1,12 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,12 +21,12 @@ public class Board {
 
     private String name;
 
-    @JsonManagedReference(value = "forum-board")
+    /*@JsonManagedReference(value = "forum-board")
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "board")
-    private List<Forum> forumList;
+    private List<Forum> forumList;*/
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JsonBackReference(value = "board-subject")
+    @OneToOne(fetch = FetchType.EAGER)
+    //@JsonBackReference(value = "board-subject")
     @JoinColumn(name = "id_subject")
     private Subject subject;
 }

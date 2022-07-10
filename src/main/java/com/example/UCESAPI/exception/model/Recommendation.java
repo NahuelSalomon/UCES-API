@@ -1,6 +1,5 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +11,7 @@ import javax.persistence.Entity;
 @Builder
 @Data
 @Entity(name = "recommendations")
-@DiscriminatorValue("0")
+//@DiscriminatorValue("0")
 public class Recommendation extends Forum{
 
     @Override

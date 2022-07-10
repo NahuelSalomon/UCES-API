@@ -1,6 +1,6 @@
 package com.example.UCESAPI.utils;
 
-import com.example.UCESAPI.model.response.Response;
+import com.example.UCESAPI.exception.model.response.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,7 +9,7 @@ import java.util.List;
 
 public class EntityResponse {
 
-    public static <T> ResponseEntity<List<T>> listResponse(Page<T> page) {
+    public static <T> ResponseEntity<List<T>> pageResponse(Page<T> page) {
         if (!page.getContent().isEmpty()) {
             return ResponseEntity.
                     status(HttpStatus.OK).
@@ -18,6 +18,16 @@ public class EntityResponse {
                     body(page.getContent());
         } else {
             return ResponseEntity.status(HttpStatus.NO_CONTENT).body(page.getContent());
+        }
+    }
+
+    public static <T> ResponseEntity<List<T>> listResponse(List<T> list) {
+        if (!list.isEmpty()) {
+            return ResponseEntity.
+                    status(HttpStatus.OK).
+                    body(list);
+        } else {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(list);
         }
     }
 

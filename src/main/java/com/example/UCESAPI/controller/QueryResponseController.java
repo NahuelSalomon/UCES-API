@@ -1,6 +1,6 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.model.QueryResponse;
+import com.example.UCESAPI.exception.model.QueryResponse;
 import com.example.UCESAPI.service.QueryResponseService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;

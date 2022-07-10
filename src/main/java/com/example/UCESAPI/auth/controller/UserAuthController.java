@@ -2,18 +2,17 @@ package com.example.UCESAPI.auth.controller;
 
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
-import com.example.UCESAPI.model.User;
-import com.example.UCESAPI.model.dto.LoginRequestDto;
-import com.example.UCESAPI.model.dto.UserDTO;
-import com.example.UCESAPI.model.dto.UserResponseDto;
-import com.example.UCESAPI.model.response.LoginResponseDto;
+import com.example.UCESAPI.exception.model.User;
+import com.example.UCESAPI.exception.model.dto.LoginRequestDto;
+import com.example.UCESAPI.exception.model.dto.UserDTO;
+import com.example.UCESAPI.exception.model.dto.UserResponseDto;
+import com.example.UCESAPI.exception.model.response.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 

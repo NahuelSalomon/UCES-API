@@ -1,7 +1,10 @@
 package com.example.UCESAPI.controller;
 
+import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
-import com.example.UCESAPI.model.Subject;
+import com.example.UCESAPI.exception.model.Career;
+import com.example.UCESAPI.exception.model.Subject;
+import com.example.UCESAPI.service.CareerService;
 import com.example.UCESAPI.service.SubjectService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -40,7 +43,7 @@ public class    SubjectController {
     public ResponseEntity<List<Subject>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<Subject> subjectPage = this.subjectService.getAll(pageable);
-        return EntityResponse.listResponse(subjectPage);
+        return EntityResponse.pageResponse(subjectPage);
     }
 
     @GetMapping(value = "/{id}")
@@ -48,10 +51,18 @@ public class    SubjectController {
         return ResponseEntity.ok(this.subjectService.getById(id));
     }
 
+    @GetMapping(value = "/careers/{idCareer}")
+    public ResponseEntity<List<Subject>> getByCareer(@PathVariable int idCareer) throws CareerNotFoundException {
+        List<Subject> subjectList = this.subjectService.getByCareer(idCareer);
+        return  EntityResponse.listResponse(subjectList);
+    }
+
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         this.subjectService.deleteById(id);
         return ResponseEntity.accepted().build();
     }
+
+
 
 }

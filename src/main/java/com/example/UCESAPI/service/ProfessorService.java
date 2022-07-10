@@ -1,7 +1,7 @@
 package com.example.UCESAPI.service;
 
 import com.example.UCESAPI.exception.notfound.ProfessorNotFoundException;
-import com.example.UCESAPI.model.Professor;
+import com.example.UCESAPI.exception.model.Professor;
 import com.example.UCESAPI.repository.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

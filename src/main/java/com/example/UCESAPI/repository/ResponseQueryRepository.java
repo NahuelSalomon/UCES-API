@@ -1,6 +1,6 @@
 package com.example.UCESAPI.repository;
 
-import com.example.UCESAPI.model.QueryResponse;
+import com.example.UCESAPI.exception.model.QueryResponse;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

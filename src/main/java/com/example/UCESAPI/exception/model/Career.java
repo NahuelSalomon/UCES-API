@@ -1,13 +1,11 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -22,9 +20,9 @@ public class Career {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
+    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
     @JsonManagedReference(value = "subject-career")
-    private List<Subject> subjects;
+    private List<Subject> subjects;*/
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_statistics")

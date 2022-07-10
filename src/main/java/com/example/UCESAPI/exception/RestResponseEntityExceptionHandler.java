@@ -1,11 +1,9 @@
 package com.example.UCESAPI.exception;
 
-import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
-import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
-import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
 import com.example.UCESAPI.exception.notfound.ObjectNotFoundException;
-import com.example.UCESAPI.model.response.ApiError;
+import com.example.UCESAPI.exception.model.response.ApiError;
 import com.example.UCESAPI.utils.EntityResponse;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +36,11 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
 
     @ExceptionHandler({ObjectNotFoundException.class})
     public ResponseEntity<Object> handlerObjectNotFoundException(ObjectNotFoundException ex,WebRequest request) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EntityResponse.messageResponse(ex.getMessage()));
+    }
+
+    @ExceptionHandler({ExpiredJwtException.class})
+    public ResponseEntity<Object> handlerObjectNotFoundException(ExpiredJwtException ex,WebRequest request) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EntityResponse.messageResponse(ex.getMessage()));
     }
 

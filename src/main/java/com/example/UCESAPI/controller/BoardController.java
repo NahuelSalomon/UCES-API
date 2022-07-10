@@ -1,7 +1,8 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
-import com.example.UCESAPI.model.Board;
+import com.example.UCESAPI.exception.model.Board;
+import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
@@ -41,6 +42,12 @@ public class BoardController {
     @GetMapping("/{id}")
     public ResponseEntity<Board> getById(@PathVariable Integer id) throws BoardNotFoundException {
         Board board = boardService.getById(id);
+        return ResponseEntity.ok(board);
+    }
+
+    @GetMapping("/subjects/{idSubject}")
+    public ResponseEntity<Board> getBySubject(@PathVariable Integer idSubject) throws SubjectNotFoundException {
+        Board board = boardService.getBySubject(idSubject);
         return ResponseEntity.ok(board);
     }
 

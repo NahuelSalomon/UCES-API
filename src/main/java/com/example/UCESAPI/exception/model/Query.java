@@ -1,25 +1,23 @@
-package com.example.UCESAPI.model;
+package com.example.UCESAPI.exception.model;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import javax.validation.OverridesAttribute;
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
 @Data
+@NoArgsConstructor
+@Builder
 @Entity(name = "queries")
-@DiscriminatorValue("1")
+//@DiscriminatorValue("1")
 public class Query extends Forum{
 
-    @JsonManagedReference(value = "response-query")
+    /*@JsonManagedReference(value = "response-query")
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "query")
-    private List<QueryResponse> responses;
+    private List<QueryResponse> responses;*/
 
     @Override
     public ForumType forumType() {
