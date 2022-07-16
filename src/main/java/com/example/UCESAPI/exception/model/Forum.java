@@ -20,10 +20,6 @@ import javax.persistence.*;
         @JsonSubTypes.Type(value = Query.class, name = "QUERY")
 })
 @Entity
-/*@DiscriminatorColumn(
-        name = "forum_type",
-        discriminatorType = DiscriminatorType.INTEGER
-)*/
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Forum {
 

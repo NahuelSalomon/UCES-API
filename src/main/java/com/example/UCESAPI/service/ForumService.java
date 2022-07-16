@@ -1,8 +1,10 @@
 package com.example.UCESAPI.service;
 
+import com.example.UCESAPI.exception.model.Board;
 import com.example.UCESAPI.exception.model.Forum;
 import com.example.UCESAPI.exception.model.ForumType;
 import com.example.UCESAPI.exception.model.QueryResponse;
+import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.repository.ForumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,14 +12,18 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ForumService {
 
     private final ForumRepository forumRepository;
+    private final BoardService boardService;
 
     @Autowired
-    public ForumService(ForumRepository forumRepository){
+    public ForumService(ForumRepository forumRepository, BoardService boardService){
         this.forumRepository = forumRepository;
+        this.boardService = boardService;
     }
 
     public Forum addForum(Forum forum) {
@@ -26,6 +32,10 @@ public class ForumService {
 
     public Page<Forum> getAll(Pageable pageable) {
         return forumRepository.findAll(pageable);
+    }
+    public List<Forum> getAllByBoard(int idBoard) throws BoardNotFoundException {
+        Board board = boardService.getById(idBoard);
+        return forumRepository.findAllByBoard(board);
     }
 
     public Forum getById(Integer id) throws ForumNotFoundException {
