@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.ProfessorNotFoundException;
-import com.example.UCESAPI.exception.model.Professor;
+import com.example.UCESAPI.model.Professor;
 import com.example.UCESAPI.service.ProfessorService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;

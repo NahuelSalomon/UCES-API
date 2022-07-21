@@ -1,4 +1,4 @@
-package com.example.UCESAPI.exception.model;
+package com.example.UCESAPI.model;
 
 public enum UserType {
     ROLE_ANONYMOUS("Anonymous"),

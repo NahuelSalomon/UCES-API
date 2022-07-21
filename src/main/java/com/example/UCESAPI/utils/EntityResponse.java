@@ -1,6 +1,6 @@
 package com.example.UCESAPI.utils;
 
-import com.example.UCESAPI.exception.model.response.Response;
+import com.example.UCESAPI.model.response.Response;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

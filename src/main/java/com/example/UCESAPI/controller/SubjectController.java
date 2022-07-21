@@ -2,9 +2,7 @@ package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
-import com.example.UCESAPI.exception.model.Career;
-import com.example.UCESAPI.exception.model.Subject;
-import com.example.UCESAPI.service.CareerService;
+import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.service.SubjectService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;

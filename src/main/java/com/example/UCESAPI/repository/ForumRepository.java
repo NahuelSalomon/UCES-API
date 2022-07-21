@@ -1,7 +1,7 @@
 package com.example.UCESAPI.repository;
 
-import com.example.UCESAPI.exception.model.Board;
-import com.example.UCESAPI.exception.model.Forum;
+import com.example.UCESAPI.model.Board;
+import com.example.UCESAPI.model.Forum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

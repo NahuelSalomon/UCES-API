@@ -1,10 +1,9 @@
 package com.example.UCESAPI.controller;
 
-import com.example.UCESAPI.exception.model.ForumType;
-import com.example.UCESAPI.exception.model.Query;
+import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
-import com.example.UCESAPI.exception.model.Forum;
+import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;

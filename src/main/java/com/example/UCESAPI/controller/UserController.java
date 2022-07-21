@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
-import com.example.UCESAPI.exception.model.User;
+import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;

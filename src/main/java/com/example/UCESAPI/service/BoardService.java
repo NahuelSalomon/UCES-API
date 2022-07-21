@@ -1,8 +1,8 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.model.Subject;
+import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
-import com.example.UCESAPI.exception.model.Board;
+import com.example.UCESAPI.model.Board;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;

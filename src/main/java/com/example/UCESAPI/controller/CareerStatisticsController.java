@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
-import com.example.UCESAPI.exception.model.CareerStatistics;
+import com.example.UCESAPI.model.CareerStatistics;
 import com.example.UCESAPI.service.CareerStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;

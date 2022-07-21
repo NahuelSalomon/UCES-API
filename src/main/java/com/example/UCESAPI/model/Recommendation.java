@@ -1,10 +1,9 @@
-package com.example.UCESAPI.exception.model;
+package com.example.UCESAPI.model;
 
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 @NoArgsConstructor

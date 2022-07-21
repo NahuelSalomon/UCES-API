@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.SubjectStaticsNotFoundException;
-import com.example.UCESAPI.exception.model.SubjectStatistics;
+import com.example.UCESAPI.model.SubjectStatistics;
 import com.example.UCESAPI.service.SubjectStatisticsService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;

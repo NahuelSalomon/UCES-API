@@ -3,11 +3,11 @@ package com.example.UCESAPI.service;
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
-import com.example.UCESAPI.exception.model.User;
-import com.example.UCESAPI.exception.model.UserType;
-import com.example.UCESAPI.exception.model.dto.LoginRequestDto;
-import com.example.UCESAPI.exception.model.dto.UserDTO;
-import com.example.UCESAPI.exception.model.response.LoginResponseDto;
+import com.example.UCESAPI.model.User;
+import com.example.UCESAPI.model.UserType;
+import com.example.UCESAPI.model.dto.LoginRequestDto;
+import com.example.UCESAPI.model.dto.UserDTO;
+import com.example.UCESAPI.model.response.LoginResponseDto;
 import com.example.UCESAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -101,8 +101,8 @@ public class UserService implements UserDetailsService {
         newUser.setUserType(UserType.ROLE_STUDENT);
         newUser = userRepository.save(newUser);
 
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(newUser.getEmail(), newUser.getPassword()));
+        /*authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(newUser.getEmail(), newUser.getPassword()));*/
 
         return new LoginResponseDto(jwtUtils.generateToken(
                 this.loadUserByUsername(newUser.getEmail())

@@ -1,7 +1,7 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
-import com.example.UCESAPI.exception.model.Board;
+import com.example.UCESAPI.model.Board;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.utils.EntityURLBuilder;

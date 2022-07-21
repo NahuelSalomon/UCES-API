@@ -1,9 +1,9 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.model.Board;
-import com.example.UCESAPI.exception.model.Forum;
-import com.example.UCESAPI.exception.model.ForumType;
-import com.example.UCESAPI.exception.model.QueryResponse;
+import com.example.UCESAPI.model.Board;
+import com.example.UCESAPI.model.Forum;
+import com.example.UCESAPI.model.ForumType;
+import com.example.UCESAPI.model.QueryResponse;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.repository.ForumRepository;

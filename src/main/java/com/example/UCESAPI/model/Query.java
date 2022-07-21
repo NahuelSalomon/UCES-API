@@ -1,12 +1,10 @@
-package com.example.UCESAPI.exception.model;
+package com.example.UCESAPI.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.OverridesAttribute;
 
 @Data
 @NoArgsConstructor

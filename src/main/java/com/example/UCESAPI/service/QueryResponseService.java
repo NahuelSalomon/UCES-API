@@ -1,7 +1,7 @@
 package com.example.UCESAPI.service;
 
 import com.example.UCESAPI.exception.notfound.ResponseQueryNotFoundException;
-import com.example.UCESAPI.exception.model.QueryResponse;
+import com.example.UCESAPI.model.QueryResponse;
 import com.example.UCESAPI.repository.ResponseQueryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

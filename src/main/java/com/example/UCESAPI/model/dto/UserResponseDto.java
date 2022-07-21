@@ -1,6 +1,6 @@
-package com.example.UCESAPI.exception.model.dto;
+package com.example.UCESAPI.model.dto;
 
-import com.example.UCESAPI.exception.model.UserType;
+import com.example.UCESAPI.model.UserType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

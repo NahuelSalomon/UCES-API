@@ -1,9 +1,9 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.exception.model.Career;
+import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
-import com.example.UCESAPI.exception.model.Subject;
+import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

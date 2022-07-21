@@ -1,7 +1,7 @@
 package com.example.UCESAPI.service;
 
 import com.example.UCESAPI.exception.notfound.CareerStatisticsNotFoundException;
-import com.example.UCESAPI.exception.model.CareerStatistics;
+import com.example.UCESAPI.model.CareerStatistics;
 import com.example.UCESAPI.repository.CareerStatisticsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

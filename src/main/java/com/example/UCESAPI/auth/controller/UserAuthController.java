@@ -2,11 +2,11 @@ package com.example.UCESAPI.auth.controller;
 
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
-import com.example.UCESAPI.exception.model.User;
-import com.example.UCESAPI.exception.model.dto.LoginRequestDto;
-import com.example.UCESAPI.exception.model.dto.UserDTO;
-import com.example.UCESAPI.exception.model.dto.UserResponseDto;
-import com.example.UCESAPI.exception.model.response.LoginResponseDto;
+import com.example.UCESAPI.model.User;
+import com.example.UCESAPI.model.dto.LoginRequestDto;
+import com.example.UCESAPI.model.dto.UserDTO;
+import com.example.UCESAPI.model.dto.UserResponseDto;
+import com.example.UCESAPI.model.response.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class UserAuthController {
         }catch (UserAlreadyExistException e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new LoginResponseDto("A User with the email already exists."));
         }
-        return ResponseEntity.status(HttpStatus.OK).body(loginResponseDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loginResponseDto);
     }
 
     @PostMapping("/login")
