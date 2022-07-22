@@ -53,6 +53,13 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping(value = "/email/{email}")
+    public ResponseEntity<User> getByEmail(@PathVariable String email) {
+        User user = this.userService.getByEmail(email);
+        if(user == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(user);
+    }
+
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
@@ -60,11 +67,7 @@ public class UserController {
         return ResponseEntity.accepted().build();
     }
 
-    @PreAuthorize(value = "hasAuthority('STUDENT')")
-    @GetMapping(value = "/sayHello")
-    public ResponseEntity<Object> sayHello() {
-        return ResponseEntity.ok(new String("hello"));
-    }
+
 
 
 
