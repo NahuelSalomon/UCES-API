@@ -320,6 +320,7 @@ CREATE TABLE users(
             lastname varchar(30) NOT NULL,
             email varchar(30) NOT NULL,
             u_password varchar(60) NOT NULL,
+            `active` bool NOT NULL DEFAULT FALSE, 
             user_type int not null default 1,
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
@@ -364,4 +365,4 @@ CREATE TABLE query_responses(
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
 
-select * from subjects;
+

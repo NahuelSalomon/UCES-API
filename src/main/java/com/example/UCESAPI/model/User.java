@@ -26,6 +26,8 @@ public class User {
 
     private UserType userType;
 
+    private boolean active;
+
     @Column(name = "u_password")
     private String password;
 

@@ -29,5 +29,6 @@ public class UserResponseDto {
     @NotBlank(message = "Email is required.")
     private UserType userType;
 
+    private boolean active;
 
 }

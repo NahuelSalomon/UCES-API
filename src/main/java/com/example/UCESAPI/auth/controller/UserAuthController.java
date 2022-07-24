@@ -68,6 +68,7 @@ public class UserAuthController {
                 .firstname(user.getFirstname())
                 .lastname(user.getLastname())
                 .userType(user.getUserType())
+                .active(user.isActive())
                 .build();
 
         return ResponseEntity.ok(dto);
