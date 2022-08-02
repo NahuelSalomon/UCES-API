@@ -28,6 +28,8 @@ public class User {
 
     private boolean active;
 
+    private boolean confirmedEmail;
+
     @Column(name = "u_password")
     private String password;
 

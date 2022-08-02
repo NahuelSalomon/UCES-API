@@ -42,6 +42,11 @@ public class JWTUtils {
         return createToken(claims, userDetails.getUsername());
     }
 
+    public String generateTokenByEmail(String email) {
+        Map<String, Object> claims = new HashMap<>();
+        return createToken(claims, email);
+    }
+
     private String createToken(Map<String, Object> claims, String subject) {
 
         return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))

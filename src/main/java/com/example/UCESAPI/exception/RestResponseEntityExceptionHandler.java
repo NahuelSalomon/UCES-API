@@ -44,4 +44,9 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(EntityResponse.messageResponse(ex.getMessage()));
     }
 
+    @ExceptionHandler({AccessNotAllowedException.class})
+    public ResponseEntity<Object> handlerAccessNotAllowedException(AccessNotAllowedException ex,WebRequest request) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(EntityResponse.messageResponse(ex.getMessage()));
+    }
+
 }
