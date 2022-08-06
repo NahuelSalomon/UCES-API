@@ -320,11 +320,12 @@ CREATE TABLE users(
             lastname varchar(30) NOT NULL,
             email varchar(30) NOT NULL,
             u_password varchar(60) NOT NULL,
-            `active` bool NOT NULL DEFAULT FALSE, 
+            `active` bool NOT NULL DEFAULT TRUE, 
             user_type int not null default 1,
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
 );
+ALTER TABLE users ADD COLUMN `confirmed_email` BOOL NOT NULL DEFAULT FALSE;
 
 INSERT INTO users (email,firstname,lastname,u_password, user_type) VALUES
 ("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1),
@@ -364,5 +365,7 @@ CREATE TABLE query_responses(
             constraint fk_query_response_user FOREIGN KEY (id_user) references users(id),
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
+
+select * from users
 
 

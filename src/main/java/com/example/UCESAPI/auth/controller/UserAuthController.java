@@ -35,6 +35,7 @@ public class UserAuthController {
     @PostMapping("/register")
     public ResponseEntity<LoginResponseDto> register(@RequestBody @Valid UserDTO user){
 
+
         LoginResponseDto loginResponseDto;
         try{
             loginResponseDto = userService.register(user);
@@ -69,6 +70,7 @@ public class UserAuthController {
                 .lastname(user.getLastname())
                 .userType(user.getUserType())
                 .active(user.isActive())
+                .confirmedEmail(user.isConfirmedEmail())
                 .build();
 
         return ResponseEntity.ok(dto);

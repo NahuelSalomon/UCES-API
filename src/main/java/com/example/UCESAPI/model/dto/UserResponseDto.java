@@ -31,4 +31,6 @@ public class UserResponseDto {
 
     private boolean active;
 
+    private boolean confirmedEmail;
+
 }
