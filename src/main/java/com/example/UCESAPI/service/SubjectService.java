@@ -50,4 +50,7 @@ public class SubjectService {
         this.subjectRepository.save(subjectUpdated);
     }
 
+    public List<Subject> getCorrelativesById(Integer id) {
+        return subjectRepository.getCorrelativesById(id);
+    }
 }

@@ -61,6 +61,11 @@ public class    SubjectController {
         return ResponseEntity.accepted().build();
     }
 
+    @GetMapping(value = "/{id}/correlatives")
+    public ResponseEntity<List<Subject>> getCorrelativesById(@PathVariable Integer id){
+        return EntityResponse.listResponse(this.subjectService.getCorrelativesById(id));
+    }
+
 
 
 }

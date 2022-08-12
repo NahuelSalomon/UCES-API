@@ -22,6 +22,8 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    private String code;
+
     private String name;
 
     @OneToOne(fetch = FetchType.EAGER)

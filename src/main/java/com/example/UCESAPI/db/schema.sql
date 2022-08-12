@@ -147,6 +147,7 @@ CREATE TABLE subjects(
             `name` varchar(60) NOT NULL,
             id_statistics int,
             id_career int NOT NULL,
+            `code` varchar(30),
             constraint pk_subject PRIMARY KEY (id),
             constraint fk_subject_statistics FOREIGN KEY (id_statistics) references subject_statistics(id),
             constraint fk_career FOREIGN KEY (id_career) references careers(id)
@@ -154,32 +155,32 @@ CREATE TABLE subjects(
             
 INSERT INTO subjects (`name`,id_statistics,id_career) VALUES
 /*PRIMER CUATRIMESTRE*/
-("Matemática I",1,1),
-("Inglés I",2,1),
-("Sistema de Procesamiento de Datos",3,1),
-("Laboratorio de Computación I",4,1),
-("Programación I",5,1),
+("95-1123","Matemática I",1,1),
+("95-1111","Inglés I",2,1),
+("95-1122","Sistema de Procesamiento de Datos",3,1),
+("95-1124","Laboratorio de Computación I",4,1),
+("95-1121","Programación I",5,1),
 
 /*SEGUNDO CUATRIMESTRE*/
-("Inglés II",6,1),
-("Arquitectura y Sistemas Operativos",7,1),
-("Programación II",8,1),
-("Metodología de la Investigación",9,1),
-("Laboratorio de Computación II",10,1),
-("Estadística",11,1),
+("95-1112","Inglés II",6,1),
+("95-1126","Arquitectura y Sistemas Operativos",7,1),
+("95-1125","Programación II",8,1),
+("95-1128","Metodología de la Investigación",9,1),
+("95-1127","Laboratorio de Computación II",10,1),
+("95-1104","Estadística",11,1),
 
 /*TERCER CUATRIMESTRE*/
-("Elementos de Investigación Operativa",12,1),
-("Organización Contable de la Empresa",13,1),
-("Organización Empresarial",14,1),
-("Laboratorio de Computación III",15,1),
-("Programación III",16,1),
+("95-1233","Elementos de Investigación Operativa",12,1),
+("95-1231","Organización Contable de la Empresa",13,1),
+("95-1232","Organización Empresarial",14,1),
+("95-1234","Laboratorio de Computación III",15,1),
+("95-1230","Programación III",16,1),
 
 /*CUARTO CUATRIMESTRE*/
-("Legislación",17,1),
-("Metodología de Sistemas I",18,1),
-("Laboratorio de Computación IV",19,1),
-("Diseño y Administración de Bases de Datos",20,1),
+("95-1209","Legislación",17,1),
+("95-1235","Metodología de Sistemas I",18,1),
+("95-1237", "Laboratorio de Computación IV",19,1),
+("95-1236","Diseño y Administración de Bases de Datos",20,1),
 ("Práctica Profesional",21,1),
 
 /*QUINTO CUATRIMESTRE*/
@@ -327,10 +328,10 @@ CREATE TABLE users(
 );
 ALTER TABLE users ADD COLUMN `confirmed_email` BOOL NOT NULL DEFAULT FALSE;
 
-INSERT INTO users (email,firstname,lastname,u_password, user_type) VALUES
-("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1),
-("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1),
-("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2);
+INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email) VALUES
+("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true);
 
 CREATE TABLE queries(
 			id int NOT NULL AUTO_INCREMENT,
@@ -365,7 +366,5 @@ CREATE TABLE query_responses(
             constraint fk_query_response_user FOREIGN KEY (id_user) references users(id),
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
-
-select * from users
 
 
