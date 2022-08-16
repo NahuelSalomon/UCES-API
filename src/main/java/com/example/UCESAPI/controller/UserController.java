@@ -4,6 +4,7 @@ import com.example.UCESAPI.exception.AccessNotAllowedException;
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.UserType;
+import com.example.UCESAPI.model.dto.UserUpdateRequestDto;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -71,6 +72,24 @@ public class UserController {
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         this.userService.deleteById(id);
         return ResponseEntity.accepted().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' ) OR hasAuthority('ROLE_STUDENT')")
+    public ResponseEntity<Object> update(@PathVariable Integer id, @RequestBody UserUpdateRequestDto user, Authentication authentication) throws UserNotFoundException, AccessNotAllowedException {
+        User userToUpdate = this.userService.getById(id);
+        User authenticatedUser = this.userService.getByEmail(( (UserDetails) authentication.getPrincipal()).getUsername());
+
+        if(userToUpdate.getId() == authenticatedUser.getId() || authenticatedUser.getUserType().equals(UserType.ROLE_ADMINISTRATOR))
+        {
+            userToUpdate.setFirstname(user.getFirstname());
+            userToUpdate.setLastname(user.getLastname());
+            userToUpdate.setEmail(user.getEmail());
+            this.userService.update(id, userToUpdate);
+            return ResponseEntity.accepted().build();
+        }
+
+        throw new AccessNotAllowedException("You have not access to this resource");
     }
 
     @PutMapping(value = "/{id}/confirmEmail")

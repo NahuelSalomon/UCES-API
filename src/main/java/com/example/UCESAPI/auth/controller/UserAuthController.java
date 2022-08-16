@@ -4,7 +4,7 @@ import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
-import com.example.UCESAPI.model.dto.UserDTO;
+import com.example.UCESAPI.model.dto.UserDto;
 import com.example.UCESAPI.model.dto.UserResponseDto;
 import com.example.UCESAPI.model.response.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
@@ -33,7 +33,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<LoginResponseDto> register(@RequestBody @Valid UserDTO user){
+    public ResponseEntity<LoginResponseDto> register(@RequestBody @Valid UserDto user){
 
 
         LoginResponseDto loginResponseDto;

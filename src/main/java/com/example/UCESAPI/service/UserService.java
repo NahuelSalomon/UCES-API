@@ -6,7 +6,7 @@ import com.example.UCESAPI.exception.notfound.UserNotFoundException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.UserType;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
-import com.example.UCESAPI.model.dto.UserDTO;
+import com.example.UCESAPI.model.dto.UserDto;
 import com.example.UCESAPI.model.response.LoginResponseDto;
 import com.example.UCESAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -87,7 +87,7 @@ public class UserService implements UserDetailsService {
         return userDetails;
     }
 
-    public LoginResponseDto register(UserDTO user)  throws UserAlreadyExistException {
+    public LoginResponseDto register(UserDto user)  throws UserAlreadyExistException {
 
         User findUser = userRepository.findByEmail(user.getEmail());
         if(findUser !=null){
