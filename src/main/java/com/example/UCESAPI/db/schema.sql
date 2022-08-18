@@ -1,4 +1,4 @@
- #DROP DATABASE uces;
+#DROP DATABASE uces;
 CREATE DATABASE uces;
 USE uces;
 
@@ -133,15 +133,6 @@ INSERT INTO subject_statistics(hours_per_week, difficulty) VALUES
 /*Ingles Técnico Avanzado II*/ (2.0, 0.0),
 /*Metodología de Sistemas III*/ (4.0, 0.0);
 
-CREATE TABLE subject_statistics_professor(
-			id int NOT NULL AUTO_INCREMENT,
-            id_subject_statistic int NOT NULL,
-            id_professor int NOT NULL,
-            constraint pk_subject_statistics_professor PRIMARY KEY (id),
-            constraint fk_subject_statistics_professor FOREIGN KEY (id_subject_statistic) references subject_statistics(id),
-            constraint fk_professor FOREIGN KEY (id_professor) references professors(id)
-);
-     
 CREATE TABLE subjects(
 			id int NOT NULL AUTO_INCREMENT,
             `name` varchar(60) NOT NULL,
@@ -153,7 +144,7 @@ CREATE TABLE subjects(
             constraint fk_career FOREIGN KEY (id_career) references careers(id)
             );
             
-INSERT INTO subjects (`name`,id_statistics,id_career) VALUES
+INSERT INTO subjects (`code`,`name`,id_statistics,id_career) VALUES
 /*PRIMER CUATRIMESTRE*/
 ("95-1123","Matemática I",1,1),
 ("95-1111","Inglés I",2,1),
@@ -181,25 +172,34 @@ INSERT INTO subjects (`name`,id_statistics,id_career) VALUES
 ("95-1235","Metodología de Sistemas I",18,1),
 ("95-1237", "Laboratorio de Computación IV",19,1),
 ("95-1236","Diseño y Administración de Bases de Datos",20,1),
-("Práctica Profesional",21,1),
+(null, "Práctica Profesional",21,1),
 
 /*QUINTO CUATRIMESTRE*/
-("Redes",22,2),
-("Programación Avanzada I",23,2),
-("Ingles Técnico Avanzado I",24,2),
-("Metodología De Sistemas II",25,2),
-("Base de Datos II",26,2),
-("Matemática II",27,2),
-("Laboratorio V",28,2),
+(null, "Redes",22,2),
+(null, "Programación Avanzada I",23,2),
+(null, "Ingles Técnico Avanzado I",24,2),
+(null, "Metodología De Sistemas II",25,2),
+(null, "Base de Datos II",26,2),
+(null, "Matemática II",27,2),
+(null, "Laboratorio V",28,2),
 
 /*SEXTO CUATRIMESTRE*/
-("Investigación Operativa II",29,2),
-("Administración y Dirección de Proyectos Informáticos",30,2),
-("Programación Avanzada II",31,2),
-("Seminario",32,2),
-("Matemática III",33,2),
-("Ingles Técnico Avanzado II",34,2),
-("Metodología de Sistemas III",35,2);
+(null, "Investigación Operativa II",29,2),
+(null, "Administración y Dirección de Proyectos Informáticos",30,2),
+(null, "Programación Avanzada II",31,2),
+(null, "Seminario",32,2),
+(null, "Matemática III",33,2),
+(null, "Ingles Técnico Avanzado II",34,2),
+(null, "Metodología de Sistemas III",35,2);
+
+CREATE TABLE subject_professor(
+			id int NOT NULL AUTO_INCREMENT,
+            id_subject int NOT NULL,
+            id_professor int NOT NULL,
+            constraint pk_subject_professor PRIMARY KEY (id),
+            constraint fk_subject_professor FOREIGN KEY (id_subject) references subjects(id),
+            constraint fk_professor FOREIGN KEY (id_professor) references professors(id)
+);
 
 CREATE TABLE correlatives(
 			id INT NOT NULL AUTO_INCREMENT,

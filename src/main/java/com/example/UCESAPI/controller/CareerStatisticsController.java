@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200", allowedHeaders = "*")
 @RequestMapping("/api/career/statistics")
 public class CareerStatisticsController {
 
     private final CareerStatisticsService careerStatisticsService;
-    private final static String CAREER_STATICS_PATH = "career/statistics";
+    private final static String CAREER_STATICS_PATH = "/api/career/statistics";
 
     @Autowired
     public CareerStatisticsController(CareerStatisticsService careerStatisticsService) {

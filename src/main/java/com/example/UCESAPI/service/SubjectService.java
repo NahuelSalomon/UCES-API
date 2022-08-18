@@ -4,6 +4,7 @@ import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.model.Subject;
+import com.example.UCESAPI.model.SubjectStatistics;
 import com.example.UCESAPI.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,15 +17,19 @@ import java.util.List;
 public class SubjectService {
 
     private final SubjectRepository subjectRepository;
+    private final SubjectStatisticsService subjectStatisticsService;
     private final CareerService careerService;
 
     @Autowired
-    public SubjectService(SubjectRepository subjectRepository, CareerService careerService) {
+    public SubjectService(SubjectRepository subjectRepository, SubjectStatisticsService subjectStatisticsService, CareerService careerService) {
         this.subjectRepository = subjectRepository;
+        this.subjectStatisticsService = subjectStatisticsService;
         this.careerService = careerService;
     }
 
     public Subject add(Subject subject) {
+        SubjectStatistics statistics = this.subjectStatisticsService.add(new SubjectStatistics(null, 0f, 0f));
+        subject.setStatistics(statistics);
         return this.subjectRepository.save(subject);
     }
 

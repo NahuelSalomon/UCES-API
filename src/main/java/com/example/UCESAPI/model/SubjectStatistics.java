@@ -23,16 +23,6 @@ public class SubjectStatistics {
     @Column(name = "hours_per_week")
     private Float hoursPerWeek;
 
-    //@JsonManagedReference(value = "professor-statistics")
-    @JsonIgnoreProperties("statistics")
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Professor.class)
-    @JoinTable(
-            name = "subject_statistics_professor",
-            joinColumns = {@JoinColumn(name = "id_subject_statistic")},
-            inverseJoinColumns = {@JoinColumn(name = "id_professor")}
-    )
-    private List<Professor> professors;
-
     private Float difficulty;
 
 }

@@ -26,8 +26,8 @@ public class Professor {
 
     //@JsonBackReference(value = "professor-statistics")
     @JsonIgnoreProperties("professors")
-    @ManyToMany(mappedBy = "professors", targetEntity = SubjectStatistics.class)
-    private List<SubjectStatistics> statistics;
+    @ManyToMany(mappedBy = "professors", targetEntity = Subject.class)
+    private List<Subject> subjects;
 
 
 }
