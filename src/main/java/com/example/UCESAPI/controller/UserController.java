@@ -18,8 +18,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.List;
 
@@ -29,11 +29,13 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final PasswordEncoder passwordEncoder;
     private final String USER_PATH = "users";
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostMapping()
@@ -107,6 +109,20 @@ public class UserController {
         throw new AccessNotAllowedException("You have not access to this resource");
     }
 
+    @PutMapping(value = "/{id}/password/{password}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' ) OR hasAuthority('ROLE_STUDENT')")
+    public ResponseEntity<Object> resetPassword(@PathVariable Integer id, @PathVariable String password,Authentication authentication) throws UserNotFoundException, AccessNotAllowedException {
+        User user = this.userService.getById(id);
+        User authenticatedUser = this.userService.getByEmail(( (UserDetails) authentication.getPrincipal()).getUsername());
+        if(user.getId() == authenticatedUser.getId() || authenticatedUser.getUserType().equals(UserType.ROLE_ADMINISTRATOR))
+        {
+            user.setPassword(passwordEncoder.encode(password));
+            this.userService.update(user.getId(),user);
+            return ResponseEntity.accepted().build();
+        }
+
+        throw new AccessNotAllowedException("You have not access to this resource");
+    }
 
 
 

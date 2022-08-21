@@ -11,7 +11,7 @@ import javax.validation.constraints.Email;
 @AllArgsConstructor
 @Data
 @Builder
-public class ConfirmEmailRequest {
+public class SendEmailRequest {
 
     @Email
     private String email;
