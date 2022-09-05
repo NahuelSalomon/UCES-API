@@ -201,6 +201,16 @@ CREATE TABLE subject_professor(
             constraint fk_professor FOREIGN KEY (id_professor) references professors(id)
 );
 
+insert into subject_professor (id_subject, id_professor) VALUES
+(1, 27),(2, 32),(3, 11),(4, 1),(4, 4),(4, 5),
+(4, 8),(5, 4),(5, 5),(5, 8),(6,32),(7,11),(8, 1),
+(8, 4),(8, 5),(8, 10),(8, 15), (9, 9), (10, 1),
+(10, 4), (10, 5), (10, 15), (11, 2), (11, 27), (12, 11),
+(13, 14), (14, 14), (15, 15), (15, 18), (15, 28), (16, 15),
+(16,18), (16, 28), (17, 17), (18, 3), (19, 19), (20, 3), (20, 26),
+(22, 22), (23, 26), (24, 24), (25, 25), (26, 26), (27, 27), (28, 23),
+(29, 29), (30, 23), (31, 31), (32, 23), (33, 27), (34, 24), (35, 33);
+
 CREATE TABLE correlatives(
 			id INT NOT NULL AUTO_INCREMENT,
             id_subject INT NOT NULL,
