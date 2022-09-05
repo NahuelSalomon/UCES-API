@@ -1,6 +1,7 @@
 package com.example.UCESAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +17,6 @@ import java.util.List;
 @Builder
 @Data
 @Entity(name = "subjects")
-@JsonIgnoreProperties("correlatives")
 public class Subject {
 
     @Id
@@ -31,6 +31,7 @@ public class Subject {
     @JoinColumn(name = "id_statistics")
     private SubjectStatistics statistics;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
     @ManyToMany(fetch = FetchType.LAZY, targetEntity = Subject.class)
     @JoinTable(
