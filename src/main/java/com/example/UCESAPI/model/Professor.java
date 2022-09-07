@@ -1,10 +1,9 @@
 package com.example.UCESAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +12,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Data
+@SQLDelete(sql = "UPDATE professors SET soft_delete = true WHERE id=?")
+@Where(clause = "soft_delete = false")
 @Entity(name = "professors")
 public class Professor {
 
@@ -29,5 +30,7 @@ public class Professor {
     @ManyToMany(mappedBy = "professors", targetEntity = Subject.class)
     private List<Subject> subjects;
 
-
+    @NonNull
+    @Column(name = "soft_delete")
+    private Boolean softDelete = Boolean.FALSE;
 }

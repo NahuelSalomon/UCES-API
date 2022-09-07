@@ -32,6 +32,7 @@ CREATE TABLE professors(
 			id int NOT NULL AUTO_INCREMENT,
             `name` varchar(40),
             ratings float,
+            soft_delete boolean default 0,
             constraint pk_professor PRIMARY KEY (id)
 );
 
