@@ -4,6 +4,7 @@ import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.model.Forum;
+import com.example.UCESAPI.model.Recommendation;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
@@ -27,30 +28,29 @@ public class ForumController {
     @Autowired
     public ForumController(ForumService forumService){
         this.forumService = forumService;
-        //this.responseService = responseService;
     }
 
     @PostMapping
-    public ResponseEntity<Forum> addForum(@RequestBody Forum forum){
+    public ResponseEntity<Forum> add(@RequestBody Forum forum){
         Forum newForum = forumService.addForum(forum);
         return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
     }
 
-    @PostMapping("/queries/")
-    public ResponseEntity<Forum> addQueries(@RequestBody Query query){
-        Forum newForum = forumService.addForum(query);
-        return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
-    }
-
-    @GetMapping
-    public ResponseEntity<Page<Forum>> getAll(Pageable pageable){
+    @GetMapping("/queries")
+    public ResponseEntity<Page<Forum>> getAllQueries(Pageable pageable){
         Page<Forum> page = forumService.getAll(pageable);
         return ResponseEntityMaker.response(page.getContent(), page);
     }
 
-    @GetMapping("/boards/{idBoard}")
-    public ResponseEntity<List<Forum>> getByBoard(@PathVariable int idBoard) throws BoardNotFoundException {
-        List<Forum> forumList = forumService.getAllByBoard(idBoard);
+    @GetMapping("queries/boards/{idBoard}")
+    public ResponseEntity<Page<Query>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Query> forumList = forumService.getAllQueriesByBoard(idBoard, pageable);
+        return ResponseEntity.ok(forumList);
+    }
+
+    @GetMapping("recommendations/boards/{idBoard}")
+    public ResponseEntity<Page<Recommendation>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Recommendation> forumList = forumService.getAllRecommendationsByBoard(idBoard, pageable);
         return ResponseEntity.ok(forumList);
     }
 

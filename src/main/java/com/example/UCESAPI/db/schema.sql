@@ -356,6 +356,14 @@ CREATE TABLE queries(
             constraint fk_board FOREIGN KEY (id_board) references boards(id)
 );
 
+INSERT INTO `uces`.`queries`
+(`body`,`upvotes`,`downvotes`,`id_user`,`id_board`) VALUES 
+("Opinion 1",5,0,1,1),
+("Opinion 2",5,0,2,1),
+("Opinion 3",7,0,1,1),
+("Opinion 4",8,0,2,1),
+("Opinion 5",9,0,1,1);
+
 CREATE TABLE recommendations(
 			id int NOT NULL AUTO_INCREMENT,
             body varchar(200) NOT NULL,
@@ -368,6 +376,14 @@ CREATE TABLE recommendations(
             constraint fk_recommendations_board FOREIGN KEY (id_board) references boards(id)
 );
 
+INSERT INTO `uces`.`recommendations`
+(`body`,`upvotes`,`downvotes`,`id_user`,`id_board`) VALUES 
+("Recomendacion 1",5,0,1,1),
+("Recomendacion 2",5,0,2,1),
+("Recomendacion 3",7,0,1,1),
+("Recomendacion 4",8,0,2,1),
+("Recomendacion 5",9,0,1,1);
+
 CREATE TABLE query_responses(
 			id int NOT NULL AUTO_INCREMENT,
             body varchar(200) NOT NULL,
@@ -377,5 +393,18 @@ CREATE TABLE query_responses(
             constraint fk_query_response_user FOREIGN KEY (id_user) references users(id),
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
+
+INSERT INTO `uces`.`query_responses` (`body`, `id_user`, `id_query`)
+VALUES 
+("Respuesta 1",2,1), 
+("Respuesta 2",1,2), 
+("Respuesta 3",2,3), 
+("Respuesta 4",1,4), 
+("Respuesta 5",2,5);
+
+
+
+
+
 
 
