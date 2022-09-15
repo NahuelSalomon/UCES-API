@@ -35,7 +35,8 @@ public class ProfessorService {
     }
 
     public void update(Integer id, Professor professorUpdated) throws ProfessorNotFoundException {
-        this.getById(id);
+        Professor professor = this.getById(id);
+        professor.setName(professorUpdated.getName());
         this.professorRepository.save(professorUpdated);
     }
 
