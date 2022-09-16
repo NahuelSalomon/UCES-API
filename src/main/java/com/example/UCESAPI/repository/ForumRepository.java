@@ -15,6 +15,7 @@ import java.util.List;
 public interface ForumRepository extends JpaRepository<Forum, Integer> {
 
     Page<Query> findAllQueriesByBoard(Board board, Pageable pageable);
+
     Page<Recommendation> findAllRecommendationsByBoard(Board board, Pageable pageable);
 
 }

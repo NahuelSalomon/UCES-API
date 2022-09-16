@@ -36,24 +36,17 @@ public class ForumController {
         return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
     }
 
-    @GetMapping("/queries")
-    public ResponseEntity<Page<Forum>> getAllQueries(Pageable pageable){
-        Page<Forum> page = forumService.getAll(pageable);
-        return ResponseEntityMaker.response(page.getContent(), page);
-    }
-
     @GetMapping("queries/boards/{idBoard}")
-    public ResponseEntity<Page<Query>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
-        Page<Query> forumList = forumService.getAllQueriesByBoard(idBoard, pageable);
-        return ResponseEntity.ok(forumList);
+    public ResponseEntity<List<Query>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Query> queryPage = forumService.getAllQueriesByBoard(idBoard, pageable);
+        return ResponseEntityMaker.paginatedListResponse(queryPage);
     }
 
     @GetMapping("recommendations/boards/{idBoard}")
-    public ResponseEntity<Page<Recommendation>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
-        Page<Recommendation> forumList = forumService.getAllRecommendationsByBoard(idBoard, pageable);
-        return ResponseEntity.ok(forumList);
+    public ResponseEntity<List<Recommendation>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Recommendation> recommendationList = forumService.getAllRecommendationsByBoard(idBoard, pageable);
+        return ResponseEntityMaker.paginatedListResponse(recommendationList);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Forum> getById(@PathVariable Integer id) throws ForumNotFoundException {
