@@ -58,4 +58,10 @@ public class ProfessorController {
         return ResponseEntity.accepted().build();
     }
 
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Object> updateById(@PathVariable Integer id, @RequestBody Professor updated) throws ProfessorNotFoundException {
+        professorService.update(id, updated);
+        return ResponseEntity.accepted().build();
+    }
+
 }
