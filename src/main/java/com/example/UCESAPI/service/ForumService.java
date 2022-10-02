@@ -63,8 +63,8 @@ public class ForumService {
         Forum f = getById(id);
         f.setBody(newForum.getBody());
         f.setUser(newForum.getUser());
-        f.setDownVotes(newForum.getDownVotes());
-        f.setUpVotes(newForum.getUpVotes());
+       /* f.setDownVotes(newForum.getDownVotes());
+        f.setUpVotes(newForum.getUpVotes());*/
         if (f.forumType() == ForumType.QUERY){
             //((Query)(f)).setResponses(((Query)(newForum)).getResponses());
         }

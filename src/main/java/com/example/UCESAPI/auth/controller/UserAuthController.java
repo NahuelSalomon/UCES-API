@@ -4,10 +4,11 @@ import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
-import com.example.UCESAPI.model.dto.UserDto;
-import com.example.UCESAPI.model.dto.UserResponseDto;
-import com.example.UCESAPI.model.response.LoginResponseDto;
+import com.example.UCESAPI.model.dto.user.UserInsertRequestDto;
+import com.example.UCESAPI.model.dto.user.UserResponseDto;
+import com.example.UCESAPI.model.dto.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
+import com.example.UCESAPI.utils.CustomConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class UserAuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<LoginResponseDto> register(@RequestBody @Valid UserDto user){
+    public ResponseEntity<LoginResponseDto> register(@RequestBody @Valid UserInsertRequestDto user){
 
 
         LoginResponseDto loginResponseDto;
@@ -63,16 +64,7 @@ public class UserAuthController {
     public ResponseEntity<UserResponseDto> userDetails(Authentication auth) {
         String email = ((UserDetails) auth.getPrincipal()).getUsername();
         User user = userService.getByEmail(email);
-        UserResponseDto dto = UserResponseDto.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .firstname(user.getFirstname())
-                .lastname(user.getLastname())
-                .userType(user.getUserType())
-                .active(user.isActive())
-                .confirmedEmail(user.isConfirmedEmail())
-                .build();
-
+        UserResponseDto dto = CustomConversion.UserToUserResponseDto(user);
         return ResponseEntity.ok(dto);
     }
 

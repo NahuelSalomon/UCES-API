@@ -1,27 +1,33 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
 
-@Data
+import java.util.List;
+
+@Setter
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@Entity(name = "forums")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "forumType", visible = true)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = Recommendation.class, name = "RECOMMENDATION"),
         @JsonSubTypes.Type(value = Query.class, name = "QUERY")
 })
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="forum_type",
+        discriminatorType = DiscriminatorType.INTEGER)
 public abstract class Forum {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String body;
@@ -30,17 +36,23 @@ public abstract class Forum {
     @JoinColumn(name = "id_user")
     private User user;
 
-    @Column(name = "upvotes")
-    private Integer upVotes;
-
-    @Column(name = "downvotes")
-    private Integer downVotes;
+    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinTable(
+            name = "users_voted_forums",
+            joinColumns = {@JoinColumn(name = "id_forum")},
+            inverseJoinColumns = {@JoinColumn(name = "id_user")}
+    )
+    private List<User> usersWhoVoted;
 
     @ManyToOne(fetch = FetchType.EAGER)
     //@JsonBackReference(value = "forum-board")
     @JoinColumn(name = "id_board")
     private Board board;
 
-    @AccessType(AccessType.Type.PROPERTY)
+    @AccessType(value = AccessType.Type.PROPERTY)
     public abstract ForumType forumType();
+
+
+
 }

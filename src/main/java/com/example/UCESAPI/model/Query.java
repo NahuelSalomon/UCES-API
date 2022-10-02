@@ -1,18 +1,18 @@
 package com.example.UCESAPI.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @NoArgsConstructor
-@Entity(name = "queries")
-//@DiscriminatorValue("1")
+@Entity
+@DiscriminatorValue("1")
 public class Query extends Forum{
 
     @JsonManagedReference(value = "response-query")
@@ -20,7 +20,6 @@ public class Query extends Forum{
     private List<QueryResponse> responses;
 
     @Override
-    @AccessType(AccessType.Type.FIELD)
     public ForumType forumType() {
         return ForumType.QUERY;
     }

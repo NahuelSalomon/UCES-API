@@ -1,14 +1,20 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.AccessNotAllowedException;
+import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
+import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.UserType;
-import com.example.UCESAPI.model.dto.UserUpdateRequestDto;
+import com.example.UCESAPI.model.dto.user.UserResponseDto;
+import com.example.UCESAPI.model.dto.user.UserUpdateRequestDto;
+import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.EntityResponse;
+import com.example.UCESAPI.utils.CustomConversion;
 import com.example.UCESAPI.utils.EntityURLBuilder;
+import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -29,13 +35,17 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+    private final ForumService forumService;
     private final PasswordEncoder passwordEncoder;
+    private final ConversionService conversionService;
     private final String USER_PATH = "users";
 
     @Autowired
-    public UserController(UserService userService, PasswordEncoder passwordEncoder) {
+    public UserController(UserService userService, ForumService forumService, PasswordEncoder passwordEncoder, ConversionService conversionService) {
         this.userService = userService;
+        this.forumService = forumService;
         this.passwordEncoder = passwordEncoder;
+        this.conversionService = conversionService;
     }
 
     @PostMapping()
@@ -50,16 +60,18 @@ public class UserController {
 
     @GetMapping(value = "/")
     @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
-    public ResponseEntity<List<User>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
+    public ResponseEntity<List<UserResponseDto>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = this.userService.getAll(pageable);
-        return EntityResponse.pageResponse(userPage);
+        Page<UserResponseDto> userResponseDtoPage = userPage.map(CustomConversion::UserToUserResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(userResponseDtoPage);
     }
 
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> getById(@PathVariable Integer id) throws UserNotFoundException {
+    public ResponseEntity<UserResponseDto> getById(@PathVariable Integer id) throws UserNotFoundException {
         User user = this.userService.getById(id);
-        return ResponseEntity.ok(user);
+        UserResponseDto userResponseDto = CustomConversion.UserToUserResponseDto(user);
+        return ResponseEntity.ok(userResponseDto);
     }
 
     @GetMapping(value = "/email/{email}")
@@ -124,6 +136,31 @@ public class UserController {
         throw new AccessNotAllowedException("You have not access to this resource");
     }
 
+    @PutMapping(value = "/{id}/forumsVoted/{idForum}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' ) OR hasAuthority('ROLE_STUDENT')")
+    public ResponseEntity<Object> votedUnVoteForum(@PathVariable Integer id, @PathVariable Integer idForum,Authentication authentication) throws UserNotFoundException, AccessNotAllowedException, ForumNotFoundException {
+        User user = this.userService.getById(id);
+        User authenticatedUser = this.userService.getByEmail(( (UserDetails) authentication.getPrincipal()).getUsername());
+        if(user.getId() == authenticatedUser.getId() || authenticatedUser.getUserType().equals(UserType.ROLE_ADMINISTRATOR))
+        {
+            Forum forum = this.forumService.getById(idForum);
+
+
+            if(user.getForumsVoted().contains(forum))
+            {
+                user.removeVoteToForum(forum);
+
+            } else {
+                user.addVoteToForum(forum);
+            }
+
+            this.userService.update(user.getId(),user);
+
+            return ResponseEntity.accepted().build();
+        }
+
+        throw new AccessNotAllowedException("You have not access to this resource");
+    }
 
 
 

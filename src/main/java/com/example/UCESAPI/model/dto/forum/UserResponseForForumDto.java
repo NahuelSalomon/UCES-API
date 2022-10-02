@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model.dto;
+package com.example.UCESAPI.model.dto.forum;
 
 import com.example.UCESAPI.model.UserType;
 import lombok.AllArgsConstructor;
@@ -6,31 +6,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotBlank;
-
-@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserResponseDto {
-
-
-    private int id;
-
-    @NotBlank(message = "Firstname is required.")
+@Data
+public class UserResponseForForumDto {
+    private Integer id;
     private String firstname;
-
-    @NotBlank(message = "Lastname is required.")
     private String lastname;
-
-    @NotBlank(message = "Email is required.")
     private String email;
-
-    @NotBlank(message = "Email is required.")
     private UserType userType;
-
     private boolean active;
-
     private boolean confirmedEmail;
-
 }

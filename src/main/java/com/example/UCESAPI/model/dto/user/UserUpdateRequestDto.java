@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model.dto;
+package com.example.UCESAPI.model.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,7 +9,7 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserDto {
+public class UserUpdateRequestDto {
 
     @NotBlank(message = "Firstname is required.")
     private String firstname;
@@ -19,8 +19,5 @@ public class UserDto {
 
     @NotBlank(message = "Email is required.")
     private String email;
-
-    @NotBlank(message = "Password is required.")
-    private String password;
 
 }

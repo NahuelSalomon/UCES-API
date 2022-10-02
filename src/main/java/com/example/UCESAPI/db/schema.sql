@@ -342,9 +342,13 @@ ALTER TABLE users ADD COLUMN `confirmed_email` BOOL NOT NULL DEFAULT FALSE;
 INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email) VALUES
 ("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
 ("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("juanperez@gmail.com","Juan","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("fran@gmail.com","Fran","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("fancomansilla@gmail.com","Franco","Mansilla","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
+("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
 ("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true);
 
-CREATE TABLE queries(
+/*CREATE TABLE queries(
 			id int NOT NULL AUTO_INCREMENT,
             body varchar(200) NOT NULL,
             upvotes int DEFAULT 0,
@@ -382,7 +386,64 @@ INSERT INTO `uces`.`recommendations`
 ("Recomendacion 2",5,0,2,1),
 ("Recomendacion 3",7,0,1,1),
 ("Recomendacion 4",8,0,2,1),
-("Recomendacion 5",9,0,1,1);
+("Recomendacion 5",9,0,1,1);*/
+
+CREATE TABLE forums(
+			id int NOT NULL AUTO_INCREMENT,
+            body varchar(300) NOT NULL,
+            id_user int NOT NULL,
+            id_board int NOT NULL,
+            forum_type int NOT NULL DEFAULT 1,
+            constraint pk_forums PRIMARY KEY (id),
+            constraint fk_forums_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_forums_board FOREIGN KEY (id_board) references boards(id)
+);
+
+INSERT INTO `uces`.`forums`
+(`body`,`id_user`,`id_board`,`forum_type`) VALUES 
+("Consulta 1",1,1,1),
+("Consulta 2",2,1,1),
+("Consulta 3",2,1,1),
+("Consulta 4",1,1,1),
+("Consulta 5",2,1,1),
+("Recomendacion 1",4,1,2),
+("Recomendacion 2",5,1,2),
+("Recomendacion 3",1,1,2),
+("Recomendacion 4",2,1,2),
+("Recomendacion 5",2,1,2);
+
+CREATE TABLE users_voted_forums (
+			id_forum int NOT NULL,
+            id_user int NOT NULL,
+			constraint pk_users_voted_forums PRIMARY KEY (id_forum, id_user),
+            constraint fk_users_voted_forums_forums FOREIGN KEY (id_forum) references forums(id),
+            constraint fk_users_voted_forums_users FOREIGN KEY (id_user) references users(id)
+);
+
+
+INSERT INTO `uces`.`users_voted_forums`
+(`id_forum`, `id_user`) VALUES
+(1,1),
+(2,1),
+(3,1),
+(9,1),
+
+(1,2),
+(8,2),
+(7,2),
+(6,2),
+(5,2),
+
+(1,4),
+(8,4),
+(7,4),
+(6,4),
+(5,4),
+
+(1,5),
+(2,5),
+(3,5),
+(9,5);
 
 CREATE TABLE query_responses(
 			id int NOT NULL AUTO_INCREMENT,
@@ -391,7 +452,7 @@ CREATE TABLE query_responses(
             id_query int NOT NULL,
             constraint pk_query_response PRIMARY KEY (id),
             constraint fk_query_response_user FOREIGN KEY (id_user) references users(id),
-            constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
+            constraint fk_query_response_query FOREIGN KEY (id_query) references forums(id)
 );
 
 INSERT INTO `uces`.`query_responses` (`body`, `id_user`, `id_query`)
@@ -399,9 +460,7 @@ VALUES
 ("Respuesta 1",2,1), 
 ("Respuesta 2",1,2), 
 ("Respuesta 3",2,3), 
-("Respuesta 4",1,4), 
-("Respuesta 5",2,5);
-
+("Respuesta 4",1,4);
 
 
 

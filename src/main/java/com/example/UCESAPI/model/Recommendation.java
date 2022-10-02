@@ -1,16 +1,16 @@
 package com.example.UCESAPI.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
+@EqualsAndHashCode(callSuper = true)
+@Getter
+@Setter
 @NoArgsConstructor
-@Builder
-@Data
-@Entity(name = "recommendations")
-//@DiscriminatorValue("0")
+@Entity
+@DiscriminatorValue("2")
 public class Recommendation extends Forum{
 
     @Override
