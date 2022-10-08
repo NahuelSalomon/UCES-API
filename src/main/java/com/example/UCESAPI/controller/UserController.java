@@ -148,9 +148,11 @@ public class UserController {
 
             if(user.getForumsVoted().contains(forum))
             {
+                forum.removeUserWhoVoted(user);
                 user.removeVoteToForum(forum);
 
             } else {
+                forum.addUserWhoVoted(user);
                 user.addVoteToForum(forum);
             }
 

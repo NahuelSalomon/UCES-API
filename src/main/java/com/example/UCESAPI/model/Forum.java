@@ -53,6 +53,15 @@ public abstract class Forum {
     @AccessType(value = AccessType.Type.PROPERTY)
     public abstract ForumType forumType();
 
+    public boolean addUserWhoVoted(User user)
+    {
+        return this.usersWhoVoted.add(user);
+    }
+    public boolean removeUserWhoVoted(User user)
+    {
+        return this.usersWhoVoted.remove(user);
+    }
+
 
 
 }
