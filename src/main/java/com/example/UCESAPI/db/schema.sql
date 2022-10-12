@@ -378,4 +378,67 @@ CREATE TABLE query_responses(
             constraint fk_query_response_query FOREIGN KEY (id_query) references queries(id)
 );
 
+CREATE TABLE poll_templates(
+			id int NOT NULL AUTO_INCREMENT,
+            template_name varchar(50),
+            title varchar(50),
+            poll_description varchar(200),
+            constraint pk_poll_template PRIMARY KEY (id)
+);
 
+INSERT INTO poll_templates (template_name, title, poll_description) VALUES
+			('CAREER_TEMPLATE', 'Encuesta general de la carrera', 'Esta encuesta tiene como fin conocer el opinión de los alumnos en base a su experiencia.'),
+			('SUBJECT_TEMPLATE', 'Encuesta de opinión de la materia', 'Esta encuesta tiene como fin conocer el opinión de los alumnos en base a su experiencia.');
+
+CREATE TABLE polls(
+			id int NOT NULL AUTO_INCREMENT,
+            id_career int,
+            id_subject int,
+			id_poll_template int NOT NULL,
+            constraint pk_poll PRIMARY KEY (id),
+            constraint fk_poll_career FOREIGN KEY (id_career) references careers(id),
+            constraint fk_poll_subject FOREIGN KEY (id_subject) references subjects(id),
+            constraint fk_poll_poll_template FOREIGN KEY (id_poll_template) references poll_templates(id)
+);
+
+INSERT INTO polls (id_career, id_subject, id_poll_template) VALUES
+			(1, null, 1), (null, 1, 2), (null, 5, 2);
+
+CREATE TABLE polls_x_users(
+			id int NOT NULL AUTO_INCREMENT,
+            id_user int NOT NULL,
+            id_poll int NOT NULL,
+			constraint pk_poll_x_user PRIMARY KEY (id),
+            constraint fk_pollxuser_user FOREIGN KEY (id_user) references users(id),
+            constraint fk_pollxuser_poll FOREIGN KEY (id_poll) references polls(id)
+);
+
+CREATE TABLE poll_questions(
+			id int NOT NULL AUTO_INCREMENT,
+            id_poll_template int NOT NULL,
+            question varchar(150) NOT NULL,
+            poll_response_type varchar(30) NOT NULL,
+            theme varchar(30) NOT NULL,
+			constraint pk_poll_question PRIMARY KEY (id),
+            constraint fk_poll_question_poll FOREIGN KEY (id_poll_template) references poll_templates(id)
+);
+
+INSERT INTO poll_questions(id_poll_template, question, poll_response_type, theme) values
+			(1, '¿Con que valor del 1 al 5 calificarías la dificultad de la carrera?', 'RATING_TO_FIVE', 'CAREER_RATING'),
+            (1, '¿Qué profesor de la carrera te gustaría destacar?', 'PROFESSOR_RATING', 'CAREER_PROFESSOR_DISTINGUISHED'),
+            (1, 'En una respuesta breve, ¿Cúal es tu opinión general sobre la carrera?', 'SHORT_ANSWER', 'CAREER_GENERAL_OPINION'),
+            (2, '¿Con qué valor del 1 al 5 calificarías al profesor con el que cursaste la materia?', 'PROFESSOR_RATING', 'PROFESSOR_RATING'),
+            (2, '¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', 'RATING_TO_FIVE', 'DIFFICULTY_RATING'),
+            (2, '¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', 'RATING_TO_FIVE', 'LEARNED_VALUE_RATING'),
+			(2, '¿Qué cantidad de horas semanales en promedio tuviste que dedicarle a la materia fuera de las clases?', 'RATING_TO_FIVE', 'SUBJECT_EXTRA_HOURS');
+    
+CREATE TABLE poll_responses(
+			id int NOT NULL AUTO_INCREMENT,
+            id_poll_question int NOT NULL,
+            id_professor int,
+            rating int,
+            short_answer varchar(200),
+			constraint pk_poll_responses PRIMARY KEY (id),
+            constraint fk_poll_responses_question FOREIGN KEY (id_poll_question) references poll_questions(id),
+			constraint fk_poll_response_professor FOREIGN KEY (id_professor) references professors(id)
+);
