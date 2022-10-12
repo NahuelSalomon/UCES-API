@@ -1,9 +1,6 @@
 package com.example.UCESAPI.service;
 
-import com.example.UCESAPI.model.Board;
-import com.example.UCESAPI.model.Forum;
-import com.example.UCESAPI.model.ForumType;
-import com.example.UCESAPI.model.QueryResponse;
+import com.example.UCESAPI.model.*;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.repository.ForumRepository;
@@ -12,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,7 +19,7 @@ public class ForumService {
     private final BoardService boardService;
 
     @Autowired
-    public ForumService(ForumRepository forumRepository, BoardService boardService){
+    public ForumService(ForumRepository forumRepository,BoardService boardService){
         this.forumRepository = forumRepository;
         this.boardService = boardService;
     }
@@ -33,9 +31,19 @@ public class ForumService {
     public Page<Forum> getAll(Pageable pageable) {
         return forumRepository.findAll(pageable);
     }
-    public List<Forum> getAllByBoard(int idBoard) throws BoardNotFoundException {
+
+    public Page<Forum> getAllQueries(Pageable pageable) {
+        return forumRepository.findAll(pageable);
+    }
+
+    public Page<Query> getAllQueriesByBoard(int idBoard, Pageable pageable) throws BoardNotFoundException {
         Board board = boardService.getById(idBoard);
-        return forumRepository.findAllByBoard(board);
+        return this.forumRepository.findAllQueriesByBoard(board,pageable);
+    }
+
+    public Page<Recommendation> getAllRecommendationsByBoard(int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Board board = boardService.getById(idBoard);
+        return this.forumRepository.findAllRecommendationsByBoard(board,pageable);
     }
 
     public Forum getById(Integer id) throws ForumNotFoundException {
@@ -55,8 +63,8 @@ public class ForumService {
         Forum f = getById(id);
         f.setBody(newForum.getBody());
         f.setUser(newForum.getUser());
-        f.setDownVotes(newForum.getDownVotes());
-        f.setUpVotes(newForum.getUpVotes());
+       /* f.setDownVotes(newForum.getDownVotes());
+        f.setUpVotes(newForum.getUpVotes());*/
         if (f.forumType() == ForumType.QUERY){
             //((Query)(f)).setResponses(((Query)(newForum)).getResponses());
         }

@@ -15,4 +15,18 @@ public class ResponseEntityMaker {
                 header("X-Total-Pages", Long.toString(page.getTotalPages())).
                 body(page.getContent());
     }
+
+    public static <T> ResponseEntity<List<T>> paginatedListResponse(Page<T> page) {
+        return !page.getContent().isEmpty() ?
+             ResponseEntity.
+                    status(HttpStatus.OK).
+                    header("X-Total-Count", Long.toString(page.getTotalElements())).
+                    header("X-Total-Pages", Long.toString(page.getTotalPages())).
+                    body(page.getContent()) :
+             ResponseEntity
+                    .status(HttpStatus.NO_CONTENT)
+                    .body(page.getContent());
+
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model.response;
+package com.example.UCESAPI.model.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

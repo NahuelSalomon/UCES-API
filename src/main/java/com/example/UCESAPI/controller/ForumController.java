@@ -4,7 +4,11 @@ import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.model.Forum;
+import com.example.UCESAPI.model.Recommendation;
+import com.example.UCESAPI.model.dto.forum.QueryResponseDto;
+import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
 import com.example.UCESAPI.service.ForumService;
+import com.example.UCESAPI.utils.CustomConversion;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,33 +31,33 @@ public class ForumController {
     @Autowired
     public ForumController(ForumService forumService){
         this.forumService = forumService;
-        //this.responseService = responseService;
     }
 
     @PostMapping
-    public ResponseEntity<Forum> addForum(@RequestBody Forum forum){
+    public ResponseEntity<Forum> add(@RequestBody Forum forum){
         Forum newForum = forumService.addForum(forum);
         return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
     }
 
-    @PostMapping("/queries/")
-    public ResponseEntity<Forum> addQueries(@RequestBody Query query){
-        Forum newForum = forumService.addForum(query);
-        return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
+    @GetMapping("/")
+    public ResponseEntity<List<Forum>> getAll(Pageable pageable) throws BoardNotFoundException {
+        Page<Forum> queryPage = forumService.getAll(pageable);
+        return ResponseEntityMaker.paginatedListResponse(queryPage);
     }
 
-    @GetMapping
-    public ResponseEntity<Page<Forum>> getAll(Pageable pageable){
-        Page<Forum> page = forumService.getAll(pageable);
-        return ResponseEntityMaker.response(page.getContent(), page);
+    @GetMapping("queries/boards/{idBoard}")
+    public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Query> queryPage = forumService.getAllQueriesByBoard(idBoard, pageable);
+        Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
     }
 
-    @GetMapping("/boards/{idBoard}")
-    public ResponseEntity<List<Forum>> getByBoard(@PathVariable int idBoard) throws BoardNotFoundException {
-        List<Forum> forumList = forumService.getAllByBoard(idBoard);
-        return ResponseEntity.ok(forumList);
+    @GetMapping("recommendations/boards/{idBoard}")
+    public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoard(idBoard, pageable);
+        Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
     }
-
 
     @GetMapping("/{id}")
     public ResponseEntity<Forum> getById(@PathVariable Integer id) throws ForumNotFoundException {

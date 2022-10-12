@@ -1,16 +1,18 @@
 package com.example.UCESAPI.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Data
+@Setter
+@Getter
 @Entity(name = "users")
 public class User {
 
@@ -32,5 +34,17 @@ public class User {
 
     @Column(name = "u_password")
     private String password;
+
+    @ManyToMany(mappedBy = "usersWhoVoted", targetEntity = Forum.class)
+    private List<Forum> forumsVoted;
+
+    public boolean addVoteToForum(Forum forum)
+    {
+        return this.forumsVoted.add(forum);
+    }
+    public boolean removeVoteToForum(Forum forum)
+    {
+        return this.forumsVoted.remove(forum);
+    }
 
 }

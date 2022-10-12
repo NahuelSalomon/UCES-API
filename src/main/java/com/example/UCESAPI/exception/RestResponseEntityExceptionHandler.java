@@ -1,7 +1,7 @@
 package com.example.UCESAPI.exception;
 
 import com.example.UCESAPI.exception.notfound.ObjectNotFoundException;
-import com.example.UCESAPI.model.response.ApiError;
+import com.example.UCESAPI.model.dto.ApiError;
 import com.example.UCESAPI.utils.EntityResponse;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.http.HttpHeaders;
