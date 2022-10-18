@@ -2,7 +2,7 @@ package com.example.UCESAPI.mapper;
 
 import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollQuestion;
-import com.example.UCESAPI.model.dto.PollDto;
+import com.example.UCESAPI.model.dto.poll.PollDto;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

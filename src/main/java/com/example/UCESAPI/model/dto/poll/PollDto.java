@@ -1,4 +1,4 @@
-package com.example.UCESAPI.model.dto;
+package com.example.UCESAPI.model.dto.poll;
 
 import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.model.PollQuestion;
