@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -9,6 +10,7 @@ import org.springframework.data.annotation.AccessType;
 
 import javax.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Setter
@@ -49,9 +51,13 @@ public abstract class Forum {
     //@JsonBackReference(value = "forum-board")
     @JoinColumn(name = "id_board")
     private Board board;
+    
+    private LocalDateTime date;
 
     @AccessType(value = AccessType.Type.PROPERTY)
     public abstract ForumType forumType();
+
+
 
     public boolean addUserWhoVoted(User user)
     {

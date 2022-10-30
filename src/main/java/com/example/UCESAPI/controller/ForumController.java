@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -52,9 +53,37 @@ public class ForumController {
         return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
     }
 
+    @GetMapping("queries/boards/{idBoard}/sort/votes")
+    public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoardSortedByVotes(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Query> queryPage = forumService.getAllQueriesByBoardSortedByVotes(idBoard, pageable);
+        Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
+    }
+
+    @GetMapping("queries/boards/{idBoard}/sort/date")
+    public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoardSortedByDates(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Query> queryPage = forumService.getAllQueriesByBoardSortedByDate(idBoard, pageable);
+        Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
+    }
+
     @GetMapping("recommendations/boards/{idBoard}")
     public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoard(idBoard, pageable);
+        Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
+    }
+
+    @GetMapping("recommendations/boards/{idBoard}/sort/votes")
+    public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoardSortedByVotes(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoardSortedByVotes(idBoard, pageable);
+        Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
+        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
+    }
+
+    @GetMapping("recommendations/boards/{idBoard}/sort/date")
+    public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoardSortedByDates(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
+        Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoardSortedByDate(idBoard, pageable);
         Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
         return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
     }

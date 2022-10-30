@@ -144,8 +144,6 @@ public class UserController {
         if(user.getId() == authenticatedUser.getId() || authenticatedUser.getUserType().equals(UserType.ROLE_ADMINISTRATOR))
         {
             Forum forum = this.forumService.getById(idForum);
-
-
             if(user.getForumsVoted().contains(forum))
             {
                 forum.removeUserWhoVoted(user);

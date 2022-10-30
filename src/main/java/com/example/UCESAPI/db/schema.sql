@@ -390,7 +390,8 @@ INSERT INTO `uces`.`recommendations`
 
 CREATE TABLE forums(
 			id int NOT NULL AUTO_INCREMENT,
-            body varchar(300) NOT NULL,
+            body varchar(500) NOT NULL,
+            `date` datetime NOT NULL DEFAULT NOW(),
             id_user int NOT NULL,
             id_board int NOT NULL,
             forum_type int NOT NULL DEFAULT 1,
@@ -400,17 +401,17 @@ CREATE TABLE forums(
 );
 
 INSERT INTO `uces`.`forums`
-(`body`,`id_user`,`id_board`,`forum_type`) VALUES 
-("Consulta 1",1,1,1),
-("Consulta 2",2,1,1),
-("Consulta 3",2,1,1),
-("Consulta 4",1,1,1),
-("Consulta 5",2,1,1),
-("Recomendacion 1",4,1,2),
-("Recomendacion 2",5,1,2),
-("Recomendacion 3",1,1,2),
-("Recomendacion 4",2,1,2),
-("Recomendacion 5",2,1,2);
+(`body`,`date`,`id_user`,`id_board`,`forum_type`) VALUES 
+("Consulta 1",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,1,1),
+("Consulta 2",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,1,1),
+("Consulta 3",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,1,1),
+("Consulta 4",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,1,1),
+("Consulta 5",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,1,1),
+("Recomendacion 1",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,1,2),
+("Recomendacion 2",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,1,2),
+("Recomendacion 3",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,1,2),
+("Recomendacion 4",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,1,2),
+("Recomendacion 5",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,1,2);
 
 CREATE TABLE users_voted_forums (
 			id_forum int NOT NULL,
@@ -526,3 +527,7 @@ CREATE TABLE poll_responses(
             constraint fk_poll_responses_question FOREIGN KEY (id_poll_question) references poll_questions(id),
 			constraint fk_poll_response_professor FOREIGN KEY (id_professor) references professors(id)
 );
+
+
+
+ 
