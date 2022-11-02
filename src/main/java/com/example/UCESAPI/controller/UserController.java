@@ -10,7 +10,7 @@ import com.example.UCESAPI.model.dto.user.UserResponseDto;
 import com.example.UCESAPI.model.dto.user.UserUpdateRequestDto;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.CustomConversion;
+import com.example.UCESAPI.mapper.CustomConversion;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;

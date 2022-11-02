@@ -8,7 +8,7 @@ import com.example.UCESAPI.model.dto.user.UserInsertRequestDto;
 import com.example.UCESAPI.model.dto.user.UserResponseDto;
 import com.example.UCESAPI.model.dto.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.CustomConversion;
+import com.example.UCESAPI.mapper.CustomConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

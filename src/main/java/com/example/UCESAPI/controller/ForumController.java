@@ -8,7 +8,7 @@ import com.example.UCESAPI.model.Recommendation;
 import com.example.UCESAPI.model.dto.forum.QueryResponseDto;
 import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
 import com.example.UCESAPI.service.ForumService;
-import com.example.UCESAPI.utils.CustomConversion;
+import com.example.UCESAPI.mapper.CustomConversion;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")

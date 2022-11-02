@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/poll")
 public class PollController {
 
@@ -23,6 +24,11 @@ public class PollController {
     @GetMapping("/{id}")
     public ResponseEntity<PollDto> getPollById(@PathVariable Integer id) throws PollNotFoundException {
         return ResponseEntity.ok(pollService.getPollById(id));
+    }
+
+    @GetMapping("/career/{careerId}")
+    public ResponseEntity<PollDto> getPollByCareerId(@PathVariable Integer careerId) throws PollNotFoundException {
+        return ResponseEntity.ok(pollService.getPollByCareerId(careerId));
     }
 
     @PostMapping("/{idPoll}/answers/process")

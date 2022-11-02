@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.Optional;
 
 @Repository
 public interface PollRepository extends JpaRepository<Poll, Integer> {
@@ -21,4 +22,6 @@ public interface PollRepository extends JpaRepository<Poll, Integer> {
     @Query(nativeQuery = true, value = "SELECT case when (count(pxs) > 0) then true else false end  " +
                                         "FROM poll_x_users pxs WHERE pxs.id_poll = :pollId AND pxs.id_user = :userId")
     Boolean isPollAnsweredByUser(Integer pollId, Integer userId);
+
+    Optional<Poll> findByCareerId(Integer id);
 }

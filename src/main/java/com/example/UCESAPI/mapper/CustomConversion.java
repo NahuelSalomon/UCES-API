@@ -1,4 +1,4 @@
-package com.example.UCESAPI.utils;
+package com.example.UCESAPI.mapper;
 
 import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.model.Recommendation;

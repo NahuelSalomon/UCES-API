@@ -43,6 +43,16 @@ public class PollService {
         return PollDtoMapper.map(poll.get(), questions);
     }
 
+    public PollDto getPollByCareerId(Integer careerId) throws PollNotFoundException {
+        List<PollQuestion> questions;
+        Optional<Poll> poll = pollRepository.findByCareerId(careerId);
+        if (poll.isEmpty()){
+            throw new PollNotFoundException();
+        }
+        questions = pollQuestionRepository.findAllByPollTemplate(poll.get().getPollTemplate());
+        return PollDtoMapper.map(poll.get(), questions);
+    }
+
     public void processPollAnswers(Integer idPoll, PollAnsweredDto pollAnswered) throws PollQuestionNotFoundException{
         for (PollAnswerDto answer : pollAnswered.getAnswers()) {
             Optional<PollQuestion> question = pollQuestionRepository.findById(answer.getQuestionId());
