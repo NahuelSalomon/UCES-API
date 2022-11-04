@@ -22,6 +22,8 @@ public class ResponseEntityMaker {
                     status(HttpStatus.OK).
                     header("X-Total-Count", Long.toString(page.getTotalElements())).
                     header("X-Total-Pages", Long.toString(page.getTotalPages())).
+                    header("Access-Control-Expose-Headers", "X-Total-Pages").
+                    header("Access-Control-Expose-Headers", "X-Total-Count").
                     body(page.getContent()) :
              ResponseEntity
                     .status(HttpStatus.NO_CONTENT)
