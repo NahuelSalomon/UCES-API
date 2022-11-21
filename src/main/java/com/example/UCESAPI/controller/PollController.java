@@ -31,6 +31,11 @@ public class PollController {
         return ResponseEntity.ok(pollService.getPollByCareerId(careerId));
     }
 
+    @GetMapping("/subject/{subjectId}")
+    public ResponseEntity<PollDto> getPollBySubjectId(@PathVariable Integer subjectId) throws PollNotFoundException {
+        return ResponseEntity.ok(pollService.getPollBySubjectId(subjectId));
+    }
+
     @PostMapping("/{idPoll}/answers/process")
     public ResponseEntity<Object> processPollAnswers(@PathVariable Integer idPoll, @RequestBody PollAnsweredDto pollAnswered) throws PollQuestionNotFoundException {
         pollService.processPollAnswers(idPoll, pollAnswered);

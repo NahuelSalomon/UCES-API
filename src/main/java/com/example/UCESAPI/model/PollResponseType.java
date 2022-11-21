@@ -4,5 +4,6 @@ public enum PollResponseType {
 
     RATING_TO_FIVE,
     SHORT_ANSWER,
-    PROFESSOR_RATING
+    PROFESSOR_RATING,
+    SHORT_NUMBER_ANSWER
 }

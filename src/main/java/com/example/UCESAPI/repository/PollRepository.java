@@ -24,4 +24,5 @@ public interface PollRepository extends JpaRepository<Poll, Integer> {
     Boolean isPollAnsweredByUser(Integer pollId, Integer userId);
 
     Optional<Poll> findByCareerId(Integer id);
+    Optional<Poll> findBySubjectId(Integer id);
 }
