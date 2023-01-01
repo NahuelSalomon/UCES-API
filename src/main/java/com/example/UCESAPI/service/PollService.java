@@ -87,6 +87,8 @@ public class PollService {
                 return answer.getRating() != null;
             case PROFESSOR_RATING:
                 return answer.getRating() != null && answer.getProfessor() != null;
+            case YES_NO_DESCRIPTION_IN_NO_ANSWER:
+                return answer.getRating() != null && answer.getShortAnswer() != null;
             default:
                 return false;
         }

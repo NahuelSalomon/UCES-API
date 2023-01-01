@@ -24,6 +24,9 @@ public class PollAnswer {
     @Column(name = "short_answer")
     String shortAnswer;
 
+    @Column(name = "positive_answer")
+    Boolean positiveAnswer;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_professor")
     Professor professor;
