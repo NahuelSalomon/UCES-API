@@ -79,7 +79,7 @@ public class PollService {
     }
 
     private Boolean isValidAnswer(PollAnswer answer) {
-        switch (answer.getQuestion().getPollResponseType()){
+        switch (answer.getPollQuestion().getPollResponseType()){
             case SHORT_ANSWER:
             case SHORT_NUMBER_ANSWER:
                 return answer.getShortAnswer() != null;

@@ -502,7 +502,7 @@ CREATE TABLE poll_questions(
 			id int NOT NULL AUTO_INCREMENT,
             id_poll_template int NOT NULL,
             question varchar(150) NOT NULL,
-            poll_response_type varchar(30) NOT NULL,
+            poll_response_type varchar(100) NOT NULL,
             theme varchar(30) NOT NULL,
 			constraint pk_poll_question PRIMARY KEY (id),
             constraint fk_poll_question_poll FOREIGN KEY (id_poll_template) references poll_templates(id)
@@ -515,12 +515,15 @@ INSERT INTO poll_questions(id_poll_template, question, poll_response_type, theme
             (2, '¿Con qué valor del 1 al 5 calificarías al profesor con el que cursaste la materia?', 'PROFESSOR_RATING', 'PROFESSOR_RATING'),
             (2, '¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', 'RATING_TO_FIVE', 'DIFFICULTY_RATING'),
             (2, '¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', 'RATING_TO_FIVE', 'LEARNED_VALUE_RATING'),
-			(2, '¿Qué cantidad de horas semanales en promedio tuviste que dedicarle a la materia fuera de las clases?', 'RATING_TO_FIVE', 'SUBJECT_EXTRA_HOURS');
+			(2, '¿Qué cantidad de horas semanales en promedio tuviste que dedicarle a la materia fuera de las clases?', 'RATING_TO_FIVE', 'SUBJECT_EXTRA_HOURS'),
+			(2, '¿Se cumplieron con todos los contenidos de la materia?. Si la respuesta es negativa indique cuales fueron los contenidos que no se cumplieron', 'YES_NO_DESCRIPTION_IN_NO_ANSWER', 'LEARNED_VALUE_RATING');
+
     
 CREATE TABLE poll_responses(
 			id int NOT NULL AUTO_INCREMENT,
             id_poll_question int NOT NULL,
             id_professor int,
+            positive_answer bool,
             rating int,
             short_answer varchar(200),
 			constraint pk_poll_responses PRIMARY KEY (id),

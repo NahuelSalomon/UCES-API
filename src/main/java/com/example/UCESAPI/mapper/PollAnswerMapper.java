@@ -12,7 +12,7 @@ public class PollAnswerMapper {
         return PollAnswer.builder()
                 .shortAnswer(answerDto.getShortAnswer())
                 .professor(answerDto.getProfessor())
-                .question(question)
+                .pollQuestion(question)
                 .rating(answerDto.getRating())
                 .build();
     }

@@ -33,5 +33,5 @@ public class PollAnswer {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_poll_question")
-    PollQuestion question;
+    PollQuestion pollQuestion;
 }
