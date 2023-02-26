@@ -3,9 +3,11 @@ package com.example.UCESAPI.controller;
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollUserNotFoundException;
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
+import com.example.UCESAPI.mapper.PollUserMapper;
 import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollUser;
 import com.example.UCESAPI.model.User;
+import com.example.UCESAPI.model.dto.poll.PollUserDto;
 import com.example.UCESAPI.repository.PollRepository;
 import com.example.UCESAPI.service.PollService;
 import com.example.UCESAPI.service.PollUserService;
@@ -65,11 +67,12 @@ public class PollUserController {
     }
 
     @GetMapping(value = "poll/{idPoll}/user/{idUser}")
-    public ResponseEntity<PollUser> getByPollAndUser(@PathVariable Integer idPoll, @PathVariable Integer idUser) throws PollNotFoundException, UserNotFoundException {
+    public ResponseEntity<PollUserDto> getByPollAndUser(@PathVariable Integer idPoll, @PathVariable Integer idUser) throws PollNotFoundException, UserNotFoundException {
         Poll poll = this.pollRepository.findById(idPoll).orElseThrow(PollNotFoundException::new);
         User user = this.userService.getById(idUser);
         PollUser pollUser = this.pollUserService.getByPollAndUser(poll,user);
-        return ResponseEntity.ok(pollUser) ;
+        PollUserDto pollUserDto = pollUser != null ? PollUserMapper.map(pollUser) : null;
+        return ResponseEntity.ok(pollUserDto);
     }
 
     @DeleteMapping(value = "/{id}")

@@ -531,7 +531,8 @@ CREATE TABLE poll_responses(
 			constraint fk_poll_response_professor FOREIGN KEY (id_professor) references professors(id)
 );
 
-
+delete from poll_responses where id <> 99999;
+delete from polls_x_users where id <> 99999;
 
 
  
