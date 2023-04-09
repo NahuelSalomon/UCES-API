@@ -1,4 +1,4 @@
-package com.example.UCESAPI.mapper;
+package com.example.UCESAPI.model.mapper;
 
 import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.model.Recommendation;
@@ -10,6 +10,7 @@ import com.example.UCESAPI.model.dto.forum.UserResponseForForumDto;
 import com.example.UCESAPI.model.dto.user.ForumResponseForUserDto;
 import com.example.UCESAPI.model.dto.user.UserResponseDto;
 
+import java.util.Base64;
 import java.util.stream.Collectors;
 
 public class CustomConversion {
@@ -24,6 +25,7 @@ public class CustomConversion {
                 .userType(user.getUserType())
                 .email(user.getEmail())
                 .active(user.isActive())
+                .image(user.getImage())
                 .confirmedEmail(user.isConfirmedEmail())
                 .forumsVoted(
                         user.getForumsVoted().stream().map(
@@ -53,6 +55,7 @@ public class CustomConversion {
                                                                      .email(recommendation.getUser().getEmail())
                                                                      .active(recommendation.getUser().isActive())
                                                                      .confirmedEmail(recommendation.getUser().isConfirmedEmail())
+                                                                     .image(recommendation.getUser().getImage())
                                                                      .build())
                                         .usersWhoVoted(
                                                 recommendation.getUsersWhoVoted().stream().map(
@@ -65,6 +68,7 @@ public class CustomConversion {
                                                                 .email(recommendation.getUser().getEmail())
                                                                 .active(recommendation.getUser().isActive())
                                                                 .confirmedEmail(recommendation.getUser().isConfirmedEmail())
+                                                                .image(recommendation.getUser().getImage())
                                                                 .build()
                                                 ).collect(Collectors.toList())
                                         )
@@ -88,6 +92,7 @@ public class CustomConversion {
                         .email(query.getUser().getEmail())
                         .active(query.getUser().isActive())
                         .confirmedEmail(query.getUser().isConfirmedEmail())
+                        .image(query.getUser().getImage())
                         .build())
                 .usersWhoVoted(
                         query.getUsersWhoVoted().stream().map(
@@ -99,6 +104,7 @@ public class CustomConversion {
                                         .userType(query.getUser().getUserType())
                                         .email(query.getUser().getEmail())
                                         .active(query.getUser().isActive())
+                                        .image(query.getUser().getImage())
                                         .confirmedEmail(query.getUser().isConfirmedEmail())
                                         .build()
                         ).collect(Collectors.toList())
@@ -117,6 +123,7 @@ public class CustomConversion {
                                                         .userType(queryResponse.getUser().getUserType())
                                                         .email(queryResponse.getUser().getEmail())
                                                         .active(queryResponse.getUser().isActive())
+                                                        .image(queryResponse.getUser().getImage())
                                                         .confirmedEmail(queryResponse.getUser().isConfirmedEmail())
                                                         .build())
                                                 .build()

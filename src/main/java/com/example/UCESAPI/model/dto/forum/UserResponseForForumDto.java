@@ -18,4 +18,5 @@ public class UserResponseForForumDto {
     private UserType userType;
     private boolean active;
     private boolean confirmedEmail;
+    private byte[] image;
 }

@@ -20,4 +20,5 @@ public class UserUpdateRequestDto {
     @NotBlank(message = "Email is required.")
     private String email;
 
+    private String image;
 }

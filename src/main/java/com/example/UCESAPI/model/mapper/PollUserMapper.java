@@ -1,4 +1,4 @@
-package com.example.UCESAPI.mapper;
+package com.example.UCESAPI.model.mapper;
 import com.example.UCESAPI.model.PollUser;
 import com.example.UCESAPI.model.dto.poll.PollUserDto;
 import org.springframework.stereotype.Component;

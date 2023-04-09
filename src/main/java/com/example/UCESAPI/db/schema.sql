@@ -334,6 +334,7 @@ CREATE TABLE users(
             u_password varchar(60) NOT NULL,
             `active` bool NOT NULL DEFAULT TRUE, 
             user_type int not null default 1,
+            image mediumblob,
             constraint pk_user PRIMARY KEY (id),
             constraint unq_email UNIQUE (email)
 );
@@ -534,5 +535,5 @@ CREATE TABLE poll_responses(
 delete from poll_responses where id <> 99999;
 delete from polls_x_users where id <> 99999;
 
-
+select * from users
  

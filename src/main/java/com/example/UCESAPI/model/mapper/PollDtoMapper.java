@@ -1,4 +1,4 @@
-package com.example.UCESAPI.mapper;
+package com.example.UCESAPI.model.mapper;
 
 import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollQuestion;

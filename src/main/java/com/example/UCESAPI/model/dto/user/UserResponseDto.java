@@ -17,6 +17,7 @@ public class UserResponseDto {
     private String lastname;
     private String email;
     private UserType userType;
+    private byte[] image;
     private boolean active;
     private boolean confirmedEmail;
     private List<ForumResponseForUserDto> forumsVoted;

@@ -35,6 +35,7 @@ public class User {
     @Column(name = "u_password")
     private String password;
 
+    private byte[] image;
     @ManyToMany(mappedBy = "usersWhoVoted", targetEntity = Forum.class)
     private List<Forum> forumsVoted;
 

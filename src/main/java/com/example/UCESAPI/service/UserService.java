@@ -25,6 +25,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Collections;
 
 @Service
@@ -87,7 +89,7 @@ public class UserService implements UserDetailsService {
         return userDetails;
     }
 
-    public LoginResponseDto register(UserInsertRequestDto user)  throws UserAlreadyExistException {
+    public LoginResponseDto register(UserInsertRequestDto user) throws UserAlreadyExistException, IOException {
 
         User findUser = userRepository.findByEmail(user.getEmail());
         if(findUser !=null){
@@ -100,6 +102,8 @@ public class UserService implements UserDetailsService {
         newUser.setActive(true);
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setUserType(UserType.ROLE_STUDENT);
+        //newUser.setImage(Base64.getDecoder().decode(user.getImage()));
+        newUser.setImage(user.getImage());
         newUser = userRepository.save(newUser);
 
         /*authenticationManager.authenticate(

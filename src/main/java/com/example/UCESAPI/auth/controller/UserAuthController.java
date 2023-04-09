@@ -8,7 +8,7 @@ import com.example.UCESAPI.model.dto.user.UserInsertRequestDto;
 import com.example.UCESAPI.model.dto.user.UserResponseDto;
 import com.example.UCESAPI.model.dto.LoginResponseDto;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.mapper.CustomConversion;
+import com.example.UCESAPI.model.mapper.CustomConversion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -42,7 +43,10 @@ public class UserAuthController {
             loginResponseDto = userService.register(user);
         }catch (UserAlreadyExistException e){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(new LoginResponseDto("A User with the email already exists."));
+        }catch (IOException e){
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(new LoginResponseDto("Image with incorrect format"));
         }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(loginResponseDto);
     }
 

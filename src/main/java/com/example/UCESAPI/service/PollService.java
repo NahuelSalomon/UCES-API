@@ -2,8 +2,8 @@ package com.example.UCESAPI.service;
 
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
-import com.example.UCESAPI.mapper.PollAnswerMapper;
-import com.example.UCESAPI.mapper.PollDtoMapper;
+import com.example.UCESAPI.model.mapper.PollAnswerMapper;
+import com.example.UCESAPI.model.mapper.PollDtoMapper;
 import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollAnswer;
 import com.example.UCESAPI.model.PollQuestion;
