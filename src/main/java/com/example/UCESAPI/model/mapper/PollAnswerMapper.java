@@ -10,7 +10,7 @@ public class PollAnswerMapper {
 
     public static PollAnswer map(PollAnswerDto answerDto, PollQuestion question){
         return PollAnswer.builder()
-                .shortAnswer(answerDto.getShortAnswer())
+                //.shortAnswer(answerDto.getShortAnswer())
                 .professor(answerDto.getProfessor())
                 .pollQuestion(question)
                 .rating(answerDto.getRating())

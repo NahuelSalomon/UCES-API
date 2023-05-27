@@ -80,15 +80,12 @@ public class PollService {
 
     private Boolean isValidAnswer(PollAnswer answer) {
         switch (answer.getPollQuestion().getPollResponseType()){
-            case SHORT_ANSWER:
-            case SHORT_NUMBER_ANSWER:
-                return answer.getShortAnswer() != null;
             case RATING_TO_FIVE:
                 return answer.getRating() != null;
             case PROFESSOR_RATING:
                 return answer.getRating() != null && answer.getProfessor() != null;
-            case YES_NO_DESCRIPTION_IN_NO_ANSWER:
-                return answer.getRating() != null && answer.getShortAnswer() != null;
+            case YES_NO_ANSWER:
+                return answer.getPositiveAnswer() != null;
             default:
                 return false;
         }

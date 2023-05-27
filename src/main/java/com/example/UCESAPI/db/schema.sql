@@ -512,12 +512,12 @@ CREATE TABLE poll_questions(
 INSERT INTO poll_questions(id_poll_template, question, poll_response_type, theme) values
 			(1, '¿Con que valor del 1 al 5 calificarías la dificultad de la carrera?', 'RATING_TO_FIVE', 'CAREER_RATING'),
             (1, '¿Qué profesor de la carrera te gustaría destacar?', 'PROFESSOR_RATING', 'CAREER_PROFESSOR_DISTINGUISHED'),
-            (1, 'En una respuesta breve, ¿Cúal es tu opinión general sobre la carrera?', 'SHORT_ANSWER', 'CAREER_GENERAL_OPINION'),
+            (1, '¿Estas conforme con la carrera la carrera?', 'YES_NO_ANSWER', 'CAREER_GENERAL_OPINION'),
             (2, '¿Con qué valor del 1 al 5 calificarías al profesor con el que cursaste la materia?', 'PROFESSOR_RATING', 'PROFESSOR_RATING'),
             (2, '¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', 'RATING_TO_FIVE', 'DIFFICULTY_RATING'),
             (2, '¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', 'RATING_TO_FIVE', 'LEARNED_VALUE_RATING'),
-			(2, '¿Qué cantidad de horas semanales en promedio tuviste que dedicarle a la materia fuera de las clases?', 'RATING_TO_FIVE', 'SUBJECT_EXTRA_HOURS'),
-			(2, '¿Se cumplieron con todos los contenidos de la materia?. Si la respuesta es negativa indique cuales fueron los contenidos que no se cumplieron', 'YES_NO_DESCRIPTION_IN_NO_ANSWER', 'LEARNED_VALUE_RATING');
+			#(2, '¿Qué cantidad de horas semanales en promedio tuviste que dedicarle a la materia fuera de las clases?', 'RATING_TO_FIVE', 'SUBJECT_EXTRA_HOURS'),
+			(2, '¿Se cumplieron con todos los contenidos de la materia?', 'YES_NO_ANSWER', 'LEARNED_VALUE_RATING');
 
     
 CREATE TABLE poll_responses(
@@ -526,14 +526,17 @@ CREATE TABLE poll_responses(
             id_professor int,
             positive_answer bool,
             rating int,
-            short_answer varchar(200),
+            #short_answer varchar(200),
 			constraint pk_poll_responses PRIMARY KEY (id),
             constraint fk_poll_responses_question FOREIGN KEY (id_poll_question) references poll_questions(id),
 			constraint fk_poll_response_professor FOREIGN KEY (id_professor) references professors(id)
 );
 
+select * from poll_responses;
+select * from polls_x_users;
+
 delete from poll_responses where id <> 99999;
 delete from polls_x_users where id <> 99999;
 
-select * from users
+select * from users;
  

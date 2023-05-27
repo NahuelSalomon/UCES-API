@@ -21,8 +21,8 @@ public class PollAnswer {
 
     Integer rating;
 
-    @Column(name = "short_answer")
-    String shortAnswer;
+    /*@Column(name = "short_answer")
+    String shortAnswer;*/
 
     @Column(name = "positive_answer")
     Boolean positiveAnswer;
