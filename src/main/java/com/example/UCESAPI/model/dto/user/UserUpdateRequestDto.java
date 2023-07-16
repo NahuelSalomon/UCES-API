@@ -10,15 +10,5 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserUpdateRequestDto {
-
-    @NotBlank(message = "Firstname is required.")
-    private String firstname;
-
-    @NotBlank(message = "Lastname is required.")
-    private String lastname;
-
-    @NotBlank(message = "Email is required.")
-    private String email;
-
-    private String image;
+    private byte[] image;
 }
