@@ -5,32 +5,26 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import javax.persistence.Entity;
 import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @Data
-@Entity(name = "poll_questions")
-public class PollQuestion {
+@Entity(name = "poll_results")
+public class PollResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "poll_id")
     private Poll poll;
 
-    private String question;
-
-    @Column(name = "short_description")
-    private String shortDescription;
-
-    @Column(name = "poll_response_type")
-    @Enumerated(EnumType.  STRING)
-    private PollResponseType pollResponseType;
-
+    @ManyToOne
+    @JoinColumn(name = "student_user_id")
+    private User studentUser;
 }

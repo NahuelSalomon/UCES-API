@@ -104,12 +104,4 @@ public class ForumController {
         forumService.update(id, newForum);
         return ResponseEntity.accepted().build();
     }
-
-
-//    @GetMapping("/{idForum}/response")
-//    public ResponseEntity<Page<ResponseQuery>> getResponsesByQuery(@PathVariable Integer idQuery, Pageable pageable)
-//    {
-//        Page<ResponseQuery> resp = responseService.getAllByQuery(idQuery,pageable);
-//        return ResponseEntityMaker.response(resp.getContent(), resp);
-//    }
 }

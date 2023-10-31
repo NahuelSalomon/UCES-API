@@ -20,38 +20,38 @@ public interface ForumRepository extends JpaRepository<Forum, Integer> {
     Page<Query> findAllQueriesByBoardOrderByDateDesc(Board board, Pageable pageable);
     Page<Recommendation> findAllRecommendationsByBoardOrderByDateDesc(Board board, Pageable pageable);
     @org.springframework.data.jpa.repository.Query(
-            value = "SELECT f.id,f.body,f.date,f.id_user,f.id_board,f.forum_type " +
+            value = "SELECT f.id,f.body,f.date,f.user_id,f.board_id,f.forum_type " +
                     "FROM forums f \n" +
                     "LEFT JOIN users_voted_forums u \n" +
-                    "ON f.id = u.id_forum \n" +
-                    "WHERE f.id_board = :id_board AND forum_type = 1 \n" +
+                    "ON f.id = u.forum_id \n" +
+                    "WHERE f.board_id = :id_board AND forum_type = 1 \n" +
                     "GROUP BY f.id\n" +
-                    "ORDER BY count(u.id_forum) DESC",
+                    "ORDER BY count(u.forum_id) DESC",
             countQuery = "SELECT COUNT(*) " +
                     "FROM forums f \n" +
                     "LEFT JOIN users_voted_forums u \n" +
-                    "ON f.id = u.id_forum \n" +
-                    "WHERE f.id_board = :id_board AND forum_type = 1 \n" +
+                    "ON f.id = u.forum_id \n" +
+                    "WHERE f.board_id = :id_board AND forum_type = 1 \n" +
                     "GROUP BY f.id\n" +
-                    "ORDER BY count(u.id_forum) ",
+                    "ORDER BY count(u.forum_id) ",
             nativeQuery = true
     )
     Page<Query> findAllQueriesOrderByUsersWhoVotedCountDesc(@Param("id_board") int id_board, Pageable pageable);
 
     @org.springframework.data.jpa.repository.Query(
-        value = "SELECT f.id,f.body,f.date,f.id_user,f.id_board,f.forum_type " +
+        value = "SELECT f.id,f.body,f.date,f.user_id,f.board_id,f.forum_type " +
                 "FROM forums f \n" +
                 "LEFT JOIN users_voted_forums u \n" +
-                "ON f.id = u.id_forum \n" +
-                "WHERE f.id_board = :id_board AND forum_type = 2 \n" +
+                "ON f.id = u.forum_id \n" +
+                "WHERE f.board_id = :id_board AND forum_type = 2 \n" +
                 "GROUP BY f.id\n" +
-                "ORDER BY count(u.id_forum) DESC"
+                "ORDER BY count(u.forum_id) DESC"
             ,
             countQuery = "SELECT COUNT(*)" +
                     "FROM forums f \n" +
                     "LEFT JOIN users_voted_forums u \n" +
-                    "ON f.id = u.id_forum \n" +
-                    "WHERE f.id_board = :id_board AND forum_type = 2 \n" +
+                    "ON f.id = u.forum_id \n" +
+                    "WHERE f.board_id = :id_board AND forum_type = 2 \n" +
                     "GROUP BY f.id\n",
             nativeQuery = true
     )

@@ -4,8 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import javax.persistence.*;
+import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,17 +16,18 @@ public class Poll {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    private Integer id;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_career")
-    Career career;
+    @Column(name = "poll_type")
+    @Enumerated(EnumType.ORDINAL)
+    public PollType pollType;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_subject")
-    Subject subject;
+    @OneToOne
+    @JoinColumn(name = "career_id")
+    private Career career;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_poll_template")
-    PollTemplate pollTemplate;
+    @OneToOne
+    @JoinColumn(name = "subject_id")
+    private Subject subject;
+
 }

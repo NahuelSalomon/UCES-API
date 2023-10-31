@@ -87,6 +87,11 @@ public class ForumService {
         forumRepository.save(f);
     }
 
+    public void getAllByUser()
+    {
+
+    }
+
     public void addResponse(Integer id, QueryResponse response) throws ForumNotFoundException {
         Forum f = getById(id);
         if (f.forumType() == ForumType.QUERY){

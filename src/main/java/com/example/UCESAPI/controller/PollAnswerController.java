@@ -1,7 +1,6 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.PollAnswerNotFoundException;
-import com.example.UCESAPI.exception.notfound.ProfessorNotFoundException;
 import com.example.UCESAPI.model.PollAnswer;
 import com.example.UCESAPI.service.PollAnswerService;
 import com.example.UCESAPI.utils.EntityResponse;
@@ -19,11 +18,11 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
-@RequestMapping("/api/pollAnswer")
+@RequestMapping("/api/poll_answers")
 public class PollAnswerController {
 
     PollAnswerService pollAnswerService;
-    final private String FORUM_PATH = "/api/forums";
+    final private String FORUM_PATH = "/api/poll_answers";
     @Autowired
     public PollAnswerController(PollAnswerService pollAnswerService)
     {

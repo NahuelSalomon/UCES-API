@@ -20,11 +20,11 @@ public class QueryResponse {
     private String body;
 
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @JsonBackReference(value = "response-query")
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_query")
+    @JoinColumn(name = "query_id")
     private Query query;
 }

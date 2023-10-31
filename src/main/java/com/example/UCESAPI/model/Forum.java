@@ -31,30 +31,25 @@ public abstract class Forum {
 
     private String body;
 
+    private LocalDateTime date;
+
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "user_id")
     private User user;
 
-    //@Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinTable(
-            name = "users_voted_forums",
-            joinColumns = {@JoinColumn(name = "id_forum")},
-            inverseJoinColumns = {@JoinColumn(name = "id_user")}
-    )
-    private List<User> usersWhoVoted;
-
     @ManyToOne(fetch = FetchType.EAGER)
-    //@JsonBackReference(value = "forum-board")
-    @JoinColumn(name = "id_board")
+    @JoinColumn(name = "board_id")
     private Board board;
-    
-    private LocalDateTime date;
 
     @AccessType(value = AccessType.Type.PROPERTY)
     public abstract ForumType forumType();
-
-
+    @ManyToMany(fetch = FetchType.LAZY, targetEntity = User.class)
+    @JoinTable(
+            name = "users_voted_forums",
+            joinColumns = {@JoinColumn(name = "forum_id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id")}
+    )
+    private List<User> usersWhoVoted;
 
     public boolean addUserWhoVoted(User user)
     {

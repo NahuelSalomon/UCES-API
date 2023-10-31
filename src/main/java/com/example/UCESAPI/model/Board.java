@@ -18,12 +18,7 @@ public class Board {
 
     private String name;
 
-    /*@JsonManagedReference(value = "forum-board")
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "board")
-    private List<Forum> forumList;*/
-
     @OneToOne(fetch = FetchType.EAGER)
-    //@JsonBackReference(value = "board-subject")
-    @JoinColumn(name = "id_subject")
+    @JoinColumn(name = "subject_id")
     private Subject subject;
 }

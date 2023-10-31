@@ -2,11 +2,13 @@ package com.example.UCESAPI.auth.controller;
 
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
+import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
 import com.example.UCESAPI.model.dto.user.UserInsertRequestDto;
 import com.example.UCESAPI.model.dto.user.UserResponseDto;
 import com.example.UCESAPI.model.dto.LoginResponseDto;
+import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.model.mapper.CustomConversion;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -26,11 +29,13 @@ import java.io.IOException;
 public class UserAuthController {
 
     private final UserService userService;
+    private final ForumService forumService;
     private final JWTUtils jwtUtils;
 
     @Autowired
-    public UserAuthController(UserService userService, JWTUtils jwtUtils){
+    public UserAuthController(UserService userService, JWTUtils jwtUtils, ForumService forumService){
         this.userService = userService;
+        this.forumService = forumService;
         this.jwtUtils = jwtUtils;
     }
 

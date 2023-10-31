@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model.mapper;
 
+import com.example.UCESAPI.model.PollResult;
 import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.model.Recommendation;
 import com.example.UCESAPI.model.User;
@@ -7,6 +8,7 @@ import com.example.UCESAPI.model.dto.forum.QueryResponseDto;
 import com.example.UCESAPI.model.dto.forum.QueryResponseResponseDto;
 import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
 import com.example.UCESAPI.model.dto.forum.UserResponseForForumDto;
+import com.example.UCESAPI.model.dto.poll.PollResultDto;
 import com.example.UCESAPI.model.dto.user.ForumResponseForUserDto;
 import com.example.UCESAPI.model.dto.user.UserResponseDto;
 
@@ -14,6 +16,16 @@ import java.util.Base64;
 import java.util.stream.Collectors;
 
 public class CustomConversion {
+
+    public static PollResultDto PollResultToPollResultDto(PollResult pollResult)
+    {
+        return PollResultDto
+                .builder()
+                .id(pollResult.getId())
+                .poll(pollResult.getPoll())
+                .studentUser(UserToUserResponseDto(pollResult.getStudentUser()))
+                .build();
+    }
 
     public static UserResponseDto UserToUserResponseDto(User user)
     {

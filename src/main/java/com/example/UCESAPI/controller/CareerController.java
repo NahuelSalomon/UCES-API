@@ -2,6 +2,7 @@ package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.model.Career;
+import com.example.UCESAPI.model.dto.career.CareerInsertDto;
 import com.example.UCESAPI.service.CareerService;
 import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
@@ -30,7 +31,6 @@ public class CareerController {
 
     @PostMapping(value = "/")
     public ResponseEntity<Object> add(@RequestBody Career career) {
-
         Career careerCreated = this.careerService.add(career);
         return  ResponseEntity
                 .status(HttpStatus.CREATED)

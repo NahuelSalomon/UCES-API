@@ -23,37 +23,9 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private String code;
-
     private String name;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_statistics")
-    private SubjectStatistics statistics;
-
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Subject.class)
-    @JoinTable(
-            name = "correlatives",
-            joinColumns = {@JoinColumn(name = "id_subject")},
-            inverseJoinColumns = {@JoinColumn(name = "id_correlative")}
-    )
-    private List<Subject> correlatives;
-
-    @JsonIgnoreProperties("subjects")
-    @Cascade({org.hibernate.annotations.CascadeType.SAVE_UPDATE})
-    @ManyToMany(fetch = FetchType.LAZY, targetEntity = Professor.class)
-    @JoinTable(
-            name = "subject_professor",
-            joinColumns = {@JoinColumn(name = "id_subject")},
-            inverseJoinColumns = {@JoinColumn(name = "id_professor")}
-    )
-    private List<Professor> professors;
-
-    //@JsonBackReference(value = "subject-career")
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_career")
+    @JoinColumn(name = "career_id")
     private Career career;
-
 }

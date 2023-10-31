@@ -17,17 +17,8 @@ public class Career {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String name;
-
-    /*@OneToMany(fetch = FetchType.EAGER, mappedBy = "career")
-    @JsonManagedReference(value = "subject-career")
-    private List<Subject> subjects;*/
-
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_statistics")
-    private CareerStatistics statistics;
-
-
+    private String description;
+    private Integer duration;
 
 }

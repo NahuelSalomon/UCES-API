@@ -1,13 +1,4 @@
 package com.example.UCESAPI.service
-
-import com.example.UCESAPI.exception.notfound.CareerNotFoundException
-import com.example.UCESAPI.model.Career
-import com.example.UCESAPI.model.CareerStatistics
-import com.example.UCESAPI.repository.CareerRepository
-import com.example.UCESAPI.repository.CareerStatisticsRepository
-import org.springframework.data.domain.Page
-import org.springframework.data.domain.PageImpl
-import org.springframework.data.domain.Pageable
 //import spock.lang.Specification
 
 class CareerServiceTest { /*extends Specification{

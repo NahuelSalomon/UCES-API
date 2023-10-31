@@ -3,7 +3,6 @@ package com.example.UCESAPI.service;
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
 import com.example.UCESAPI.model.mapper.PollAnswerMapper;
-import com.example.UCESAPI.model.mapper.PollDtoMapper;
 import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollAnswer;
 import com.example.UCESAPI.model.PollQuestion;
@@ -33,34 +32,33 @@ public class PollService {
         this.pollAnswerRepository = pollAnswerRepository;
     }
 
-    public PollDto getPollById(Integer pollId) throws PollNotFoundException {
-        List<PollQuestion> questions;
+    public List<Poll> getAll(){
+        return this.pollRepository.findAll();
+    }
+
+    public Poll getPollById(Integer pollId) throws PollNotFoundException {
         Optional<Poll> poll = pollRepository.findById(pollId);
         if (poll.isEmpty()){
             throw new PollNotFoundException();
         }
-        questions = pollQuestionRepository.findAllByPollTemplate(poll.get().getPollTemplate());
-        return PollDtoMapper.map(poll.get(), questions);
+        return poll.get();
     }
 
-    public PollDto getPollByCareerId(Integer careerId) throws PollNotFoundException {
+    public Poll getPollByCareerId(Integer careerId) throws PollNotFoundException {
         List<PollQuestion> questions;
         Optional<Poll> poll = pollRepository.findByCareerId(careerId);
         if (poll.isEmpty()){
             throw new PollNotFoundException();
         }
-        questions = pollQuestionRepository.findAllByPollTemplate(poll.get().getPollTemplate());
-        return PollDtoMapper.map(poll.get(), questions);
+        return poll.get();
     }
 
-    public PollDto getPollBySubjectId(Integer subjectId) throws PollNotFoundException {
-        List<PollQuestion> questions;
+    public Poll getPollBySubjectId(Integer subjectId) throws PollNotFoundException {
         Optional<Poll> poll = pollRepository.findBySubjectId(subjectId);
         if(poll.isEmpty()){
             throw new PollNotFoundException();
         }
-        questions = pollQuestionRepository.findAllByPollTemplate(poll.get().getPollTemplate());
-        return PollDtoMapper.map(poll.get(),questions);
+        return poll.get();
     }
 
 
@@ -71,23 +69,8 @@ public class PollService {
                 throw new PollQuestionNotFoundException();
             }
             PollAnswer answerMapped = PollAnswerMapper.map(answer, question.get());
-            if (isValidAnswer(answerMapped)) {
-                pollAnswerRepository.save(answerMapped);
-            }
+            pollAnswerRepository.save(answerMapped);
         }
         pollRepository.saveUserWithPollAnswered(pollAnswered.getUserId(), idPoll);
-    }
-
-    private Boolean isValidAnswer(PollAnswer answer) {
-        switch (answer.getPollQuestion().getPollResponseType()){
-            case RATING_TO_FIVE:
-                return answer.getRating() != null;
-            case PROFESSOR_RATING:
-                return answer.getRating() != null && answer.getProfessor() != null;
-            case YES_NO_ANSWER:
-                return answer.getPositiveAnswer() != null;
-            default:
-                return false;
-        }
     }
 }

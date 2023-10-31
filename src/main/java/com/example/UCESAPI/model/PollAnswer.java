@@ -1,5 +1,6 @@
 package com.example.UCESAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,27 +12,22 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Builder
 @Data
-@Entity(name = "poll_responses")
-
+@Entity(name = "poll_answers")
 public class PollAnswer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
-
-    Integer rating;
-
-    /*@Column(name = "short_answer")
-    String shortAnswer;*/
-
-    @Column(name = "positive_answer")
-    Boolean positiveAnswer;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_professor")
-    Professor professor;
+    @JoinColumn(name = "poll_question_id")
+    private PollQuestion pollQuestion;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "id_poll_question")
-    PollQuestion pollQuestion;
+    @ManyToOne
+    @JoinColumn(name = "poll_result_id")
+    private PollResult pollResult;
+
+    private Boolean boolResponse;
+
+    private Integer rankResponse;
 }
