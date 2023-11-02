@@ -388,9 +388,5 @@ VALUES
 (4,0, 0, 9, 3), #RATING_TO_FIVE
 (5,1, 2, 0, 3); #YES_NO_ANSWER
 
-use uces;
-select * from poll_answers;
-select * from poll_results;
-select * from poll_questions;
 #delete from poll_results where id <> 9999;
 #delete from poll_answers where id <> 9999;
