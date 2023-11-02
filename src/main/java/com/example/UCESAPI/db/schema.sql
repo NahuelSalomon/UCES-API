@@ -200,7 +200,7 @@ INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_ema
 ("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
 ("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true);
 
-select * from users
+
 
 CREATE TABLE forums(
 			id int NOT NULL AUTO_INCREMENT,
@@ -319,14 +319,18 @@ CREATE TABLE poll_answers(
             constraint fk_poll_answers_poll_result FOREIGN KEY (poll_result_id) references poll_results(id)
 );
 
-INSERT INTO poll_answers
-(`id`,
-`poll_question_id`,
-`poll_result_id`,
-`bool_response`,
-`rank_response`)
+INSERT INTO `uces`.`poll_results`
+(`poll_id`,
+`student_user_id`)
 VALUES
-(0,1,1,null, 4);
+(1,1),
+(2,1),
+
+(1,2),
+(2,2),
+
+(1,3),
+(2,3);
 
 INSERT INTO poll_questions(poll_id, question, short_description, poll_response_type) values
 			(1,'¿Con que valor del 1 al 5 calificarías la dificultad de la carrera?',"Dificultad", 'RATING_TO_FIVE'),
@@ -334,6 +338,30 @@ INSERT INTO poll_questions(poll_id, question, short_description, poll_response_t
             (2,'¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', "Dificultad", 'RATING_TO_FIVE'),
             (2,'¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', "Valor de lo aprendido", 'RATING_TO_FIVE'),
 			(2,'¿Se cumplieron con todos los contenidos de la materia?', "Cumplimiento de contenidos" , 'YES_NO_ANSWER');
+
+INSERT INTO poll_answers
+(`poll_question_id`,
+`poll_result_id`,
+`bool_response`,
+`rank_response`)
+VALUES
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,1, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,0, null), #YES_NO_ANSWER
+
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,0, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,1, null), #YES_NO_ANSWER
+
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,1, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,0, null); #YES_NO_ANSWER
 
 
 CREATE TABLE poll_question_statistics(
@@ -349,20 +377,20 @@ CREATE TABLE poll_question_statistics(
 
 INSERT INTO poll_question_statistics
 (`poll_question_id`,
-`percentage_positive_response`,
-`percentage_negative_response`,
-`average_range_response`,
+`number_of_positive_response`,
+`number_of_negative_response`,
+`total_range_response`,
 `number_of_responses`)
 VALUES
-(0,1,0, 0, 0, 0),
-(0,2,0, 0, 0, 0),
-(0,3,0, 0, 0, 0),
-(0,4,0, 0, 0, 0),
-(0,5,0, 0, 0, 0);
+(1,0, 0, 12, 3), #RATING_TO_FIVE
+(2,2, 1, 0, 3), #YES_NO_ANSWER
+(3,0, 0, 15, 3), #RATING_TO_FIVE
+(4,0, 0, 9, 3), #RATING_TO_FIVE
+(5,1, 2, 0, 3); #YES_NO_ANSWER
 
 use uces;
 select * from poll_answers;
 select * from poll_results;
 select * from poll_questions;
-delete from poll_results where id <> 9999;
-delete from poll_answers where id <> 9999;
+#delete from poll_results where id <> 9999;
+#delete from poll_answers where id <> 9999;
