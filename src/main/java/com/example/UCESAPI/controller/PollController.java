@@ -3,10 +3,14 @@ package com.example.UCESAPI.controller;
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
 import com.example.UCESAPI.model.Poll;
+import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.model.dto.poll.PollAnsweredDto;
 import com.example.UCESAPI.service.PollService;
 import com.example.UCESAPI.utils.EntityResponse;
+import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -17,12 +21,21 @@ import java.util.List;
 public class PollController {
 
     private final PollService pollService;
-
+    private final String POLL_PATH = "poll";
     @Autowired
     PollController(PollService pollService){
         this.pollService = pollService;
     }
 
+    @PostMapping("/")
+    public ResponseEntity<Poll> add(@RequestBody Poll poll) {
+        Poll pollCreated = this.pollService.add(poll);
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .location(EntityURLBuilder.buildURL(POLL_PATH, pollCreated.getId()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(pollCreated);
+    }
 
     @GetMapping("/")
     public ResponseEntity<List<Poll>> getAll() {

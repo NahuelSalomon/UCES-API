@@ -44,7 +44,7 @@ public class PollQuestionController {
                 .status(HttpStatus.CREATED)
                 .location(EntityURLBuilder.buildURL(POLL_RESULT_PATH,pollQuestionCreated.getId().intValue()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .build();
+                .body(pollQuestionCreated);
     }
 
     @GetMapping

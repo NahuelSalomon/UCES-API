@@ -28,6 +28,10 @@ public class SubjectService {
         return this.subjectRepository.save(subject);
     }
 
+    public List<Subject> getAll() {
+        return this.subjectRepository.findAll();
+    }
+
     public Page<Subject> getAll(Pageable pageable) {
         return this.subjectRepository.findAll(pageable);
     }

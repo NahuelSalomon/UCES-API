@@ -32,6 +32,11 @@ public class PollService {
         this.pollAnswerRepository = pollAnswerRepository;
     }
 
+    public Poll add(Poll poll)
+    {
+        return this.pollRepository.save(poll);
+    }
+
     public List<Poll> getAll(){
         return this.pollRepository.findAll();
     }
