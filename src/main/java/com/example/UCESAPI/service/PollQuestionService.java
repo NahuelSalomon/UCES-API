@@ -42,7 +42,19 @@ public class PollQuestionService {
 
     public List<PollQuestion> addAll(List<PollQuestion> pollQuestionList)
     {
-        return this.pollQuestionRepository.saveAll(pollQuestionList);
+        List<PollQuestion> pollQuestionListCreated = this.pollQuestionRepository.saveAll(pollQuestionList);
+
+        for (PollQuestion pollQuestion : pollQuestionListCreated ) {
+            PollQuestionStatistic pollQuestionStatistic = PollQuestionStatistic.builder()
+                    .pollQuestion(pollQuestion)
+                    .NumberOfPositiveResponse(0)
+                    .NumberOfNegativeResponse(0)
+                    .NumberOfResponses(0)
+                    .TotalRangeResponse(0)
+                    .build();
+            this.pollQuestionStatisticService.save(pollQuestionStatistic);
+        }
+        return pollQuestionListCreated;
     }
 
     public Page<PollQuestion> getAll(Pageable pageable)
