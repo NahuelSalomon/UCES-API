@@ -47,6 +47,16 @@ public class PollQuestionController {
                 .body(pollQuestionCreated);
     }
 
+    @PostMapping(value = "/all")
+    public ResponseEntity<Object> addAll(@RequestBody List<PollQuestion> pollQuestion) {
+        List<PollQuestion> pollQuestionCreatedList = this.pollQuestionService.addAll(pollQuestion);
+        return  ResponseEntity
+                .status(HttpStatus.CREATED)
+                //.location(EntityURLBuilder.buildURL(POLL_RESULT_PATH,pollQuestionCreated.getId().intValue()))
+                .contentType(MediaType.APPLICATION_JSON)
+                .body(pollQuestionCreatedList);
+    }
+
     @GetMapping
     public ResponseEntity<List<PollQuestion>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size,
                                                    @RequestParam(value = "page", defaultValue = "0") Integer page)

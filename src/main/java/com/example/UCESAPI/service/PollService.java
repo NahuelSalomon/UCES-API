@@ -66,7 +66,6 @@ public class PollService {
         return poll.get();
     }
 
-
     public void processPollAnswers(Integer idPoll, PollAnsweredDto pollAnswered) throws PollQuestionNotFoundException{
         for (PollAnswerDto answer : pollAnswered.getAnswers()) {
             Optional<PollQuestion> question = pollQuestionRepository.findById(answer.getQuestionId());
@@ -78,4 +77,10 @@ public class PollService {
         }
         pollRepository.saveUserWithPollAnswered(pollAnswered.getUserId(), idPoll);
     }
+
+    public void delete(Poll poll)
+    {
+        this.pollRepository.delete(poll);
+    }
+
 }

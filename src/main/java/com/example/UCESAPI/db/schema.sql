@@ -294,8 +294,8 @@ CREATE TABLE poll_results(
             poll_id int NOT NULL,
             student_user_id int NOT NULL,
 			constraint pk_poll_results PRIMARY KEY (id),
-            constraint fk_poll_results_user FOREIGN KEY (poll_id) references polls(id),
-            constraint fk_poll_results_poll FOREIGN KEY (student_user_id) references users(id)
+            constraint fk_poll_results_user FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_poll_results_poll FOREIGN KEY (student_user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE poll_questions(
@@ -305,7 +305,7 @@ CREATE TABLE poll_questions(
             short_description varchar(30) NOT NULL,
             poll_response_type varchar(100) NOT NULL,
 			constraint pk_poll_question PRIMARY KEY (id),
-            constraint fk_poll_question_poll FOREIGN KEY (poll_id) references polls(id)
+            constraint fk_poll_question_poll FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE poll_answers(
@@ -315,8 +315,8 @@ CREATE TABLE poll_answers(
             bool_response bool,
             rank_response int,
 			constraint pk_poll_answers PRIMARY KEY (id),
-            constraint fk_poll_answers_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id),
-            constraint fk_poll_answers_poll_result FOREIGN KEY (poll_result_id) references poll_results(id)
+            constraint fk_poll_answers_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_poll_answers_poll_result FOREIGN KEY (poll_result_id) references poll_results(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO `uces`.`poll_results`
@@ -372,7 +372,7 @@ CREATE TABLE poll_question_statistics(
 			total_range_response FLOAT DEFAULT 0,
 			number_of_responses INT DEFAULT 0,
 			constraint pk_poll_answers PRIMARY KEY (id),
-            constraint fk_poll_question_statistics_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id)
+            constraint fk_poll_question_statistics_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) on delete cascade on update cascade
 );
 
 INSERT INTO poll_question_statistics

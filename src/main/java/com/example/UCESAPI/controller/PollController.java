@@ -3,6 +3,7 @@ package com.example.UCESAPI.controller;
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
 import com.example.UCESAPI.model.Poll;
+import com.example.UCESAPI.model.PollQuestion;
 import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.model.dto.poll.PollAnsweredDto;
 import com.example.UCESAPI.service.PollService;
@@ -62,4 +63,12 @@ public class PollController {
         pollService.processPollAnswers(idPoll, pollAnswered);
         return ResponseEntity.ok().build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> delete(@PathVariable Integer id) throws PollNotFoundException {
+        Poll poll = this.pollService.getPollById(id);
+        this.pollService.delete(poll);
+        return ResponseEntity.accepted().build();
+    }
+
 }
