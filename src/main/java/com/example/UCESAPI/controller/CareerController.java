@@ -36,7 +36,7 @@ public class CareerController {
                 .status(HttpStatus.CREATED)
                 .location(EntityURLBuilder.buildURL(CAREER_PATH,careerCreated.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .build();
+                .body(careerCreated);
     }
 
     @GetMapping(value = "/")

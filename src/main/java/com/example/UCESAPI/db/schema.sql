@@ -21,7 +21,7 @@ CREATE TABLE subjects(
             `name` varchar(60) NOT NULL,
             career_id int NOT NULL,
             constraint pk_subject PRIMARY KEY (id),
-            constraint fk_career FOREIGN KEY (career_id) references careers(id)
+            constraint fk_career FOREIGN KEY (career_id) references careers(id) ON DELETE CASCADE ON UPDATE CASCADE
             );
             
 INSERT INTO subjects (`name`,career_id) VALUES
@@ -126,7 +126,7 @@ CREATE TABLE boards(
             `name` varchar(60) NOT NULL,
             subject_id INT,
             constraint pk_boards PRIMARY KEY (id),
-            constraint fk_subject FOREIGN KEY (subject_id) references subjects(id),
+            constraint fk_subject FOREIGN KEY (subject_id) references subjects(id) ON DELETE CASCADE ON UPDATE CASCADE,
             constraint unq_name_subject UNIQUE (`name`, subject_id)
 );
 
@@ -210,8 +210,8 @@ CREATE TABLE forums(
             board_id int NOT NULL,
             forum_type int NOT NULL DEFAULT 1,
             constraint pk_forums PRIMARY KEY (id),
-            constraint fk_forums_user FOREIGN KEY (user_id) references users(id),
-            constraint fk_forums_board FOREIGN KEY (board_id) references boards(id)
+            constraint fk_forums_user FOREIGN KEY (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_forums_board FOREIGN KEY (board_id) references boards(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO forums
