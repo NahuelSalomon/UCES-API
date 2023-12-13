@@ -32,6 +32,10 @@ public class CareerService {
         return this.careerRepository.findById(id).orElseThrow(CareerNotFoundException::new);
     }
 
+    public Career getByName(String name) throws CareerNotFoundException {
+        return this.careerRepository.findByNameIgnoreCase(name).orElseThrow(CareerNotFoundException::new);
+    }
+
     public void deleteById(Integer id) {
         this.careerRepository.deleteById(id);
     }
