@@ -28,13 +28,13 @@ public class    SubjectController {
     }
 
     @PostMapping(value = "/")
-    public ResponseEntity<Object> add(@RequestBody Subject subject) {
+    public ResponseEntity<Subject> add(@RequestBody Subject subject) {
         Subject subjectCreated = this.subjectService.add(subject);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .location(EntityURLBuilder.buildURL(SUBJECT_PATH, subjectCreated.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
-                .build();
+                .body(subjectCreated);
     }
 
     @GetMapping(value = "/{id}")
@@ -46,6 +46,15 @@ public class    SubjectController {
     public ResponseEntity<List<Subject>> getByCareer(@PathVariable int idCareer) throws CareerNotFoundException {
         List<Subject> subjectList = this.subjectService.getByCareer(idCareer);
         return  EntityResponse.listResponse(subjectList);
+    }
+
+    @GetMapping(value = "/search")
+    public ResponseEntity<Subject> getByNameAndCareerId(
+            @RequestParam("name") String name,
+            @RequestParam("idCareer") int idCareer
+    ) throws SubjectNotFoundException {
+        Subject subject = this.subjectService.getByNameAndCareerId(name, idCareer);
+        return ResponseEntity.ok(subject);
     }
 
     @DeleteMapping(value = "/{id}")

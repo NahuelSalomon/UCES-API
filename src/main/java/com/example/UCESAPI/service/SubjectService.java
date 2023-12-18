@@ -45,6 +45,10 @@ public class SubjectService {
         return this.subjectRepository.findAllByCareer(career);
     }
 
+    public Subject getByNameAndCareerId(String name, Integer idCareer) throws SubjectNotFoundException {
+        return this.subjectRepository.findByNameAndCareerIdIgnoreCase(name, idCareer).orElseThrow(SubjectNotFoundException::new);
+    }
+
     public void deleteById(Integer id) {
         this.subjectRepository.deleteById(id);
     }

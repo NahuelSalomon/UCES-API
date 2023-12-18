@@ -48,6 +48,12 @@ public class CareerController {
         return EntityResponse.pageResponse(careers);
     }
 
+    @GetMapping(value = "/name/{name}/career/{careerId}")
+    public ResponseEntity<Career> getByName(@PathVariable String name, @PathVariable Integer careerId) throws CareerNotFoundException {
+        Career career = this.careerService.getByName(name);
+        return ResponseEntity.ok(career);
+    }
+
     @GetMapping(value = "/{id}")
     public ResponseEntity<Career> getById(@PathVariable Integer id) throws CareerNotFoundException {
         Career career = this.careerService.getById(id);
