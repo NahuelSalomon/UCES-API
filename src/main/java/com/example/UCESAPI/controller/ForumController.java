@@ -1,20 +1,26 @@
 package com.example.UCESAPI.controller;
 
+import com.example.UCESAPI.exception.AccessNotAllowedException;
 import com.example.UCESAPI.model.Query;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
 import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.Recommendation;
+import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.forum.QueryResponseDto;
 import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.model.mapper.CustomConversion;
+import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,17 +30,25 @@ import java.util.List;
 @RequestMapping("/api/forums")
 public class ForumController {
 
-    final private ForumService forumService;
-    //final private ResponseQueryService responseService;
-    final private String FORUM_PATH = "/api/forums";
+    private final ForumService forumService;
+    private final UserService userService;
+    private final String FORUM_PATH = "/api/forums";
 
     @Autowired
-    public ForumController(ForumService forumService){
+    public ForumController(ForumService forumService, UserService userService){
         this.forumService = forumService;
+        this.userService = userService;
     }
 
     @PostMapping
-    public ResponseEntity<Forum> add(@RequestBody Forum forum){
+    @PreAuthorize(value ="hasRole('ROLE_STUDENT' )")
+    public ResponseEntity<Forum> add(@RequestBody Forum forum, Authentication authentication) throws AccessNotAllowedException {
+        User authenticatedUser = this.userService.getByEmail(( (UserDetails) authentication.getPrincipal()).getUsername());
+        if(!authenticatedUser.getId().equals(forum.getUser().getId()))
+        {
+            throw new AccessNotAllowedException("You have not access to this resource");
+        }
+
         Forum newForum = forumService.addForum(forum);
         return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
     }
@@ -94,14 +108,10 @@ public class ForumController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' )")
     public ResponseEntity<Object> deleteForum(@PathVariable Integer id) throws ForumNotFoundException {
         forumService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateForum(@PathVariable Integer id, @RequestBody Forum newForum) throws ForumNotFoundException {
-        forumService.update(id, newForum);
-        return ResponseEntity.accepted().build();
-    }
 }

@@ -14,6 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -31,6 +32,7 @@ public class CareerController {
     }
 
     @PostMapping(value = "/")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' )")
     public ResponseEntity<Object> add(@RequestBody Career career) {
         Career careerCreated = this.careerService.add(career);
         return  ResponseEntity
@@ -48,8 +50,8 @@ public class CareerController {
         return EntityResponse.pageResponse(careers);
     }
 
-    @GetMapping(value = "/name/{name}/career/{careerId}")
-    public ResponseEntity<Career> getByName(@PathVariable String name, @PathVariable Integer careerId) throws CareerNotFoundException {
+    @GetMapping(value = "/search")
+    public ResponseEntity<Career> getByName(@RequestParam("name") String name) throws CareerNotFoundException {
         Career career = this.careerService.getByName(name);
         return ResponseEntity.ok(career);
     }
@@ -61,6 +63,7 @@ public class CareerController {
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' )")
     public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
         this.careerService.deleteById(id);
         return ResponseEntity.accepted().build();

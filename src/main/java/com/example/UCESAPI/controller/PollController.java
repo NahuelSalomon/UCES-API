@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public class PollController {
     }
 
     @PostMapping("/")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' )")
     public ResponseEntity<Poll> add(@RequestBody Poll poll) {
         Poll pollCreated = this.pollService.add(poll);
         return ResponseEntity
@@ -65,6 +67,7 @@ public class PollController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' )")
     public ResponseEntity<Object> delete(@PathVariable Integer id) throws PollNotFoundException {
         Poll poll = this.pollService.getPollById(id);
         this.pollService.delete(poll);

@@ -34,16 +34,6 @@ public class PollQuestionStatisticController {
         this.pollService = pollService;
     }
 
-    @PostMapping(value = "/")
-    public ResponseEntity<Object> add(@RequestBody PollQuestionStatistic pollQuestionStatistic) {
-        PollQuestionStatistic pollQuestionStatisticCreated = this.pollQuestionStatisticService.save(pollQuestionStatistic);
-        return  ResponseEntity
-                .status(HttpStatus.CREATED)
-                .location(EntityURLBuilder.buildURL(POLL_RESULT_PATH,pollQuestionStatisticCreated.getId().intValue()))
-                .contentType(MediaType.APPLICATION_JSON)
-                .build();
-    }
-
     @GetMapping("/polls/{pollId}")
     public ResponseEntity<List<PollQuestionStatistic>> getAllByPoll(@PathVariable Integer pollId) throws PollNotFoundException {
         Poll poll = pollService.getPollById(pollId);

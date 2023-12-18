@@ -27,12 +27,6 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @PostMapping
-    public ResponseEntity<Board> addBoard(@RequestBody Board board){
-        Board newBoard = boardService.addBoard(board);
-        return ResponseEntity.created(EntityURLBuilder.buildURL(BOARD_PATH, newBoard.getId())).build();
-    }
-
     @GetMapping
     public ResponseEntity<List<Board>> getAll(Pageable pageable){
         Page page = boardService.getAll(pageable);
