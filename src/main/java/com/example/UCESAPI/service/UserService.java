@@ -144,4 +144,11 @@ public class UserService implements UserDetailsService {
                 return false;
         }
     }
+
+    public void changeState(User user)
+    {
+        user.setActive(!user.isActive());
+        userRepository.save(user);
+    }
+
 }

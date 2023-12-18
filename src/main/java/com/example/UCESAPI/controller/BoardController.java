@@ -50,19 +50,4 @@ public class BoardController {
         Board board = boardService.getBySubject(idSubject);
         return ResponseEntity.ok(board);
     }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteBoard(@PathVariable Integer id) throws BoardNotFoundException {
-        boardService.deleteById(id);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity updateBoard(@PathVariable Integer id, @RequestBody Board newBoard) throws BoardNotFoundException {
-        boardService.update(id, newBoard);
-        return ResponseEntity.accepted().build();
-    }
-
-
-
 }

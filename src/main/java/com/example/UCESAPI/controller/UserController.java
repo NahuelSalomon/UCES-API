@@ -81,13 +81,6 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    @DeleteMapping(value = "/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMINISTRATOR')")
-    public ResponseEntity<Object> deleteById(@PathVariable Integer id) {
-        this.userService.deleteById(id);
-        return ResponseEntity.accepted().build();
-    }
-
     @PutMapping(value = "/{id}")
     @PreAuthorize(value ="hasRole('ROLE_ADMINISTRATOR' ) OR hasAuthority('ROLE_STUDENT')")
     public ResponseEntity<Object> update(@PathVariable Integer id, @RequestBody UserUpdateRequestDto user, Authentication authentication) throws UserNotFoundException, AccessNotAllowedException {
@@ -160,6 +153,11 @@ public class UserController {
         throw new AccessNotAllowedException("You have not access to this resource");
     }
 
-
+    @PutMapping(value = "/{id}/changeState")
+    public ResponseEntity<Object> changeState(@PathVariable Integer id) throws UserNotFoundException {
+        User user = this.userService.getById(id);
+        this.userService.changeState(user);
+        return ResponseEntity.accepted().build();
+    }
 
 }

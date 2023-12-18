@@ -37,20 +37,6 @@ public class    SubjectController {
                 .build();
     }
 
-    /*@GetMapping(value = "/")
-    public ResponseEntity<List<Subject>> getAll(@RequestParam(value = "size", defaultValue = "10") Integer size, @RequestParam(value ="page", defaultValue = "0") Integer page) {
-        Pageable pageable = PageRequest.of(page, size);
-        Page<Subject> subjectPage = this.subjectService.getAll(pageable);
-        return EntityResponse.pageResponse(subjectPage);
-    }*/
-
-    @GetMapping(value = "/")
-    public ResponseEntity<List<Subject>> getAll() {
-        List<Subject> subjectList = this.subjectService.getAll();
-        return EntityResponse.listResponse(subjectList);
-    }
-
-
     @GetMapping(value = "/{id}")
     public ResponseEntity<Subject> getById(@PathVariable Integer id) throws SubjectNotFoundException {
         return ResponseEntity.ok(this.subjectService.getById(id));
@@ -67,12 +53,5 @@ public class    SubjectController {
         this.subjectService.deleteById(id);
         return ResponseEntity.accepted().build();
     }
-
-    @GetMapping(value = "/{id}/correlatives")
-    public ResponseEntity<List<Subject>> getCorrelativesById(@PathVariable Integer id){
-        return EntityResponse.listResponse(this.subjectService.getCorrelativesById(id));
-    }
-
-
 
 }
