@@ -16,6 +16,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
 
 @RestController
@@ -37,7 +39,9 @@ public class CareerController {
         Career careerCreated = this.careerService.add(career);
         return  ResponseEntity
                 .status(HttpStatus.CREATED)
-                .location(EntityURLBuilder.buildURL(CAREER_PATH,careerCreated.getId()))
+                .location(UriComponentsBuilder.fromPath("/api/careers/{id}")
+                        .buildAndExpand(careerCreated.getId())
+                        .toUri())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(careerCreated);
     }

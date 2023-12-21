@@ -22,6 +22,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.List;
 
@@ -50,13 +51,9 @@ public class ForumController {
         }
 
         Forum newForum = forumService.addForum(forum);
-        return ResponseEntity.created(EntityURLBuilder.buildURL(FORUM_PATH, newForum.getId())).build();
-    }
-
-    @GetMapping("/")
-    public ResponseEntity<List<Forum>> getAll(Pageable pageable) throws BoardNotFoundException {
-        Page<Forum> queryPage = forumService.getAll(pageable);
-        return ResponseEntityMaker.paginatedListResponse(queryPage);
+        return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/careers/{id}")
+                .buildAndExpand(newForum.getId())
+                .toUri()).build();
     }
 
     @GetMapping("queries/boards/{idBoard}")

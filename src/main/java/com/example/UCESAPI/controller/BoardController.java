@@ -27,12 +27,6 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping
-    public ResponseEntity<List<Board>> getAll(Pageable pageable){
-        Page page = boardService.getAll(pageable);
-        return ResponseEntityMaker.response(page.getContent(), page);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Board> getById(@PathVariable Integer id) throws BoardNotFoundException {
         Board board = boardService.getById(id);
