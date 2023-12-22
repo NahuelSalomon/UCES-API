@@ -51,9 +51,15 @@ public class ForumController {
         }
 
         Forum newForum = forumService.addForum(forum);
-        return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/careers/{id}")
+        return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/forums/{id}")
                 .buildAndExpand(newForum.getId())
                 .toUri()).build();
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<List<Forum>> getAll(Pageable pageable) throws BoardNotFoundException {
+        Page<Forum> queryPage = forumService.getAll(pageable);
+        return ResponseEntityMaker.paginatedListResponse(queryPage);
     }
 
     @GetMapping("queries/boards/{idBoard}")

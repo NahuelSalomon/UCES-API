@@ -3,6 +3,7 @@ package com.example.UCESAPI.controller;
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.model.Board;
+import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.service.SubjectService;
@@ -43,6 +44,14 @@ public class    SubjectController {
                 .location(EntityURLBuilder.buildURL(SUBJECT_PATH, subjectCreated.getId()))
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(subjectCreated);
+    }
+
+    @GetMapping(value = "/")
+    public ResponseEntity<List<Subject>> getAll(@RequestParam(value = "size",defaultValue = "10") Integer size,
+                                               @RequestParam(value = "page", defaultValue = "0") Integer page) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Subject> subjects = this.subjectService.getAll(pageable);
+        return EntityResponse.pageResponse(subjects);
     }
 
     @GetMapping(value = "/{id}")
