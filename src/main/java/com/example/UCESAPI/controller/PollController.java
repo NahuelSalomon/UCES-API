@@ -15,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
 
 @RestController
@@ -35,7 +37,9 @@ public class PollController {
         Poll pollCreated = this.pollService.add(poll);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .location(EntityURLBuilder.buildURL(POLL_PATH, pollCreated.getId()))
+                .location(UriComponentsBuilder.fromPath("/api/poll/{id}")
+                        .buildAndExpand(pollCreated.getId())
+                        .toUri())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(pollCreated);
     }
@@ -58,12 +62,6 @@ public class PollController {
     @GetMapping("/subject/{subjectId}")
     public ResponseEntity<Poll> getPollBySubjectId(@PathVariable Integer subjectId) throws PollNotFoundException {
         return ResponseEntity.ok(pollService.getPollBySubjectId(subjectId));
-    }
-
-    @PostMapping("/{idPoll}/answers/process")
-    public ResponseEntity<Object> processPollAnswers(@PathVariable Integer idPoll, @RequestBody PollAnsweredDto pollAnswered) throws PollQuestionNotFoundException {
-        pollService.processPollAnswers(idPoll, pollAnswered);
-        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")

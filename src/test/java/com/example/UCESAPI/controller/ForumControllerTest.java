@@ -1,8 +1,9 @@
 package com.example.UCESAPI.controller;
+
 import com.example.UCESAPI.exception.AccessNotAllowedException;
 import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.exception.notfound.ForumNotFoundException;
-import com.example.UCESAPI.model.*;
+import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.forum.QueryResponseDto;
 import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
@@ -14,21 +15,11 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-
 import static com.example.UCESAPI.utils.ModelTestUtil.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

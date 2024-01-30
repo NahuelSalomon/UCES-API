@@ -3,12 +3,10 @@ package com.example.UCESAPI.controller;
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.model.Board;
-import com.example.UCESAPI.model.Career;
 import com.example.UCESAPI.model.Subject;
 import com.example.UCESAPI.service.BoardService;
 import com.example.UCESAPI.service.SubjectService;
 import com.example.UCESAPI.utils.EntityResponse;
-import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +15,8 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
 import java.util.List;
 
 @RestController
@@ -41,7 +41,9 @@ public class    SubjectController {
         Board boardCreated = this.boardService.addBoard(boardToCreate);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .location(EntityURLBuilder.buildURL(SUBJECT_PATH, subjectCreated.getId()))
+                .location(UriComponentsBuilder.fromPath("/api/forums/{id}")
+                        .buildAndExpand(boardCreated.getId())
+                        .toUri())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(subjectCreated);
     }

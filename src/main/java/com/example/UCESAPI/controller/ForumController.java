@@ -56,11 +56,11 @@ public class ForumController {
                 .toUri()).build();
     }
 
-    @GetMapping("/")
+    /*@GetMapping("/")
     public ResponseEntity<List<Forum>> getAll(Pageable pageable) throws BoardNotFoundException {
         Page<Forum> queryPage = forumService.getAll(pageable);
         return ResponseEntityMaker.paginatedListResponse(queryPage);
-    }
+    }*/
 
     @GetMapping("queries/boards/{idBoard}")
     public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {

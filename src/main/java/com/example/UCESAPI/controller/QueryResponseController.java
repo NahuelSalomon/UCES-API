@@ -12,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -39,7 +40,9 @@ public class QueryResponseController {
         }
 
         QueryResponse r = this.responseService.add(response);
-        return ResponseEntity.created(EntityURLBuilder.buildURL(RESPONSE_PATH, r.getId())).build();
+        return ResponseEntity.created(UriComponentsBuilder.fromPath("/api/query/responses/{id}")
+                .buildAndExpand(r.getId())
+                .toUri()).build();
     }
 
     @DeleteMapping("/{id}")

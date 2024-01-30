@@ -1,7 +1,6 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.AccessNotAllowedException;
-import com.example.UCESAPI.exception.notfound.PollAnswerResponseNotFoundException;
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
 import com.example.UCESAPI.exception.notfound.UserNotFoundException;
 import com.example.UCESAPI.model.PollResult;
@@ -10,12 +9,8 @@ import com.example.UCESAPI.model.dto.poll.PollResultDto;
 import com.example.UCESAPI.model.mapper.CustomConversion;
 import com.example.UCESAPI.service.PollResultService;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.EntityResponse;
 import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +18,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.util.UriComponentsBuilder;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
@@ -53,10 +47,12 @@ public class PollResultController {
         }
 
         PollResult pollResultCreated = this.pollResultService.add(pollResult);
-        PollResultDto pollResultDto = pollResult != null ? CustomConversion.PollResultToPollResultDto(pollResultCreated) : null;
+        PollResultDto pollResultDto = CustomConversion.PollResultToPollResultDto(pollResultCreated);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .location(EntityURLBuilder.buildURL(POLL_RESULT_PATH,pollResultCreated.getId().intValue()))
+                .location(UriComponentsBuilder.fromPath("/api/poll_results/{id}")
+                        .buildAndExpand(pollResultDto.getId())
+                        .toUri())
                 .contentType(MediaType.APPLICATION_JSON)
                 .body(pollResultDto);
     }
