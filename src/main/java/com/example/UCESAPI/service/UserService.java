@@ -106,8 +106,6 @@ public class UserService implements UserDetailsService {
         newUser.setImage(user.getImage());
         newUser = userRepository.save(newUser);
 
-        /*authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(newUser.getEmail(), newUser.getPassword()));*/
 
         return new LoginResponseDto(jwtUtils.generateToken(
                 this.loadUserByUsername(newUser.getEmail())
@@ -123,26 +121,6 @@ public class UserService implements UserDetailsService {
         return new org.springframework.security.core.userdetails.User(user.getEmail(),
                 user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority(user.getUserType().toString())));
-    }
-
-    /*Método para asegurar el acceso de un endpoint a un administrador o
-    a un usuario que corresponda al id pasado por parámetro. */
-    public Boolean validateRole(Integer id, HttpServletRequest req){
-
-        String token = req.getHeader("Authorization").replace("Bearer ", "");
-        String email = jwtUtils.extractUsername(token);
-        UserDetails userDetails = this.loadUserByUsername(email);
-
-        if (userDetails.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMINISTRATOR"))){
-            return true;
-        }else{
-            User user = userRepository.findByEmail(email);
-
-            if (id.equals(user.getId()))
-                return true;
-            else
-                return false;
-        }
     }
 
     public void changeState(User user)

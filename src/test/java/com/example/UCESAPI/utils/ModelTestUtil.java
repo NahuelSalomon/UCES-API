@@ -42,9 +42,16 @@ public class ModelTestUtil {
         return new PageImpl<>(recommendationList);
     }
 
+    public static Page<Forum> somePageOfForum() {
+        List<Forum> recommendationList = Collections.singletonList(someRecommendation());
+        return new PageImpl<>(recommendationList);
+    }
+
     public static com.example.UCESAPI.model.User someUser()
     {
         return com.example.UCESAPI.model.User.builder()
+                                        .firstname("user")
+                                        .lastname("user")
                                         .email("user@gmail.com")
                                         .password("pws").id(1)
                                         .userType(UserType.ROLE_STUDENT)
