@@ -97,7 +97,33 @@ public class ModelTestUtil {
     {
         PollAnswer pollAnswer = new PollAnswer();
         pollAnswer.setPollResult(somePollResult());
+        pollAnswer.setPollQuestion(somePollQuestion());
+        pollAnswer.setBoolResponse(true);
+        pollAnswer.setRankResponse(1);
         return pollAnswer;
+    }
+
+    public static PollQuestionStatistic somePollQuestionStatistic()
+    {
+        return PollQuestionStatistic.builder()
+                .id(1L)
+                .pollQuestion(somePollQuestion())
+                .NumberOfResponses(2)
+                .NumberOfNegativeResponse(1)
+                .NumberOfPositiveResponse(1)
+                .TotalRangeResponse(2)
+                .build();
+    }
+
+    public static PollQuestion somePollQuestion()
+    {
+        return PollQuestion.builder()
+                .id(1)
+                .poll(somePoll())
+                .question("Some question")
+                .pollResponseType(PollResponseType.YES_NO_ANSWER)
+                .shortDescription("Shor description")
+                .build();
     }
 
     public static PollResult somePollResult()
