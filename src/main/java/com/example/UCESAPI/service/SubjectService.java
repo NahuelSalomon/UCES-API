@@ -28,10 +28,6 @@ public class SubjectService {
         return this.subjectRepository.save(subject);
     }
 
-    public List<Subject> getAll() {
-        return this.subjectRepository.findAll();
-    }
-
     public Page<Subject> getAll(Pageable pageable) {
         return this.subjectRepository.findAll(pageable);
     }
@@ -53,12 +49,4 @@ public class SubjectService {
         this.subjectRepository.deleteById(id);
     }
 
-    public void update(Integer id, Subject subjectUpdated) throws SubjectNotFoundException {
-        this.getById(id);
-        this.subjectRepository.save(subjectUpdated);
-    }
-
-    public List<Subject> getCorrelativesById(Integer id) {
-        return subjectRepository.getCorrelativesById(id);
-    }
 }

@@ -1,14 +1,8 @@
 package com.example.UCESAPI.service;
 
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
-import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
-import com.example.UCESAPI.model.mapper.PollAnswerMapper;
 import com.example.UCESAPI.model.Poll;
-import com.example.UCESAPI.model.PollAnswer;
 import com.example.UCESAPI.model.PollQuestion;
-import com.example.UCESAPI.model.dto.poll.PollAnswerDto;
-import com.example.UCESAPI.model.dto.poll.PollDto;
-import com.example.UCESAPI.model.dto.poll.PollAnsweredDto;
 import com.example.UCESAPI.repository.PollAnswerRepository;
 import com.example.UCESAPI.repository.PollQuestionRepository;
 import com.example.UCESAPI.repository.PollRepository;
@@ -64,18 +58,6 @@ public class PollService {
             throw new PollNotFoundException();
         }
         return poll.get();
-    }
-
-    public void processPollAnswers(Integer idPoll, PollAnsweredDto pollAnswered) throws PollQuestionNotFoundException{
-        for (PollAnswerDto answer : pollAnswered.getAnswers()) {
-            Optional<PollQuestion> question = pollQuestionRepository.findById(answer.getQuestionId());
-            if (question.isEmpty()) {
-                throw new PollQuestionNotFoundException();
-            }
-            PollAnswer answerMapped = PollAnswerMapper.map(answer, question.get());
-            pollAnswerRepository.save(answerMapped);
-        }
-        pollRepository.saveUserWithPollAnswered(pollAnswered.getUserId(), idPoll);
     }
 
     public void delete(Poll poll)

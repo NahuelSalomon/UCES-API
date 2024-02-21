@@ -62,14 +62,23 @@ public class ModelTestUtil {
         return UserResponseDto.builder().email("user@gmail.com").id(1).build();
     }
 
-
-
     public static QueryResponse someQueryResponse()
     {
         QueryResponse queryResponse = new QueryResponse();
         queryResponse.setUser(someUser());
         return queryResponse;
     }
+
+    public static List<QueryResponse> someQueryResponseList()
+    {
+        return List.of(someQueryResponse());
+    }
+
+    public static Page<QueryResponse> someQueryResponsePage()
+    {
+        return new PageImpl<>(Collections.singletonList(someQueryResponse()));
+    }
+
 
     public static Query someQuery()
     {
@@ -126,6 +135,16 @@ public class ModelTestUtil {
                 .build();
     }
 
+    public static List<PollQuestion> somePollQuestionList()
+    {
+        return List.of(somePollQuestion());
+    }
+
+    public static Page<PollQuestion> somePollQuestionPage()
+    {
+        return new PageImpl<>(Collections.singletonList(somePollQuestion()));
+    }
+
     public static PollResult somePollResult()
     {
         PollResult pollResult = new PollResult();
@@ -146,9 +165,44 @@ public class ModelTestUtil {
 
     public static Poll somePoll()
     {
-        Poll poll = new Poll();
-        return poll;
+        return new Poll();
     }
+
+    public static List<Poll> somePollList()
+    {
+        return List.of(somePoll());
+    }
+
+    public static Subject someSubject()
+    {
+        return Subject
+                .builder()
+                .id(1)
+                .career(someCareer())
+                .name("Subject 1")
+                .build();
+    }
+
+    public static List<Subject> someSubjectList()
+    {
+        return List.of(someSubject());
+    }
+
+    public static Page<Subject> someSubjectPage()
+    {
+        return new PageImpl<>(Collections.singletonList(someSubject()));
+    }
+
+    public static Career someCareer()
+    {
+        return Career
+                .builder()
+                .id(1)
+                .name("Career 1")
+                .build();
+    }
+
+
 
     public static Authentication someAuthentication()
     {
