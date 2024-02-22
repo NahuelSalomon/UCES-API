@@ -12,8 +12,7 @@ import com.example.UCESAPI.model.dto.forum.RecommendationResponseDto;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.model.mapper.CustomConversion;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.EntityURLBuilder;
-import com.example.UCESAPI.utils.ResponseEntityMaker;
+import com.example.UCESAPI.utils.EntityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -66,42 +65,42 @@ public class ForumController {
     public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Query> queryPage = forumService.getAllQueriesByBoard(idBoard, pageable);
         Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
+        return EntityResponse.pageResponse(queryResponseDtoPage);
     }
 
     @GetMapping("queries/boards/{idBoard}/sort/votes")
     public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoardSortedByVotes(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Query> queryPage = forumService.getAllQueriesByBoardSortedByVotes(idBoard, pageable);
         Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
+        return EntityResponse.pageResponse(queryResponseDtoPage);
     }
 
     @GetMapping("queries/boards/{idBoard}/sort/date")
     public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoardSortedByDates(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Query> queryPage = forumService.getAllQueriesByBoardSortedByDate(idBoard, pageable);
         Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(queryResponseDtoPage);
+        return EntityResponse.pageResponse(queryResponseDtoPage);
     }
 
     @GetMapping("recommendations/boards/{idBoard}")
     public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoard(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoard(idBoard, pageable);
         Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
+        return EntityResponse.pageResponse(recommendationResponseDtos);
     }
 
     @GetMapping("recommendations/boards/{idBoard}/sort/votes")
     public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoardSortedByVotes(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoardSortedByVotes(idBoard, pageable);
         Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
+        return EntityResponse.pageResponse(recommendationResponseDtos);
     }
 
     @GetMapping("recommendations/boards/{idBoard}/sort/date")
     public ResponseEntity<List<RecommendationResponseDto>> getAllRecommendationsByBoardSortedByDates(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Recommendation> recommendationPage = forumService.getAllRecommendationsByBoardSortedByDate(idBoard, pageable);
         Page<RecommendationResponseDto> recommendationResponseDtos = recommendationPage.map(CustomConversion::RecommendationToRecommendationResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(recommendationResponseDtos);
+        return EntityResponse.pageResponse(recommendationResponseDtos);
     }
 
     @GetMapping("/{id}")

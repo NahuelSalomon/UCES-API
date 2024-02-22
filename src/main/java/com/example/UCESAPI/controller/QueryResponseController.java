@@ -5,7 +5,6 @@ import com.example.UCESAPI.model.QueryResponse;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.service.QueryResponseService;
 import com.example.UCESAPI.service.UserService;
-import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;

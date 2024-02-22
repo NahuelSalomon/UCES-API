@@ -2,7 +2,6 @@ package com.example.UCESAPI.auth.controller;
 
 import com.example.UCESAPI.auth.utils.JWTUtils;
 import com.example.UCESAPI.exception.UserAlreadyExistException;
-import com.example.UCESAPI.model.Forum;
 import com.example.UCESAPI.model.User;
 import com.example.UCESAPI.model.dto.LoginRequestDto;
 import com.example.UCESAPI.model.dto.user.UserInsertRequestDto;

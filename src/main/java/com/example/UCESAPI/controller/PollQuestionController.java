@@ -5,7 +5,6 @@ import com.example.UCESAPI.model.Poll;
 import com.example.UCESAPI.model.PollQuestion;
 import com.example.UCESAPI.service.PollQuestionService;
 import com.example.UCESAPI.service.PollService;
-import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

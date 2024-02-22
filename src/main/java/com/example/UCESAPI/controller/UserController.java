@@ -11,7 +11,7 @@ import com.example.UCESAPI.model.dto.user.UserUpdateRequestDto;
 import com.example.UCESAPI.service.ForumService;
 import com.example.UCESAPI.service.UserService;
 import com.example.UCESAPI.model.mapper.CustomConversion;
-import com.example.UCESAPI.utils.ResponseEntityMaker;
+import com.example.UCESAPI.utils.EntityResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
@@ -50,7 +50,7 @@ public class UserController {
         Pageable pageable = PageRequest.of(page, size);
         Page<User> userPage = this.userService.getAll(pageable);
         Page<UserResponseDto> userResponseDtoPage = userPage.map(CustomConversion::UserToUserResponseDto);
-        return ResponseEntityMaker.paginatedListResponse(userResponseDtoPage);
+        return EntityResponse.pageResponse(userResponseDtoPage);
     }
 
     @GetMapping(value = "/{id}")

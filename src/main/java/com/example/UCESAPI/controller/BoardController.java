@@ -4,11 +4,7 @@ import com.example.UCESAPI.exception.notfound.BoardNotFoundException;
 import com.example.UCESAPI.model.Board;
 import com.example.UCESAPI.exception.notfound.SubjectNotFoundException;
 import com.example.UCESAPI.service.BoardService;
-import com.example.UCESAPI.utils.EntityURLBuilder;
-import com.example.UCESAPI.utils.ResponseEntityMaker;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 

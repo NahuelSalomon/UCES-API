@@ -1,14 +1,9 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.PollNotFoundException;
-import com.example.UCESAPI.exception.notfound.PollQuestionNotFoundException;
 import com.example.UCESAPI.model.Poll;
-import com.example.UCESAPI.model.PollQuestion;
-import com.example.UCESAPI.model.Subject;
-import com.example.UCESAPI.model.dto.poll.PollAnsweredDto;
 import com.example.UCESAPI.service.PollService;
 import com.example.UCESAPI.utils.EntityResponse;
-import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

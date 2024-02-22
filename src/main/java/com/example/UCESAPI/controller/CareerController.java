@@ -1,12 +1,9 @@
 package com.example.UCESAPI.controller;
 
 import com.example.UCESAPI.exception.notfound.CareerNotFoundException;
-import com.example.UCESAPI.model.Board;
 import com.example.UCESAPI.model.Career;
-import com.example.UCESAPI.model.dto.career.CareerInsertDto;
 import com.example.UCESAPI.service.CareerService;
 import com.example.UCESAPI.utils.EntityResponse;
-import com.example.UCESAPI.utils.EntityURLBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
