@@ -13,8 +13,10 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class EntityResponseTest {
+
     @Test
     public void testPageResponse_NotEmptyPage() {
         // Arrange
@@ -75,6 +77,12 @@ public class EntityResponseTest {
         Response response = EntityResponse.messageResponse(message);
 
         assertEquals(message, response.getMessage());
+    }
+
+    @Test
+    public void testConstructor() {
+        EntityResponse entityResponse = new EntityResponse();
+        assertNotNull(entityResponse);
     }
 
 }

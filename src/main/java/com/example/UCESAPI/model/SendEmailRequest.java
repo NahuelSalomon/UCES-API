@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +15,7 @@ import javax.validation.constraints.Email;
 public class SendEmailRequest {
 
     @Email
+    @NotNull
     private String email;
     private String urlToRedirect;
 

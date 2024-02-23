@@ -1,5 +1,6 @@
 package com.example.UCESAPI.auth.utils;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -12,6 +13,8 @@ import java.util.Collections;
 import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class JWTUtilsTest {
 
@@ -60,5 +63,12 @@ public class JWTUtilsTest {
         boolean isValid = jwtUtils.validateToken(token, userDetails);
         assertTrue(isValid);
     }
-
+    @Test
+    public void testValidateTokenUserNameInvalid() {
+        UserDetails userDetails = new User("admin", "password", Collections.emptyList());
+        String token = jwtUtils.generateToken(userDetails);
+        UserDetails userDetails2 = new User("aa", "aa", Collections.emptyList());
+        boolean isValid = jwtUtils.validateToken(token, userDetails2);
+        assertFalse(isValid);
+    }
 }

@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
-public class EntityResponse {
+public class  EntityResponse {
 
     public static <T> ResponseEntity<List<T>> pageResponse(Page<T> page) {
         if (!page.getContent().isEmpty()) {
