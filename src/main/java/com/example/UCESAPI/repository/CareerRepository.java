@@ -13,3 +13,4 @@ public interface CareerRepository extends JpaRepository<Career,Integer> {
     @Query("SELECT c FROM careers c WHERE LOWER(c.name) = LOWER(:name)")
     Optional<Career> findByNameIgnoreCase(@Param("name") String name);
 }
+

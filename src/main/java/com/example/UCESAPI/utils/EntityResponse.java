@@ -13,6 +13,7 @@ public class  EntityResponse {
         if (!page.getContent().isEmpty()) {
             return ResponseEntity.
                     status(HttpStatus.OK).
+                    header("Access-Control-Expose-Headers","X-Total-Count", "X-Total-Pages" ).
                     header("X-Total-Count", Long.toString(page.getTotalElements())).
                     header("X-Total-Pages", Long.toString(page.getTotalPages())).
                     body(page.getContent());

@@ -29,5 +29,4 @@ public class Poll {
     @OneToOne
     @JoinColumn(name = "subject_id")
     private Subject subject;
-
 }

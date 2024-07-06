@@ -10,9 +10,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CareerService {
-
     private final CareerRepository careerRepository;
-
 
     @Autowired
     public CareerService(CareerRepository careerRepository) {
@@ -43,5 +41,4 @@ public class CareerService {
         this.getById(id);
         this.careerRepository.save(careerUpdated);
     }
-
 }

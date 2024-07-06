@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/poll_question_statistics")
 public class PollQuestionStatisticController {
     private final PollQuestionStatisticService pollQuestionStatisticService;
@@ -32,5 +31,6 @@ public class PollQuestionStatisticController {
         List<PollQuestionStatistic> pollQuestionStatisticList = this.pollQuestionStatisticService.getAllByPoll(poll);
         return EntityResponse.listResponse(pollQuestionStatisticList);
     }
-
 }
+
+

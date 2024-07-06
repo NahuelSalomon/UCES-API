@@ -59,7 +59,4 @@ public abstract class Forum {
     {
         return this.usersWhoVoted.remove(user);
     }
-
-
-
 }

@@ -26,7 +26,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/forums")
 public class ForumController {
 
@@ -72,6 +71,7 @@ public class ForumController {
     public ResponseEntity<List<QueryResponseDto>> getAllQueriesByBoardSortedByVotes(@PathVariable int idBoard, Pageable pageable) throws BoardNotFoundException {
         Page<Query> queryPage = forumService.getAllQueriesByBoardSortedByVotes(idBoard, pageable);
         Page<QueryResponseDto> queryResponseDtoPage = queryPage.map(CustomConversion::QueryToQueryResponseDto);
+        ResponseEntity<List<QueryResponseDto>> response =  EntityResponse.pageResponse(queryResponseDtoPage);
         return EntityResponse.pageResponse(queryResponseDtoPage);
     }
 
