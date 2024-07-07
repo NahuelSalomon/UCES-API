@@ -75,6 +75,7 @@ public class UserController {
 
         if(userToUpdate.getId() == authenticatedUser.getId() || authenticatedUser.getUserType().equals(UserType.ROLE_ADMINISTRATOR))
         {
+            userToUpdate.setEmail(user.getEmail());
             userToUpdate.setImage(user.getImage());
             this.userService.update(id, userToUpdate);
             return ResponseEntity.accepted().build();

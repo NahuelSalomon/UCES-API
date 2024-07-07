@@ -10,5 +10,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserUpdateRequestDto {
+    private String email;
     private byte[] image;
 }
