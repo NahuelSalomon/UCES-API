@@ -3,77 +3,77 @@ CREATE DATABASE IF NOT EXISTS uces;
 USE uces;
 
 CREATE TABLE careers(
-                        id int NOT NULL AUTO_INCREMENT,
-                        `name` VARCHAR(250) NOT NULL,
-                        `description` VARCHAR(250) NOT NULL,
-                        duration int not null,
-                        constraint pk_career PRIMARY KEY (id),
-                        constraint unq_name UNIQUE (`name`)
+			id int NOT NULL AUTO_INCREMENT,
+            `name` VARCHAR(250) NOT NULL,
+            `description` VARCHAR(250) NOT NULL,
+            duration int not null,
+            constraint pk_career PRIMARY KEY (id),
+            constraint unq_name UNIQUE (`name`)
 );
 
 INSERT INTO careers(`name`,`description`, duration )
-VALUES
-    ("Tecnicatura universitaria en Programación", "Formación sólida en desarrollo de software, lenguajes de programación y resolución de problemas. Preparación para ser programador o desarrollador de software.", 2),
-    ("Tecnicatura universitaria en Sistemas Informáticos", "Gestión de sistemas informáticos, redes, seguridad y soporte técnico. Ideal para ser técnico de sistemas, administrador de redes o experto en TI.", 1);
+VALUES 
+("Tecnicatura universitaria en Programación", "Formación sólida en desarrollo de software, lenguajes de programación y resolución de problemas. Preparación para ser programador o desarrollador de software.", 2),
+("Tecnicatura universitaria en Sistemas Informáticos", "Gestión de sistemas informáticos, redes, seguridad y soporte técnico. Ideal para ser técnico de sistemas, administrador de redes o experto en TI.", 1);
 
 CREATE TABLE subjects(
-                         id int NOT NULL AUTO_INCREMENT,
-                         `name` varchar(60) NOT NULL,
-                         career_id int NOT NULL,
-                         constraint pk_subject PRIMARY KEY (id),
-                         constraint fk_career FOREIGN KEY (career_id) references careers(id) ON DELETE CASCADE ON UPDATE CASCADE
-);
-
+			id int NOT NULL AUTO_INCREMENT,
+            `name` varchar(60) NOT NULL,
+            career_id int NOT NULL,
+            constraint pk_subject PRIMARY KEY (id),
+            constraint fk_career FOREIGN KEY (career_id) references careers(id) ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            
 INSERT INTO subjects (`name`,career_id) VALUES
 /*PRIMER CUATRIMESTRE*/
-                                            ("Matemática I",1),
-                                            ("Inglés I",1),
-                                            ("Sistema de Procesamiento de Datos",1),
-                                            ("Laboratorio de Computación I",1),
-                                            ("Programación I",1),
+("Matemática I",1),
+("Inglés I",1),
+("Sistema de Procesamiento de Datos",1),
+("Laboratorio de Computación I",1),
+("Programación I",1),
 
 /*SEGUNDO CUATRIMESTRE*/
-                                            ("Inglés II",1),
-                                            ("Arquitectura y Sistemas Operativos",1),
-                                            ("Programación II",1),
-                                            ("Metodología de la Investigación",1),
-                                            ("Laboratorio de Computación II",1),
-                                            ("Estadística",1),
+("Inglés II",1),
+("Arquitectura y Sistemas Operativos",1),
+("Programación II",1),
+("Metodología de la Investigación",1),
+("Laboratorio de Computación II",1),
+("Estadística",1),
 
 /*TERCER CUATRIMESTRE*/
-                                            ("Elementos de Investigación Operativa",1),
-                                            ("Organización Contable de la Empresa",1),
-                                            ("Organización Empresarial",1),
-                                            ("Laboratorio de Computación III",1),
-                                            ("Programación III",1),
+("Elementos de Investigación Operativa",1),
+("Organización Contable de la Empresa",1),
+("Organización Empresarial",1),
+("Laboratorio de Computación III",1),
+("Programación III",1),
 
 /*CUARTO CUATRIMESTRE*/
-                                            ("Legislación",1),
-                                            ("Metodología de Sistemas I",1),
-                                            ("Laboratorio de Computación IV",1),
-                                            ("Diseño y Administración de Bases de Datos",1),
-                                            ("Práctica Profesional",1),
+("Legislación",1),
+("Metodología de Sistemas I",1),
+("Laboratorio de Computación IV",1),
+("Diseño y Administración de Bases de Datos",1),
+("Práctica Profesional",1),
 
 /*QUINTO CUATRIMESTRE*/
-                                            ("Redes",2),
-                                            ("Programación Avanzada I",2),
-                                            ("Ingles Técnico Avanzado I",2),
-                                            ("Metodología De Sistemas II",2),
-                                            ("Base de Datos II",2),
-                                            ("Matemática II",2),
-                                            ("Laboratorio V",2),
+("Redes",2),
+("Programación Avanzada I",2),
+("Ingles Técnico Avanzado I",2),
+("Metodología De Sistemas II",2),
+("Base de Datos II",2),
+("Matemática II",2),
+("Laboratorio V",2),
 
 /*SEXTO CUATRIMESTRE*/
-                                            ("Investigación Operativa II",2),
-                                            ("Administración y Dirección de Proyectos Informáticos",2),
-                                            ("Programación Avanzada II",2),
-                                            ("Seminario",2),
-                                            ("Matemática III",2),
-                                            ("Ingles Técnico Avanzado II",2),
-                                            ("Metodología de Sistemas III",2);
+("Investigación Operativa II",2),
+("Administración y Dirección de Proyectos Informáticos",2),
+("Programación Avanzada II",2),
+("Seminario",2),
+("Matemática III",2),
+("Ingles Técnico Avanzado II",2),
+("Metodología de Sistemas III",2);
 
 
-#INSERT INTO correlatives (id_subject,id_correlative) VALUES
+#INSERT INTO correlatives (id_subject,id_correlative) VALUES 
 /* PRIMER CUATRIMESTRE */
 /*Matemática NO TIENE CORRELATIVAS*/
 /*Inglés I NO TIENE CORRELATIVAS*/
@@ -85,7 +85,7 @@ INSERT INTO subjects (`name`,career_id) VALUES
 #/*Inglés II*/ (6, 2),
 #/*Arquitectura y Sistemas Operativos*/ (7, 3),
 #/*Programación II*/ (8, 4),(8, 5),
-#/*Metodología de la Investigación NO TIENE CORRELATIVAS*/
+#/*Metodología de la Investigación NO TIENE CORRELATIVAS*/ 
 #/*Laboratorio de Computación II*/ (10, 4),(10, 5),
 #/*Estadística*/ (11, 1),
 
@@ -100,37 +100,37 @@ INSERT INTO subjects (`name`,career_id) VALUES
 /*Legislación NO TIENE CORRELATIVAS*/
 #/*Metodología de Sistemas I*/ (18, 9),(18, 16),(18, 13),(18, 14),(18, 15),
 #/*Laboratorio de Computación IV*/ (19, 15), (19, 16),
-#/*Diseño y Administración de Bases de Datos*/ (20, 15),(20, 16),
-#/*Práctica Profesional NO TIENE CORRELATIVAS*/
+#/*Diseño y Administración de Bases de Datos*/ (20, 15),(20, 16), 
+#/*Práctica Profesional NO TIENE CORRELATIVAS*/ 
 
 /*QUINTO CUATRIMESTRE*/
 /*Redes NO TIENE CORRELATIVAS*/
-/*Programación Avanzada I NO TIENE CORRELATIVAS*/
-/*Ingles Técnico Avanzado I NO TIENE CORRELATIVAS*/
-/*Metodología De Sistemas II NO TIENE CORRELATIVAS*/
-/*Base de Datos II	NO TIENE CORRELATIVAS*/
-/*Matemática II	NO TIENE CORRELATIVAS*/
-/*Laboratorio V	NO TIENE CORRELATIVAS*/
+/*Programación Avanzada I NO TIENE CORRELATIVAS*/ 
+/*Ingles Técnico Avanzado I NO TIENE CORRELATIVAS*/ 
+/*Metodología De Sistemas II NO TIENE CORRELATIVAS*/ 
+/*Base de Datos II	NO TIENE CORRELATIVAS*/ 
+/*Matemática II	NO TIENE CORRELATIVAS*/ 
+/*Laboratorio V	NO TIENE CORRELATIVAS*/ 
 
 /*SEXTO CUATRIMESTRE*/
-/*Investigación Operativa II NO TIENE CORRELATIVAS*/
-/*Administración y Dirección de Proyectos Informáticos NO TIENE CORRELATIVAS*/
+/*Investigación Operativa II NO TIENE CORRELATIVAS*/ 
+/*Administración y Dirección de Proyectos Informáticos NO TIENE CORRELATIVAS*/ 
 #/*Programación Avanzada II*/ (31, 28),
-#/*Seminario NO TIENE CORRELATIVAS*/
+#/*Seminario NO TIENE CORRELATIVAS*/ 
 #/*Matemática III*/ (33, 27),
 #/*Ingles Técnico Avanzado II*/ (34, 24),
 #/*Metodología de Sistemas III*/ (35, 25);
 
 CREATE TABLE boards(
-                       id int NOT NULL AUTO_INCREMENT,
-                       `name` varchar(60) NOT NULL,
-                       subject_id INT,
-                       constraint pk_boards PRIMARY KEY (id),
-                       constraint fk_subject FOREIGN KEY (subject_id) references subjects(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                       constraint unq_name_subject UNIQUE (`name`, subject_id)
+			id int NOT NULL AUTO_INCREMENT,
+            `name` varchar(60) NOT NULL,
+            subject_id INT,
+            constraint pk_boards PRIMARY KEY (id),
+            constraint fk_subject FOREIGN KEY (subject_id) references subjects(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint unq_name_subject UNIQUE (`name`, subject_id)
 );
 
-INSERT INTO boards(`name`,subject_id) VALUES
+INSERT INTO boards(`name`,subject_id) VALUES 
 /*Matemática*/ ("Matemática 1", 1),
 /*Inglés I*/ ("Inglés I", 2),
 /*Sistema de Procesamiento de Datos*/ ("Sistema de Procesamiento de Datos", 3),
@@ -161,15 +161,15 @@ INSERT INTO boards(`name`,subject_id) VALUES
 
 /*QUINTO CUATRIMESTRE*/
 /*Redes*/  ("Redes", 22),
-/*Programación Avanzada I*/  ("Programación Avanzada I", 23),
-/*Ingles Técnico Avanzado I*/  ("Ingles Técnico Avanzado I", 24),
-/*Metodología De Sistemas II*/  ("Metodología De Sistemas II", 25),
-/*Base de Datos II*/  ("Base de Datos II", 26),
-/*Matemática II*/  ("Matemática II", 27),
-/*Laboratorio V*/  ("Laboratorio V", 28),
+/*Programación Avanzada I*/  ("Programación Avanzada I", 23), 
+/*Ingles Técnico Avanzado I*/  ("Ingles Técnico Avanzado I", 24), 
+/*Metodología De Sistemas II*/  ("Metodología De Sistemas II", 25), 
+/*Base de Datos II*/  ("Base de Datos II", 26), 
+/*Matemática II*/  ("Matemática II", 27), 
+/*Laboratorio V*/  ("Laboratorio V", 28), 
 
 /*SEXTO CUATRIMESTRE*/
-/*Investigación Operativa II*/  ("Investigación Operativa II", 29),
+/*Investigación Operativa II*/  ("Investigación Operativa II", 29), 
 /*Administración y Dirección de Proyectos Informáticos*/  ("Administración y Dirección de Proyectos Informáticos", 30),
 /*Programación Avanzada II*/ ("Programación Avanzada II", 31),
 /*Seminario*/ ("Seminario", 32),
@@ -178,212 +178,233 @@ INSERT INTO boards(`name`,subject_id) VALUES
 /*Metodología de Sistemas III*/ ("Metodología de Sistemas III", 35);
 
 CREATE TABLE users(
-                      id int NOT NULL AUTO_INCREMENT,
-                      firstname varchar(30) NOT NULL,
-                      lastname varchar(30) NOT NULL,
-                      email varchar(30) NOT NULL,
-                      u_password varchar(60) NOT NULL,
-                      `active` bool NOT NULL DEFAULT TRUE,
-                      confirmed_email BOOL NOT NULL DEFAULT FALSE,
-                      user_type int not null default 1,
-                      image mediumblob,
-                      constraint pk_user PRIMARY KEY (id),
-                      constraint unq_email UNIQUE (email)
+			id int NOT NULL AUTO_INCREMENT,
+            firstname varchar(30) NOT NULL,
+            lastname varchar(30) NOT NULL,
+            email varchar(30) NOT NULL,
+            u_password varchar(60) NOT NULL,
+            `active` bool NOT NULL DEFAULT TRUE, 
+            confirmed_email BOOL NOT NULL DEFAULT FALSE,
+            user_type int not null default 1,
+            image mediumblob,
+            constraint pk_user PRIMARY KEY (id),
+            constraint unq_email UNIQUE (email)
 );
 
-INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email) VALUES
-                                                                                        ("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("juanperez@gmail.com","Juan","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("fran@gmail.com","Fran","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("fancomansilla@gmail.com","Franco","Mansilla","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-                                                                                        ("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true);
-
+INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email, image) VALUES
+("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("benitorodriguez@gmail.com","Benito","Rodriguez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("juanperez@gmail.com","Juan","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("fran@gmail.com","Fran","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("fancomansilla@gmail.com","Franco","Mansilla","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true, null);
 
 
 CREATE TABLE forums(
-                       id int NOT NULL AUTO_INCREMENT,
-                       body varchar(500) NOT NULL,
-                       `date` datetime NOT NULL DEFAULT NOW(),
-                       user_id int NOT NULL,
-                       board_id int NOT NULL,
-                       forum_type int NOT NULL DEFAULT 1,
-                       constraint pk_forums PRIMARY KEY (id),
-                       constraint fk_forums_user FOREIGN KEY (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                       constraint fk_forums_board FOREIGN KEY (board_id) references boards(id) ON DELETE CASCADE ON UPDATE CASCADE
+			id int NOT NULL AUTO_INCREMENT,
+            body varchar(500) NOT NULL,
+            `date` datetime NOT NULL DEFAULT NOW(),
+            user_id int NOT NULL,
+            board_id int NOT NULL,
+            forum_type int NOT NULL DEFAULT 1,
+            constraint pk_forums PRIMARY KEY (id),
+            constraint fk_forums_user FOREIGN KEY (user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_forums_board FOREIGN KEY (board_id) references boards(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO forums
-(body,`date`,user_id,board_id,forum_type) VALUES
-                                              ("Consulta 1",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,1,1),
-                                              ("Consulta 2",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,1,1),
-                                              ("Consulta 3",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,1,1),
-                                              ("Consulta 4",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,1,1),
-                                              ("Consulta 5",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,1,1),
-                                              ("Recomendacion 1",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,1,2),
-                                              ("Recomendacion 2",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,1,2),
-                                              ("Recomendacion 3",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,1,2),
-                                              ("Recomendacion 4",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,1,2),
-                                              ("Recomendacion 5",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,1,2);
+(body,`date`,user_id,board_id,forum_type) VALUES 
+("¿Cómo se resuelven las ecuaciones cuadráticas usando la fórmula general?",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,1,1),
+("¿Cuál es el procedimiento para encontrar la derivada de una función polinómica simple?",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,1,1),
+("¿Cómo se multiplican dos matrices y cuándo es posible hacerlo?",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,1,1),
+("¿Cómo se aplica el teorema de Pitágoras para encontrar la longitud de los lados de un triángulo rectángulo?",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,1,1),
+("¿Cómo se calcula una integral definida de una función básica como x^2?",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,1,1),
+("Dediquen al menos una hora diaria para practicar problemas de matemáticas. La práctica constante es clave para entender y dominar los conceptos.",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,1,2),
+("Utilicen recursos en línea como Khan Academy, Coursera, o YouTube para complementar tus estudios. Estos recursos ofrecen explicaciones visuales que pueden ser muy útiles.",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,1,2),
+("Unance a un grupo de estudio o forma uno con tus compañeros de clase. Estudiar en grupo puede ayudarte a resolver dudas y a entender los conceptos desde diferentes perspectivas.",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,1,2),
+("Intenten resolver problemas de diferentes niveles de dificultad. Comienza con los problemas básicos y avanza gradualmente a problemas más complejos para fortalecer tu comprensión.",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,1,2),
+("No dudes en pedir ayuda a tus profesores o tutores cuando encuentres dificultades. Es mejor aclarar tus dudas de inmediato para evitar confusiones futuras.",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,1,2),
+
+
+("¿Cómo se declara y se inicializa una variable en C?",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,4,1),
+("¿Cómo se utiliza una estructura if-else en C?",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,4,1),
+("¿Cómo se escribe un bucle for en C?",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,4,1),
+("¿Cómo se define y se llama a una función en C?",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,4,1),
+("¿Qué es un puntero y cómo se utiliza en C?",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,4,1),
+("Dedica tiempo cada día a escribir y ejecutar pequeños programas en C para reforzar tu aprendizaje.",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,4,2),
+("Lee y analiza código de otros para entender diferentes enfoques y técnicas de programación.",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,4,2),
+("Usa herramientas de depuración como gdb para entender mejor el flujo de tu programa y solucionar errores.",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,4,2),
+("Consulta la documentación oficial y libros sobre C para profundizar en los conceptos.",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,4,2),
+("Trabaja en pequeños proyectos personales para aplicar lo que has aprendido y ganar experiencia práctica.",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,4,2);
+
+
+;
 
 CREATE TABLE users_voted_forums (
-                                    forum_id int NOT NULL,
-                                    user_id int NOT NULL,
-                                    constraint pk_users_voted_forums PRIMARY KEY (forum_id, user_id),
-                                    constraint fk_users_voted_forums_forums FOREIGN KEY (forum_id) references forums(id),
-                                    constraint fk_users_voted_forums_users FOREIGN KEY (user_id) references users(id)
+			forum_id int NOT NULL,
+            user_id int NOT NULL,
+			constraint pk_users_voted_forums PRIMARY KEY (forum_id, user_id),
+            constraint fk_users_voted_forums_forums FOREIGN KEY (forum_id) references forums(id),
+            constraint fk_users_voted_forums_users FOREIGN KEY (user_id) references users(id)
 );
 
 INSERT INTO users_voted_forums
 (forum_id, user_id) VALUES
-                        (1,1),
-                        (2,1),
-                        (3,1),
-                        (9,1),
+(1,1),
+(2,1),
+(3,1),
+(9,1),
 
-                        (1,2),
-                        (8,2),
-                        (7,2),
-                        (6,2),
-                        (5,2),
+(1,2),
+(8,2),
+(7,2),
+(6,2),
+(5,2),
 
-                        (1,4),
-                        (8,4),
-                        (7,4),
-                        (6,4),
-                        (5,4),
+(1,4),
+(8,4),
+(7,4),
+(6,4),
+(5,4),
 
-                        (1,5),
-                        (2,5),
-                        (3,5),
-                        (9,5);
+(1,5),
+(2,5),
+(3,5),
+(9,5);
 
 CREATE TABLE query_responses(
-                                id int NOT NULL AUTO_INCREMENT,
-                                body varchar(200) NOT NULL,
-                                user_id int NOT NULL,
-                                query_id int NOT NULL,
-                                constraint pk_query_response PRIMARY KEY (id),
-                                constraint fk_query_response_user FOREIGN KEY (user_id) references users(id),
-                                constraint fk_query_response_query FOREIGN KEY (query_id) references forums(id)
+			id int NOT NULL AUTO_INCREMENT,
+            body varchar(15000) NOT NULL,
+            user_id int NOT NULL,
+            query_id int NOT NULL,
+            constraint pk_query_response PRIMARY KEY (id),
+            constraint fk_query_response_user FOREIGN KEY (user_id) references users(id),
+            constraint fk_query_response_query FOREIGN KEY (query_id) references forums(id)
 );
 
 INSERT INTO `uces`.`query_responses` (`body`, `user_id`, `query_id`)
-VALUES
-    ("Respuesta 1",2,1),
-    ("Respuesta 2",1,2),
-    ("Respuesta 3",2,3),
-    ("Respuesta 4",1,4);
+VALUES 
+("La fórmula general para resolver ecuaciones cuadráticas de la forma ax^2 + bx + c = 0 es: x = (-b ± √(b^2 - 4ac)) / (2a).",2,1), 
+("Para encontrar la derivada de una función polinómica como f(x) = ax^n, aplica la regla de la potencia: f'(x) = n * ax^(n-1).",1,2), 
+("Dos matrices A y B se pueden multiplicar si el número de columnas de A es igual al número de filas de B. El elemento (i, j) del producto es la suma del producto de los elementos correspondientes de la fila i de A y la columna j de B.",2,3), 
+("El teorema de Pitágoras establece que en un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a^2 + b^2 = c^2.",1,4),
+("La integral definida de x^2 desde a hasta b se calcula como: ∫(a->b) x^2 dx = (b^3/3) - (a^3/3).",1,5), 
+
+("Una variable se declara especificando su tipo seguido del nombre y se inicializa asignándole un valor. Por ejemplo, int x = 10; declara una variable entera x y la inicializa con el valor 10.",2,11), 
+("La estructura if-else permite ejecutar código basado en una condición. Si la condición es verdadera, se ejecuta el bloque if; de lo contrario, se ejecuta el bloque else.",1,12), 
+("Un bucle for se utiliza para repetir un bloque de código un número específico de veces. Se inicializa una variable, se establece una condición de continuación y se actualiza la variable en cada iteración.",2,13), 
+("Una función se define especificando su tipo de retorno, nombre y parámetros. Luego se llama a la función utilizando su nombre y pasando los argumentos necesarios.",1,14),
+("Un puntero es una variable que almacena la dirección de memoria de otra variable. Se declara con un asterisco y se utiliza para acceder y manipular directamente los datos almacenados en la memoria.",1,15);
 
 CREATE TABLE polls(
-                      id int NOT NULL AUTO_INCREMENT,
-                      poll_type int,
-                      career_id INT,
-                      subject_id INT,
-                      constraint pk_poll PRIMARY KEY (id),
-                      constraint fk_poll_career FOREIGN KEY (career_id) references careers(id),
-                      constraint fk_poll_subject FOREIGN KEY (subject_id) references subjects(id)
+			id int NOT NULL AUTO_INCREMENT,
+            poll_type int,
+            career_id INT,
+            subject_id INT,
+            constraint pk_poll PRIMARY KEY (id),
+            constraint fk_poll_career FOREIGN KEY (career_id) references careers(id),
+            constraint fk_poll_subject FOREIGN KEY (subject_id) references subjects(id)
 );
 
 INSERT INTO polls (poll_type, career_id, subject_id) VALUES
-                                                         (0, 1, null), (1, NULL, 1);
+			(0, 1, null), (1, NULL, 1);
 
 CREATE TABLE poll_results(
-                             id int NOT NULL AUTO_INCREMENT,
-                             poll_id int NOT NULL,
-                             student_user_id int NOT NULL,
-                             constraint pk_poll_results PRIMARY KEY (id),
-                             constraint fk_poll_results_user FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                             constraint fk_poll_results_poll FOREIGN KEY (student_user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
+			id int NOT NULL AUTO_INCREMENT,   
+            poll_id int NOT NULL,
+            student_user_id int NOT NULL,
+			constraint pk_poll_results PRIMARY KEY (id),
+            constraint fk_poll_results_user FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_poll_results_poll FOREIGN KEY (student_user_id) references users(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE poll_questions(
-                               id int NOT NULL AUTO_INCREMENT,
-                               poll_id int NOT NULL,
-                               question varchar(150) NOT NULL,
-                               short_description varchar(30) NOT NULL,
-                               poll_response_type varchar(100) NOT NULL,
-                               constraint pk_poll_question PRIMARY KEY (id),
-                               constraint fk_poll_question_poll FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE
+			id int NOT NULL AUTO_INCREMENT,
+            poll_id int NOT NULL,
+            question varchar(150) NOT NULL,
+            short_description varchar(30) NOT NULL,
+            poll_response_type varchar(100) NOT NULL,
+			constraint pk_poll_question PRIMARY KEY (id),
+            constraint fk_poll_question_poll FOREIGN KEY (poll_id) references polls(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE poll_answers(
-                             id int NOT NULL AUTO_INCREMENT,
-                             poll_question_id int NOT NULL,
-                             poll_result_id int NOT NULL,
-                             bool_response bool,
-                             rank_response int,
-                             constraint pk_poll_answers PRIMARY KEY (id),
-                             constraint fk_poll_answers_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) ON DELETE CASCADE ON UPDATE CASCADE,
-                             constraint fk_poll_answers_poll_result FOREIGN KEY (poll_result_id) references poll_results(id) ON DELETE CASCADE ON UPDATE CASCADE
+			id int NOT NULL AUTO_INCREMENT,
+            poll_question_id int NOT NULL,
+            poll_result_id int NOT NULL,
+            bool_response bool,
+            rank_response int,
+			constraint pk_poll_answers PRIMARY KEY (id),
+            constraint fk_poll_answers_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) ON DELETE CASCADE ON UPDATE CASCADE,
+            constraint fk_poll_answers_poll_result FOREIGN KEY (poll_result_id) references poll_results(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 INSERT INTO `uces`.`poll_results`
 (`poll_id`,
- `student_user_id`)
+`student_user_id`)
 VALUES
-    (1,1),
-    (2,1),
+(1,1),
+(2,1),
 
-    (1,2),
-    (2,2),
+(1,2),
+(2,2),
 
-    (1,3),
-    (2,3);
+(1,3),
+(2,3);
 
 INSERT INTO poll_questions(poll_id, question, short_description, poll_response_type) values
-                                                                                         (1,'¿Con que valor del 1 al 5 calificarías la dificultad de la carrera?',"Dificultad", 'RATING_TO_FIVE'),
-                                                                                         (1,'¿Estas conforme con la carrera la carrera?', "Conformidad" , 'YES_NO_ANSWER'),
-                                                                                         (2,'¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', "Dificultad", 'RATING_TO_FIVE'),
-                                                                                         (2,'¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', "Valor de lo aprendido", 'RATING_TO_FIVE'),
-                                                                                         (2,'¿Se cumplieron con todos los contenidos de la materia?', "Cumplimiento de contenidos" , 'YES_NO_ANSWER');
+			(1,'¿Con que valor del 1 al 5 calificarías la dificultad de la carrera?',"Dificultad", 'RATING_TO_FIVE'),
+            (1,'¿Estas conforme con la carrera la carrera?', "Conformidad" , 'YES_NO_ANSWER'),
+            (2,'¿Con que valor del 1 al 5 calificarías la dificultad de la materia?', "Dificultad", 'RATING_TO_FIVE'),
+            (2,'¿Con que valor del 1 al 5 calificarías el valor de lo aprendido en la cursada de la materia?', "Valor de lo aprendido", 'RATING_TO_FIVE'),
+			(2,'¿Se cumplieron con todos los contenidos de la materia?', "Cumplimiento de contenidos" , 'YES_NO_ANSWER');
 
 INSERT INTO poll_answers
 (`poll_question_id`,
- `poll_result_id`,
- `bool_response`,
- `rank_response`)
+`poll_result_id`,
+`bool_response`,
+`rank_response`)
 VALUES
-    (1,1,null, 4), #RATING_TO_FIVE
-    (2,1,1, null), #YES_NO_ANSWER
-    (3,2,null, 5), #RATING_TO_FIVE
-    (4,2,null, 3), #RATING_TO_FIVE
-    (5,2,0, null), #YES_NO_ANSWER
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,1, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,0, null), #YES_NO_ANSWER
 
-    (1,1,null, 4), #RATING_TO_FIVE
-    (2,1,0, null), #YES_NO_ANSWER
-    (3,2,null, 5), #RATING_TO_FIVE
-    (4,2,null, 3), #RATING_TO_FIVE
-    (5,2,1, null), #YES_NO_ANSWER
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,0, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,1, null), #YES_NO_ANSWER
 
-    (1,1,null, 4), #RATING_TO_FIVE
-    (2,1,1, null), #YES_NO_ANSWER
-    (3,2,null, 5), #RATING_TO_FIVE
-    (4,2,null, 3), #RATING_TO_FIVE
-    (5,2,0, null); #YES_NO_ANSWER
+(1,1,null, 4), #RATING_TO_FIVE
+(2,1,1, null), #YES_NO_ANSWER
+(3,2,null, 5), #RATING_TO_FIVE
+(4,2,null, 3), #RATING_TO_FIVE
+(5,2,0, null); #YES_NO_ANSWER
 
 
 CREATE TABLE poll_question_statistics(
-                                         id int NOT NULL AUTO_INCREMENT,
-                                         poll_question_id int NOT NULL,
-                                         number_of_positive_response FLOAT DEFAULT 0,
-                                         number_of_negative_response FLOAT DEFAULT 0,
-                                         total_range_response FLOAT DEFAULT 0,
-                                         number_of_responses INT DEFAULT 0,
-                                         constraint pk_poll_answers PRIMARY KEY (id),
-                                         constraint fk_poll_question_statistics_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) on delete cascade on update cascade
+			id int NOT NULL AUTO_INCREMENT,
+            poll_question_id int NOT NULL,
+			number_of_positive_response FLOAT DEFAULT 0,
+			number_of_negative_response FLOAT DEFAULT 0,
+			total_range_response FLOAT DEFAULT 0,
+			number_of_responses INT DEFAULT 0,
+			constraint pk_poll_answers PRIMARY KEY (id),
+            constraint fk_poll_question_statistics_poll_question FOREIGN KEY (poll_question_id) references poll_questions(id) on delete cascade on update cascade
 );
 
 INSERT INTO poll_question_statistics
 (`poll_question_id`,
- `number_of_positive_response`,
- `number_of_negative_response`,
- `total_range_response`,
- `number_of_responses`)
+`number_of_positive_response`,
+`number_of_negative_response`,
+`total_range_response`,
+`number_of_responses`)
 VALUES
-    (1,0, 0, 12, 3), #RATING_TO_FIVE
-    (2,2, 1, 0, 3), #YES_NO_ANSWER
-    (3,0, 0, 15, 3), #RATING_TO_FIVE
-    (4,0, 0, 9, 3), #RATING_TO_FIVE
-    (5,1, 2, 0, 3); #YES_NO_ANSWER
+(1,0, 0, 12, 3), #RATING_TO_FIVE
+(2,2, 1, 0, 3), #YES_NO_ANSWER
+(3,0, 0, 15, 3), #RATING_TO_FIVE
+(4,0, 0, 9, 3), #RATING_TO_FIVE
+(5,1, 2, 0, 3); #YES_NO_ANSWER

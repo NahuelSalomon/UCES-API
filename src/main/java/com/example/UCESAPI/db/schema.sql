@@ -191,15 +191,14 @@ CREATE TABLE users(
             constraint unq_email UNIQUE (email)
 );
 
-INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email) VALUES
-("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("noelia@gmail.com","Noelia","Benitez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("juanperez@gmail.com","Juan","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("fran@gmail.com","Fran","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("fancomansilla@gmail.com","Franco","Mansilla","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true),
-("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true);
-
+INSERT INTO users (email,firstname,lastname,u_password, user_type, confirmed_email, image) VALUES
+("nahuel@gmail.com","Nahuel","Salomon","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("benitorodriguez@gmail.com","Benito","Rodriguez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("juanperez@gmail.com","Juan","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("fran@gmail.com","Fran","Perez","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("fancomansilla@gmail.com","Franco","Mansilla","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("thomasraion@gmail.com","Thomas","Raion","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 1, true, null),
+("admin@gmail.com","Admin","Admin","$2a$10$ELh6pkJSR4z9NfPc5Z1PGeKnVZgYJn5QvcbqWBv/ZuffgAOV8Veu6"/*123*/, 2, true, null);
 
 
 CREATE TABLE forums(
@@ -216,16 +215,31 @@ CREATE TABLE forums(
 
 INSERT INTO forums
 (body,`date`,user_id,board_id,forum_type) VALUES 
-("Consulta 1",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,1,1),
-("Consulta 2",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,1,1),
-("Consulta 3",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,1,1),
-("Consulta 4",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,1,1),
-("Consulta 5",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,1,1),
-("Recomendacion 1",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,1,2),
-("Recomendacion 2",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,1,2),
-("Recomendacion 3",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,1,2),
-("Recomendacion 4",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,1,2),
-("Recomendacion 5",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,1,2);
+("¿Cómo se resuelven las ecuaciones cuadráticas usando la fórmula general?",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,1,1),
+("¿Cuál es el procedimiento para encontrar la derivada de una función polinómica simple?",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,1,1),
+("¿Cómo se multiplican dos matrices y cuándo es posible hacerlo?",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,1,1),
+("¿Cómo se aplica el teorema de Pitágoras para encontrar la longitud de los lados de un triángulo rectángulo?",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,1,1),
+("¿Cómo se calcula una integral definida de una función básica como x^2?",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,1,1),
+("Dediquen al menos una hora diaria para practicar problemas de matemáticas. La práctica constante es clave para entender y dominar los conceptos.",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,1,2),
+("Utilicen recursos en línea como Khan Academy, Coursera, o YouTube para complementar tus estudios. Estos recursos ofrecen explicaciones visuales que pueden ser muy útiles.",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,1,2),
+("Unance a un grupo de estudio o forma uno con tus compañeros de clase. Estudiar en grupo puede ayudarte a resolver dudas y a entender los conceptos desde diferentes perspectivas.",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,1,2),
+("Intenten resolver problemas de diferentes niveles de dificultad. Comienza con los problemas básicos y avanza gradualmente a problemas más complejos para fortalecer tu comprensión.",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,1,2),
+("No dudes en pedir ayuda a tus profesores o tutores cuando encuentres dificultades. Es mejor aclarar tus dudas de inmediato para evitar confusiones futuras.",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,1,2),
+
+
+("¿Cómo se declara y se inicializa una variable en C?",DATE_ADD(NOW(),INTERVAL -2 MONTH),1,4,1),
+("¿Cómo se utiliza una estructura if-else en C?",DATE_ADD(NOW(),INTERVAL -1 MONTH),2,4,1),
+("¿Cómo se escribe un bucle for en C?",DATE_ADD(NOW(),INTERVAL -3 MONTH),2,4,1),
+("¿Cómo se define y se llama a una función en C?",DATE_ADD(NOW(),INTERVAL -6 MONTH),1,4,1),
+("¿Qué es un puntero y cómo se utiliza en C?",DATE_ADD(NOW(),INTERVAL -5 MONTH),2,4,1),
+("Dedica tiempo cada día a escribir y ejecutar pequeños programas en C para reforzar tu aprendizaje.",DATE_ADD(NOW(),INTERVAL -11 MONTH),4,4,2),
+("Lee y analiza código de otros para entender diferentes enfoques y técnicas de programación.",DATE_ADD(NOW(),INTERVAL -7 MONTH),5,4,2),
+("Usa herramientas de depuración como gdb para entender mejor el flujo de tu programa y solucionar errores.",DATE_ADD(NOW(),INTERVAL -10 MONTH),1,4,2),
+("Consulta la documentación oficial y libros sobre C para profundizar en los conceptos.",DATE_ADD(NOW(),INTERVAL -9 MONTH),2,4,2),
+("Trabaja en pequeños proyectos personales para aplicar lo que has aprendido y ganar experiencia práctica.",DATE_ADD(NOW(),INTERVAL -10 MONTH),2,4,2);
+
+
+;
 
 CREATE TABLE users_voted_forums (
 			forum_id int NOT NULL,
@@ -261,7 +275,7 @@ INSERT INTO users_voted_forums
 
 CREATE TABLE query_responses(
 			id int NOT NULL AUTO_INCREMENT,
-            body varchar(200) NOT NULL,
+            body varchar(15000) NOT NULL,
             user_id int NOT NULL,
             query_id int NOT NULL,
             constraint pk_query_response PRIMARY KEY (id),
@@ -271,10 +285,17 @@ CREATE TABLE query_responses(
 
 INSERT INTO `uces`.`query_responses` (`body`, `user_id`, `query_id`)
 VALUES 
-("Respuesta 1",2,1), 
-("Respuesta 2",1,2), 
-("Respuesta 3",2,3), 
-("Respuesta 4",1,4);
+("La fórmula general para resolver ecuaciones cuadráticas de la forma ax^2 + bx + c = 0 es: x = (-b ± √(b^2 - 4ac)) / (2a).",2,1), 
+("Para encontrar la derivada de una función polinómica como f(x) = ax^n, aplica la regla de la potencia: f'(x) = n * ax^(n-1).",1,2), 
+("Dos matrices A y B se pueden multiplicar si el número de columnas de A es igual al número de filas de B. El elemento (i, j) del producto es la suma del producto de los elementos correspondientes de la fila i de A y la columna j de B.",2,3), 
+("El teorema de Pitágoras establece que en un triángulo rectángulo, la suma de los cuadrados de los catetos es igual al cuadrado de la hipotenusa: a^2 + b^2 = c^2.",1,4),
+("La integral definida de x^2 desde a hasta b se calcula como: ∫(a->b) x^2 dx = (b^3/3) - (a^3/3).",1,5), 
+
+("Una variable se declara especificando su tipo seguido del nombre y se inicializa asignándole un valor. Por ejemplo, int x = 10; declara una variable entera x y la inicializa con el valor 10.",2,11), 
+("La estructura if-else permite ejecutar código basado en una condición. Si la condición es verdadera, se ejecuta el bloque if; de lo contrario, se ejecuta el bloque else.",1,12), 
+("Un bucle for se utiliza para repetir un bloque de código un número específico de veces. Se inicializa una variable, se establece una condición de continuación y se actualiza la variable en cada iteración.",2,13), 
+("Una función se define especificando su tipo de retorno, nombre y parámetros. Luego se llama a la función utilizando su nombre y pasando los argumentos necesarios.",1,14),
+("Un puntero es una variable que almacena la dirección de memoria de otra variable. Se declara con un asterisco y se utiliza para acceder y manipular directamente los datos almacenados en la memoria.",1,15);
 
 CREATE TABLE polls(
 			id int NOT NULL AUTO_INCREMENT,
@@ -388,9 +409,6 @@ VALUES
 (4,0, 0, 9, 3), #RATING_TO_FIVE
 (5,1, 2, 0, 3); #YES_NO_ANSWER
 
-use uces;
-select * from poll_answers;
-select * from poll_results;
-select * from poll_questions;
+
 #delete from poll_results where id <> 9999;
 #delete from poll_answers where id <> 9999;
